@@ -1,0 +1,56 @@
+---
+layout: "blog.hbs"
+title: Блог
+navbar: 'Блог посвящен программированию и дизайну.'
+posts: ['src/content/blog/C++-1.0.md']
+postdate: 13.08.2015
+---
+<style>
+.hvrborder:hover{
+   border:1px solid grey;
+}
+.fcont{
+  min-width:400px;max-height:150px;margin:10px;
+}
+.finner{
+  display:flex;justify-content: center;align-items: center;width:100%;max-height:50px;background:#ccc;text-align:center;
+}
+.fgalery { display: flex; flex-flow: row wrap; }
+.fgalery > * { flex: auto; height: auto; }
+.fblock{
+  width:100%;max-height:70px;overflow:hidden;
+}
+.vertcenter{
+  display: inline-block;vertical-align: middle;
+}
+.mar20{
+  margin-right: 20px;
+}
+.fcntblk{
+  width:100%;max-height:30px;padding:0 10px 0 10px;color:lightgrey;
+}
+</style>
+<div class="fgalery">
+{{#each tags}}
+  {{#is tag "blog"}}
+    {{#withSort pages "data.postdate"}}
+  <div class="border hvrborder clearfix fcont">
+    <a href="{{this.basename}}.html">
+        <div class="padblock bgpat titletext finner">
+          <span class=vertcenter></span>{{data.title}}
+        </div>
+        <div class="padblock fblock">
+          {{ data.anons }}
+        </div>
+        <div class="fcntblk">
+          <div class="left mar20"><i class="fa fa-clock-o mrspace"></i> {{ data.postdate }}</div>
+          <div class="left mar20"><i class="fa fa-user mrspace"></i> {{ data.postauthor }}</div>
+        </div>
+    </a>
+    </div>
+    {{/withSort}}
+  {{/is}}
+{{/each}}
+
+</div>
+
