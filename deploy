@@ -1,0 +1,6 @@
+#!/bin/sh
+git add .
+git commit -a -m "post"
+git status
+git push origin gh-pages
+git push origin master
