@@ -1,0 +1,76 @@
+---
+title: Emscripten - C++ в веб!
+cat: Блог
+anons: 'Опыт использования Emscripten'
+heading: 'Добро пожаловать!'
+postdate: 20.02.2016
+postauthor: Derofim
+postauthorpage: "#"
+area: posts
+tags:
+- blog
+categories:
+- blog
+- C++
+---
+Основное внимание уделяется созданию многопользовательской игры на Emscripten, SDL2, socket.io, nodejs.
+<br><br>
+  <b>Изучаем Emscripten</b>
+  <hr/>
+Компиляция простой программы описана на  http://kripken.github.io/emscripten-site/docs/getting_started/Tutorial.html#running-emscripten
+<br><br>
+Код простого примера использования SDL2 и emcc: https://gist.github.com/derofim/c00a8ce4c7233862ecdd
+<br><br>
+Компилировать командой emcc source.cpp -s USE_SDL=2 -s FULL_ES2=1 --preload-file res/img -o publish\emsripten\index.html -O3 -s ALLOW_MEMORY_GROWTH=1 -s USE_SDL_IMAGE=2 -s USE_SDL_TTF=2 -s SDL2_IMAGE_FORMATS="['png']" 
+<br><br>
+Здесь res/img - папка с ресурсами, publish\emsripten\index.html - результат компиляции.
+<br><br>
+  <b>Cmake + Emscripten</b>
+  <hr/>
+Попробуем скомпилировать с помощью более удобного способа. Я предпочитаю cmake, им можно сгенерировать файлы для редактора ( call cmake .. -G"Visual Studio 14" ), а также готовую программу ( cmake --build . )
+<br><br>
+Скачиваем в одну папку файлы https://gist.github.com/derofim/c052308cc863fbfbb893
+<br><br>
+Наиболее интересны файлы CMakeLists.txt, emc-cmk.bat, shell.html.
+<br><br>
+emc-cmk.bat - главный скрипт, его запускаем для построения.
+<br><br>
+CMakeLists.txt используется для компиляции нужных нам файлов, при желании можно использовать другие генераторы (пример cmk.bat)
+<br><br>
+То же можно было сделать и с помощью emcc вручную (пример в build.bat) и даже используя gcc (пример gpp.bat)
+<br><br>
+  <b>Создание .lib библиотек и Emscripten</b>
+  <hr/>
+Задача - использовать библиотеку lib в проекте main.
+<br><br>
+Содержимое папки testlib: https://gist.github.com/derofim/7cfbafa452a1569d5f1f
+<br><br>
+Компилируем библиотеку получая .bc файл (флаг -I говорит о папке с заголовочными файлами):
+<br><br>
+call emcc lib.cpp -I"%folder%" -o lib.bc -O3 -Werror
+<br><br>
+Компилируем проект:
+<br><br>
+Соделржимое папки mainlib: https://gist.github.com/derofim/7fac8602b61c0c75e845
+<br><br>
+call emcc main.cpp lib.bc -I"%folder%" -I"D:\CppTests\testlib\testlib" -o index.html -O2 -Werror -s WARN_ON_UNDEFINED_SYMBOLS=1
+<br><br>
+  <b>Вызов javascript функций </b>
+  <hr/>
+Простой способ (далеко не самый лучший) - использование EM_ASM, т.е. код на javascript вставляется в C++. 
+Из javascript функции можно вызывать с помощью cwrap. Не забываем оборачивать функции в extern "C" { ... }, добавлять EMSCRIPTEN_KEEPALIVE и использовать EXPORTED_FUNCTIONS="['_main', '_finish']"
+<br><br>
+int_sqrt = Module.cwrap('int_sqrt', 'number', ['number']);
+<br><br>
+Пример такого использования (альфа версия): https://gist.github.com/derofim/fdbce3632ea07b19f5b6
+<br><br>
+  <b>Исользование javascript библиотек и C++ (лучший выход). Используем параметр --js-library! </b>
+  <hr/>
+Можно обычный создать код на C++, без javascript вставок (что скорее всего и нужно). Результат будет в виде:
+<br><br>
+<script src="https://gist.github.com/derofim/0a32d11d34d08805f6f2.js"></script>
+Функция extern void connectSocket(); будет взята из js файла (в примере это unicode_library.js) вида:
+<br><br>
+<script src="https://gist.github.com/derofim/0671f9df24dcadda6520.js"></script>
+Компилирется такой код командой вроде call emcc main.cpp lib.bc -I"%folder%" -I"D:\CppTests\testlib\testlib" -o index.html -O2 -Werror -s WARN_ON_UNDEFINED_SYMBOLS=1 --js-library "unicode_library.js"
+<br><br>
