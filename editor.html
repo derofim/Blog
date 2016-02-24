@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru" class=no-js>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live editor. | Derofim</title>
+    <link rel=icon type=image/png sizes=32x32 href=assets/favicon-32x32.png>
+    <link rel=apple-touch-icon href=assets/apple-icon-180x180.png>
+
+    <link rel=stylesheet href=assets/styles/vendor.css>
+    <link rel=stylesheet href=assets/styles/main.css>
+
+    <link rel=stylesheet type=text/css href="http://fonts.googleapis.com/css?family=Lobster">
+    <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    
+    <div class="flexbar topbar">
+      <div class="toplogo">
+        <a href="index.html" class="logolink">D</a>
+      </div>
+      <div class="topnav">
+        <a href="blog.html" class="navlink">Блог</a>
+      </div>
+      <div class="search">
+        <input type="search" placeholder="search..." />
+      </div>
+    </div>
+
+    
+    <div class="titlebar">
+      <div class="titletext">
+        <a href="blog.html" class="titlelnk">Блог</a> <span style="color:lightgrey">/</span> <a href="#" class="titlelnk">Live editor.</a>
+      </div>
+    </div>
+
+    
+
+    <div class="flexbar infobar">
+      <div> <i class="fa fa-clock-o mrspace"></i> 23.02.2016 </div>
+      <div> <i class="fa fa-user mrspace"></i> <a href="#" class="navlink">Derofim</a> </div>
+    </div>
+
+
+    <div class=maincontent role="main">
+
+      
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script type="text/javascript">
+  window.onbeforeunload = function() {
+      return "Did you save your stuff?"
+  }
+  tinymce.init({
+      setup : function(ed) {
+          ed.on('change', function(e) {
+              console.log('the event object '+e);
+              console.log('the editor object '+ed);
+              console.log('the content '+ed.getContent());
+              var content = ed.getContent().toString();
+              content.replace("Easy", "W3Schools");
+              $("#preview").html(content);
+          });
+      },
+      selector: 'textarea',
+      height: 500,
+      theme: 'modern',
+      plugins: [
+          'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+          'searchreplace wordcount visualblocks visualchars code fullscreen',
+          'insertdatetime media nonbreaking save table contextmenu directionality',
+          'emoticons template paste textcolor colorpicker textpattern imagetools'
+      ],
+      toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+      toolbar2: 'print preview media | forecolor backcolor emoticons',
+      image_advtab: true,
+      templates: [
+          { title: 'Test template 1', content: 'Test 1' },
+          { title: 'Test template 2', content: 'Test 2' }
+      ],
+      content_css: [
+          'http://derofim.github.io/blog/assets/styles/vendor.css',
+          'http://derofim.github.io/blog/assets/styles/main.css'
+      ]
+  });
+</script>
+<textarea> </textarea>
+<br/><br/>
+<div id="preview"></div>
+
+
+
+
+
+
+    </div>
+
+    
+    <div class="infofooter">
+    <ul class="pager pager-justified">
+  
+  
+  
+<div class="left"><a href="cocosd.html" class="footerlnk">&larr; Ранее</a></div>
+  
+  
+  
+<div class="right"><a href="emscripten.html" class="footerlnk">Далее &rarr;</a></div>
+  
+  
+</ul>
+
+
+    </div>
+
+    
+
+    <div class="footer">
+      <div class="left">© 2015 Denis Trofimov</div>
+
+      <div class="right"><a href="sitemap.xml" class="footerlnk">Карта сайта</a></div>
+    </div>
+
+
+    <script src=assets/scripts/vendor.js></script>
+    <script src=assets/scripts/main.js></script>
+    <script src="assets/scripts/pattern/js/geopattern.min.js"></script>
+  </body>
+</html>
