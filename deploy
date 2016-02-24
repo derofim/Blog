@@ -2,5 +2,5 @@
 git add .
 git commit -a -m "post"
 git status
-git subtree push --prefix dist origin gh-pages --force
+git subtree push --force --prefix dist origin gh-pages
 git push origin master --force
