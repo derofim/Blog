@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1c81c952-d094-44c9-8459-d38e26e96289" name="Default" comment="" />
+    <list default="true" id="1c81c952-d094-44c9-8459-d38e26e96289" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="assemble.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -114,8 +116,8 @@
       <file leaf-file-name="deploy" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/deploy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24355301">
-              <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.09742121">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -524,7 +526,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -755,8 +757,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/deploy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24355301">
-          <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.09742121">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="23" />
           <folding />
         </state>
       </provider>
