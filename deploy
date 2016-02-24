@@ -3,4 +3,4 @@ git add .
 git commit -a -m "post"
 git status
 git subtree push --prefix dist origin gh-pages
-git push origin master
+git push -f origin master

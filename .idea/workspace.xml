@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c81c952-d094-44c9-8459-d38e26e96289" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/CNAME" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/templates/pages/cocosd.hbs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/templates/pages/editor.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/assets/styles/main.css" afterPath="$PROJECT_DIR$/dist/assets/styles/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/assets/theme.css" afterPath="$PROJECT_DIR$/dist/assets/theme.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/blog.html" afterPath="$PROJECT_DIR$/dist/blog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/emscripten.html" afterPath="$PROJECT_DIR$/dist/emscripten.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/sitemap.xml" afterPath="$PROJECT_DIR$/dist/sitemap.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search_index.json" afterPath="$PROJECT_DIR$/search_index.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/styles/main.css" afterPath="$PROJECT_DIR$/src/assets/styles/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/theme.css" afterPath="$PROJECT_DIR$/src/assets/theme.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/templates/layouts/blog.hbs" afterPath="$PROJECT_DIR$/src/templates/layouts/blog.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deploy" afterPath="$PROJECT_DIR$/deploy" />
     </list>
     <ignored path="assemble.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -116,11 +103,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CNAME" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CNAME" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/CNAME">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="0" column="10" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="deploy" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/deploy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.24355301">
+              <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -146,16 +143,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="theme.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/assets/theme.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.8846154">
-              <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -174,6 +161,7 @@
         <option value="$PROJECT_DIR$/src/templates/pages/editor.hbs" />
         <option value="$PROJECT_DIR$/src/templates/pages/cocosd.hbs" />
         <option value="$PROJECT_DIR$/dist/CNAME" />
+        <option value="$PROJECT_DIR$/deploy" />
       </list>
     </option>
   </component>
@@ -763,6 +751,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="10" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deploy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24355301">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
           <folding />
         </state>
       </provider>
