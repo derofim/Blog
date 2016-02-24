@@ -1,0 +1,59 @@
+---
+title: Live editor.
+cat: Блог
+anons: 'Пост о блоге и его дальнейшем развитии'
+heading: 'Добро пожаловать!'
+postdate: 23.02.2016
+postauthor: Derofim
+postauthorpage: "#"
+area: no
+tags:
+- no
+categories:
+- no
+---
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script type="text/javascript">
+  window.onbeforeunload = function() {
+      return "Did you save your stuff?"
+  }
+  tinymce.init({
+      setup : function(ed) {
+          ed.on('change', function(e) {
+              console.log('the event object '+e);
+              console.log('the editor object '+ed);
+              console.log('the content '+ed.getContent());
+              var content = ed.getContent().toString();
+              content.replace("Easy", "W3Schools");
+              $("#preview").html(content);
+          });
+      },
+      selector: 'textarea',
+      height: 500,
+      theme: 'modern',
+      plugins: [
+          'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+          'searchreplace wordcount visualblocks visualchars code fullscreen',
+          'insertdatetime media nonbreaking save table contextmenu directionality',
+          'emoticons template paste textcolor colorpicker textpattern imagetools'
+      ],
+      toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+      toolbar2: 'print preview media | forecolor backcolor emoticons',
+      image_advtab: true,
+      templates: [
+          { title: 'Test template 1', content: 'Test 1' },
+          { title: 'Test template 2', content: 'Test 2' }
+      ],
+      content_css: [
+          'http://derofim.github.io/blog/assets/styles/vendor.css',
+          'http://derofim.github.io/blog/assets/styles/main.css'
+      ]
+  });
+</script>
+<textarea> </textarea>
+<br/><br/>
+<div id="preview"></div>
+
+
+
+

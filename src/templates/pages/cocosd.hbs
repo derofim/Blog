@@ -1,0 +1,165 @@
+---
+title: Cocos2d-x Javascript гайд
+cat: Блог
+anons: 'Уроки по Cocos2d-html'
+heading: 'Добро пожаловать!'
+postdate: 23.02.2016
+postauthor: Derofim
+postauthorpage: "#"
+area: posts
+tags:
+- blog
+categories:
+- blog
+---
+<h2 style="text-align: center;">Оглавление</h2>
+<p><a href="#beginning">Cocos2d: Начало</a></p>
+<p><a href="#setup">Cocos2d: Установка</a></p>
+<p>Cocos2d: Основы</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2 id="beginning" style="text-align: center;"><a href="#beginning">Cocos2d: Начало</a></h2>
+<p>&nbsp;</p>
+<p>Я начал изучать&nbsp;Cocos2d из-за его популярности, кросплатформенности и отличных возможностей.</p>
+<p>На данный момент меня сильнее всего интересует&nbsp;Cocos2d-X с выбором языка программирования javascript, поскольку код Cocos2d на&nbsp;javascript можно выполнять в браузере и преобразовать&nbsp;для многих платформ в C++ (используя&nbsp;SpiderMonkey, Firefox JS виртуальную машину&nbsp;(VM)).</p>
+<p>&nbsp;</p>
+<p>Плюсы:</p>
+<p>&nbsp;</p>
+<p style="padding-left: 30px;">Разрабатывается с&nbsp;2010 года</p>
+<p style="padding-left: 30px;">Популярно, много топовых мобильных игр на кокосе</p>
+<p style="padding-left: 30px;">cross-platform</p>
+<p style="padding-left: 30px;">Поддержка C++ и javascript. Поддержка скриптовых языков.</p>
+<p style="padding-left: 30px;">Хорошее&nbsp;API</p>
+<p style="padding-left: 30px;">Open Source,&nbsp;<a href="https://opensource.org/licenses/MIT">MIT License</a></p>
+<p style="padding-left: 30px;">&nbsp;</p>
+<p>Минусы:</p>
+<p>&nbsp;</p>
+<p style="padding-left: 30px;">Мало уроков на javascript для версии 3</p>
+<p style="padding-left: 30px;">Возможно придется учить китайский, разрабатывается и документируется китайской&nbsp;Chukong Technologies</p>
+<p>&nbsp;</p>
+<p>Найденные в интернете уроки я решил собирать в один <strong>большой список уроков</strong>: <a title="gist.github.com" href="https://gist.github.com/derofim/568e52ae75aff70a7213" target="_blank">https://gist.github.com/derofim/568e52ae75aff70a7213</a></p>
+<p>На этой странице я буду публиковать собственные уроки, преимущественно используя javascript как язык программирования.</p>
+<p>&nbsp;</p>
+<p>Свежая документация (многого нет еще на сйте):&nbsp;https://github.com/slackmoehrle/cocos-docs/tree/92bba2dcc94ad718c1bfbdde37d47b19da879e6a</p>
+<p>&nbsp;</p>
+<p>Официальные примеры:&nbsp;https://github.com/cocos2d/cocos2d-x-samples&nbsp;</p>
+<p>&nbsp;</p>
+<p>API:&nbsp;<a href="http://cocos2d-x.org/docs/api-ref/">http://cocos2d-x.org/docs/api-ref/</a></p>
+<p>Issues:&nbsp;https://github.com/cocos2d/cocos2d-x/issues</p>
+<p>Официальный&nbsp;IRC кокоса:&nbsp;<a href="https://webchat.freenode.net/"><strong>Freenode</strong></a>&nbsp;подключаться к&nbsp;<em>#cocos2d</em></p>
+<p>&nbsp;</p>
+<p><em>Код стайл:&nbsp;</em></p>
+<p><em>C++:&nbsp;<a href="https://github.com/cocos2d/cocos2d-x/blob/v3/docs/CODING_STYLE.md">https://github.com/cocos2d/cocos2d-x/blob/v3/docs/CODING_STYLE.md</a></em></p>
+<p><em>Python:&nbsp;https://www.python.org/dev/peps/pep-0008/</em></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2 id="setup" style="text-align: center;"><a href="#setup">Cocos2d:&nbsp;Установка</a></h2>
+<p>&nbsp;</p>
+<p>Я воспользовался установщиком&nbsp;WINDOWS V3.10 INSTALLER (BETA) с официального сайта.</p>
+<p>Команда cocos -v выводит&nbsp;2.1, установлена только 3.10&nbsp;версия движка.</p>
+<p>&nbsp;</p>
+<p>Создать первый проект можно с помощью встроенных интрументов&nbsp;</p>
+<p>&nbsp;</p>
+<p><img src="http://www.cocos2d-x.org/docs/cocos/cocos-img/main_window.png" alt="" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;Но можно воспользоваться командной строкой.</p>
+<p>&nbsp;</p>
+<p>Убедитесь, что установлены необходимые программы и компоненты:</p>
+<ul>
+    <li>Python 2.7.5</li>
+    <li>NDK r10c+ is required to build Android games</li>
+    <li>Windows Phone/Store 8.1 VS 2013 Update 4+ or VS 2015</li>
+    <li>Windows Phone/Store 10.0 VS 2015</li>
+    <li>JRE or JDK 1.6+ is required for web publishing</li>
+    <li>
+        <ul>
+            <li>iOS 6.0+ for iPhone / iPad games</li>
+            <li>Android 2.3+ for Android games</li>
+            <li>Windows 8.1 or Windows 10.0 for Windows Phone/Store 8.1 games</li>
+            <li>Windows 10.0 for Windows Phone/Store 10.0 games</li>
+            <li>OS X v10.6+ for Mac games</li>
+            <li>Windows 7+ for Win games</li>
+            <li>Modern browsers and IE 9+ for web games</li>
+        </ul>
+    </li>
+</ul>
+<ul>
+    <li>
+        <p>JDK/SDK 1.6+ <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
+    </li>
+    <li>
+        <p>Android Studio Bundle <a href="http://developer.android.com/sdk/index.html">http://developer.android.com/sdk/index.html</a></p>
+    </li>
+    <li>
+        <p>NDK r10c <a href="https://developer.android.com/tools/sdk/ndk/index.html">https://developer.android.com/tools/sdk/ndk/index.html</a></p>
+    </li>
+    <li>
+        <p>Apache Ant <a href="http://ant.apache.org/bindownload.cgi">http://ant.apache.org/bindownload.cgi</a></p>
+    </li>
+    <li>
+        <p>Python 2.7.5 <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p>Не забудьте установить переменные среды! Например jdk:</p>
+<p>&nbsp;</p>
+<p><img src="http://www.cocos2d-x.org/docs/installation/B-img/win-step8.png" alt="" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Подробные иструкции есть в документации&nbsp;<a href="http://www.cocos2d-x.org/docs/installation/F/index.html">http://www.cocos2d-x.org/docs/installation/F/index.html</a></p>
+<p>&nbsp;</p>
+<p>Создание javascript проекта в папке C:\MyGame:</p>
+<p>&nbsp;</p>
+<p>cocos new MyGame -<span class="hljs-tag">p</span> com<span class="hljs-class">.MyCompany</span><span class="hljs-class">.MyGame</span> -l js -d&nbsp;C:\MyGame</p>
+<p>&nbsp;</p>
+<p>Компиляция:&nbsp;cocos compile . -<span class="hljs-tag">p</span> ios -m release</p>
+<p>&nbsp;</p>
+<p>Поддерживаемые платформы:<strong> ios</strong>, <strong>android</strong>, <strong>mac</strong>, <strong>linux</strong>, <strong>win32</strong>, <strong>wp8_1</strong>&nbsp;и&nbsp;<strong>web</strong></p>
+<p>&nbsp;</p>
+<p>Запуск:&nbsp;cocos cocos run . -p ios -m release</p>
+<p>&nbsp;</p>
+<p>Подробнее о консоли кокоса: <a href="http://www.cocos2d-x.org/docs/editors_and_tools/cocosCLTool/index.html">http://www.cocos2d-x.org/docs/editors_and_tools/cocosCLTool/index.html&nbsp;</a></p>
+<p>Решение многих проблем с консолью: https://github.com/chukong/cocos-docs/blob/cf06ac86f6fb9630c8a65c1dcd4813eb5e95aa6f/manual/studio/v4/chapter4/FixPackageError/en.md</p>
+<p>Cocos Studio Manual:&nbsp;https://github.com/chukong/cocos-docs/blob/cf06ac86f6fb9630c8a65c1dcd4813eb5e95aa6f/manual/studio/v4/category/en.md</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2 id="basics" style="text-align: center;"><a href="#basics">Cocos2d:&nbsp;Основы</a></h2>
+<p>&nbsp;</p>
+<p>Основы хорошо описаны на&nbsp;<a href="http://www.cocos2d-x.org/docs/static-pages/theBasics.html">http://www.cocos2d-x.org/docs/static-pages/theBasics.html</a>, документацию&nbsp;можно спокойно прочитать с помощью кнопки Next сверху страницы.</p>
+<p>Я постараюсь кратко описать основы и поскорее приступить к более сложным и интересным вещам.</p>
+<p>&nbsp;</p>
+<p><strong>Director</strong> - Режиссер&nbsp;- управляет сценами</p>
+<p><strong>Scene</strong> - Сцена - выводится на экран рендером (renderer)</p>
+<p><strong>Граф сцен</strong> - задает порядок вывода элементов на экран по&nbsp;глубине (z-order)</p>
+<p>&nbsp;</p>
+<p>В сцену добавляются элементы, например добавление элемента&nbsp;title_node с порядком&nbsp;-<span class="hljs-number">2</span>: scene.<strong>addChild</strong>(title_node, -<span class="hljs-number">2</span>);</p>
+<p>Спрайты можно создать из картинок <span class="hljs-keyword">var</span> mySprite = <span class="hljs-keyword">new</span> cc.<strong>Sprite</strong>(res.mySprite_png);</p>
+<p>Спраты можно изменять и вращать&nbsp;mySprite.<strong>setRotation</strong>(<span class="hljs-number">40</span>);</p>
+<p>Точку относительно которой вращается (и изменяется) объект задает&nbsp;AnchorPoint:&nbsp;mySprite.<strong>setAnchorPoint</strong>(cc._p(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>));</p>
+<p>&nbsp;</p>
+<p>Простые движения можно создать с помощью&nbsp;<strong>Action</strong>:</p>
+<p><span class="hljs-keyword">var</span> moveBy = <span class="hljs-keyword">new</span> cc.MoveBy(<span class="hljs-number">2</span>, cc._p(<span class="hljs-number">50</span>,<span class="hljs-number">10</span>));</p>
+<p>mySprite.runAction(moveBy);</p>
+<p>&nbsp;</p>
+<p><strong>Sequence</strong> - последовательность&nbsp;Action, позволяет выполнять несколько&nbsp;Action по очереди:</p>
+<p><span class="hljs-keyword">var</span> moveTo1 = <span class="hljs-keyword">new</span> cc.MoveTo(<span class="hljs-number">2</span>, cc._p(<span class="hljs-number">50</span>,<span class="hljs-number">10</span>));</p>
+<p>// ...</p>
+<p>mySprite.runAction(Sequence.create(moveTo1, delay, moveBy1, delay.clone(), moveTo2));</p>
+<p>&nbsp;</p>
+<p><strong>Spawn</strong> - комбинация&nbsp;Action, позволяет выполнять несколько&nbsp;Action одновременно:</p>
+<p>myNode.runAction(Spawn.create(moveTo1, moveBy1, moveTo2));</p>
+<p>&nbsp;</p>
+<p><strong>Лог</strong> в консоль выполняется простой командой:&nbsp;cc.log(<span class="hljs-string">"Position x: "</span> + pos.x + <span class="hljs-string">' y:'</span> + pos.y);</p>
+<p>&nbsp;</p>
+<p>Ресурсы хранятся в виде (resource.js):</p>
+<pre><code>var g_resources = [
+    "res/a.png",
+    "res/cocosgui/Marker Felt.ttf",
+    {
+    type:"font",
+    name:"Schwarzwald Regular",
+    srcs:["res/fonts/Schwarzwald_Regular.eot", "res/fonts/Schwarzwald Regular.ttf"]
+    }
+    ]<br /><br />И загружаются в виде (main.js):<br /></code></pre>
+<pre>cc.LoaderScene.preload(g_resources, function () {<br />    cc.director.runScene(new HelloWorldScene());<br />}, this);</pre>
+<pre><code>&nbsp;</code></pre>
