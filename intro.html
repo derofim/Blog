@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru" class=no-js>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Первый пост. Немного про assemble и yeoman. | Derofim</title>
+    <link rel=icon type=image/png sizes=32x32 href=assets/favicon-32x32.png>
+    <link rel=apple-touch-icon href=assets/apple-icon-180x180.png>
+
+    <link rel=stylesheet href=assets/styles/vendor.css>
+    <link rel=stylesheet href=assets/styles/main.css>
+
+    <link rel=stylesheet type=text/css href="http://fonts.googleapis.com/css?family=Lobster">
+    <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    
+    <div class="flexbar topbar">
+      <div class="toplogo">
+        <a href="index.html" class="logolink">D</a>
+      </div>
+      <div class="topnav">
+        <a href="blog.html" class="navlink">Блог</a>
+      </div>
+      <div class="search">
+        <input type="search" placeholder="search..." />
+      </div>
+    </div>
+
+    
+    <div class="titlebar">
+      <div class="titletext">
+        <a href="blog.html" class="titlelnk">Блог</a> <span style="color:lightgrey">/</span> <a href="#" class="titlelnk">Первый пост. Немного про assemble и yeoman.</a>
+      </div>
+    </div>
+
+    
+
+    <div class="flexbar infobar">
+      <div> <i class="fa fa-clock-o mrspace"></i> 13.08.2015 </div>
+      <div> <i class="fa fa-user mrspace"></i> <a href="#" class="navlink">Derofim</a> </div>
+    </div>
+
+
+    <div class=maincontent role="main">
+
+      
+Данный блог создан с помощью yoeman и assemble.io. Почему я выбрал эти инструменты? Начитавшись блога andismith.com сомнения отпадут.
+<br><br>
+Теперь поговорим о плюсах и минусах разработки. Делать статические сайты с помощью assemble весьма удобно, особенно если вы хорошо знаете javascript. Статические сайты очевидно самые быстрые и их можно разместить на бесплатном хостинге вроде Github Pages. Причем размещение на бесплатном хостинге для меня особенно важно т.к. я обычно забрасываю проекты в течение 3 месяцев в связи с полученными новыми знаниями и освоенными технологиями (старое зачастую кажется даже недостойным внимания), а когда хочу прочитать давно опубликованный материал, то его уже просто нет.
+<br><br>
+Изучил довольно много про assemble и суммарно потратил два дня на создание этого сайта. Все же много возможностей assemble не добавлены еще на сайт и я подумываю попробовать еще Jekyll. Особенно мешает практически полное отсутствие информации на некоторые важные вещи и устаревание продукта безумно быстрыми темпами (за год меняется до неузнаваемости и старая информация непригодна для использования). Иногда думаю нехватка нормальной документации - это некоторая "чума" программирования, хотя уже кажется даже привык к такому ходу дел.
+<br><br>
+Ниже будут мои заметки и рекомендации касательно создания сайта на assemble. Я работаю в windows, но рекомендую использовать для работы linux.
+<br><br>
+  <b>Изучаем yeoman.io</b>
+  <hr/>
+Первое с чем следует ознакомиться - yeoman.io. Проект с прекрасными пошаговыми уроками по установке, буквально мечта новичка. Используйте генератор webapp и не забудьте поставить и настроить все необходимые для yeoman программы.
+<br><br>
+Подготовка: Устанавливаем NodeJs, Git, Python и обязательно проверяем переменные среды! Запускаем node command prompt.
+<br><br>
+Sublime: Ставим версию 3 sublimetext.com. Устанавливаем контроль плагинов packagecontrol.io/installation. Устанавливаем и настраиваем плагины (Preferences – Package Control – Install Package):  Emmet, Emmet CSS Snippets, HTML-CSS-JS Prettify, ColorPicker, SideBarEnhancements. Код пишется в разы быстрее (docs.emmet.io/cheat-sheet/) и сам редактор очень удобен.
+<br><br>
+Yeoman: Устанавливаем yeoman.io/learning/index.html . Читаем yeoman.io/codelab.html. Устанавливаем генератор webapp выбирая пробелом пункты что не нужно устанавливать.
+Читаем Setting up Git (https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup). Устанавливаем load-grunt-tasks  и подключаем в Gruntfile как «require('load-grunt-tasks')(grunt);». Устанавливаем Grunt-build-control task по инструкции с github.com/robwierzbowski/grunt-build-control и читаем yeoman.io/learning/deployment.html. Вот мой код Gruntfile (Только часть кода): pastebin.ru/R6R5hz1K. Чтобы не вводить постоянно пароль от git для windows устанавливаем  gitcredentialstore.codeplex.com.
+<br><br>
+Чтобы отправить результат как сайт/репозиторий github следуем инструкции с help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/ не выполняя последний шаг (не делаем git push origin master). Убеждаемся что репозиторий полностью пустой на github. С помощью grunt-build-control выполняем «grunt buildcontrol» (или делаем registerTask и «grunt pages»). Сайт находится на «имя.github.io/репозиторий» (см. pages.github.com/).
+<br><br>
+Если понадобятся ssh делаем себе новый ключ по инструкции с help.github.com/articles/generating-ssh-keys/. Читаем статьи help.github.com/articles/working-with-ssh-key-passphrases/ и help.github.com/articles/caching-your-github-password-in-git/ .
+<br><br>
+Результат: Отличная среда для front-end разработки. При редактировании кода real-time виден  результат в браузере (по инструкции с Yeoman запускаем сервер). Сайт можно командой grunt построить в папку dist. Файлы html/css/js сами склеятся, например чтобы получить vendor.js из двух файлов используется код в app/index.html:
+<br><br>
+<script src="https://gist.github.com/derofim/6391b19e95e0d601879b.js"></script>
+Изображения сами сожмутся. Из кода на sass/scss получаем real-time в результате css файл. Зависимостями можно управлять из консоли с помощью bower, например, установка jquery:
+<br><br>
+bower install --save jquery<br>
+grunt wiredep
+<br><br>
+В результате jquery сам подключится. Сайт можно одной командой выложить на git («grunt buildcontrol»). С помощью webapp можно сделать шаблон будущего сайта.
+<br><br>
+  <b>Изучаем assemble</b>
+  <hr/>
+Устанавливаем asseble.io с помощью yeoman генератора github.com/assemble/generator-assemble нажмая при установке везде enter.
+<br><br>
+Создаем в папке site/src/templates/pages файл test.hbs с текстом "Hello world!". Запускаем "grunt server" и проверяем файл по адресу "localhost:9000/test.html".
+<br><br>
+Сделаем вывод называния "data.title" постов с определенным тегом и сорировкой по дате "data.postdate" добавив в код hbs файла строки:
+<br><br>
+<script src="https://gist.github.com/derofim/37b5f3a77c7dae6906e0.js"></script>
+В hbs файлах которые должны выводиться не забываем добавить теги и дату:
+<br><br>
+<script src="https://gist.github.com/derofim/eeb80699ca79244a23a1.js"></script>
+Теперь сделаем возможность выбора шаблона отдельно для каждой страницы.
+<br><br>
+В Gruntfile.js меняем строки (внутри assemble в options):
+<br><br>
+layout: 'default.hbs',<br>
+layoutdir: '<%= config.src %>/templates/layouts',
+<br><br>
+Теперь внутри hbs файла перед title можно указать
+<br><br>
+layout: "your-template.hbs"
+<br><br>
+Советую посмотреть github.com/helpers, содержащий много вспомогательных утилит. Нормальный поиск по сайту и pagination мне так найти не удалось. Найденные решения мне не понравились, а свое писать сейчас некогда.
+<br><br>
+TODO:<br>
+* Сделать нормальный pagination<br>
+* Прикрутить поиск по сайту (скорее всего будет простой Google поиск)<br>
+* Перейти на смесь html и markdown<br>
+* Добавить подсветку кода Prism<br>
+* Добавить комментарии disqus.com<br>
+* Добавить социальные кнопки<br>
+* Добавить RSS<br>
+* Сделать выбор категорий<br>
+* Сравнить с Jekyll<br>
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    <div class="infofooter">
+    <ul class="pager pager-justified">
+  
+  
+  
+<div class="left"><a href="haxe.html" class="footerlnk">&larr; Ранее</a></div>
+  
+  
+  
+  
+  
+</ul>
+
+
+    </div>
+
+    
+
+    <div class="footer">
+      <div class="left">© 2015 Denis Trofimov</div>
+
+      <div class="right"><a href="sitemap.xml" class="footerlnk">Карта сайта</a></div>
+    </div>
+
+
+    <script src=assets/scripts/vendor.js></script>
+    <script src=assets/scripts/main.js></script>
+    <script src="assets/scripts/pattern/js/geopattern.min.js"></script>
+  </body>
+</html>
