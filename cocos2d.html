@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="ru" class=no-js>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cocos2d-x Javascript гайд | Derofim</title>
+    <link rel=icon type=image/png sizes=32x32 href=assets/favicon-32x32.png>
+    <link rel=apple-touch-icon href=assets/apple-icon-180x180.png>
+
+    <link rel=stylesheet href=assets/styles/vendor.css>
+    <link rel=stylesheet href=assets/styles/main.css>
+
+    <link rel=stylesheet type=text/css href="http://fonts.googleapis.com/css?family=Lobster">
+    <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css>
+      <link rel=stylesheet href=https://cdn.jsdelivr.net/prism/1.4.1/themes/prism.css>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    
+    <div class="flexbar topbar">
+      <div class="toplogo">
+        <a href="index.html" class="logolink">D</a>
+      </div>
+      <div class="topnav">
+        <a href="blog.html" class="navlink">Блог</a>
+      </div>
+      <div class="search">
+        <input type="search" placeholder="search..." />
+      </div>
+    </div>
+
+    
+    <div class="titlebar">
+      <div class="titletext">
+        <a href="blog.html" class="titlelnk">Блог</a> <span style="color:lightgrey">/</span> <a href="#" class="titlelnk">Cocos2d-x Javascript гайд</a>
+      </div>
+    </div>
+
+    
+
+    <div class="flexbar infobar">
+      <div> <i class="fa fa-clock-o mrspace"></i> 23.02.2016 </div>
+      <div> <i class="fa fa-user mrspace"></i> <a href="#" class="navlink">Derofim</a> </div>
+    </div>
+
+
+    <div class=maincontent role="main">
+
+      
+<h2 style="text-align: center;">Оглавление</h2>
+<p><a href="#beginning">Cocos2d: Начало</a></p>
+<p><a href="#setup">Cocos2d: Установка</a></p>
+<p><a href="#basics">Cocos2d: Основы</a></p>
+<p><a href="#scene">Работа со сценами</a></p>
+<p><a href="#element">Элементы</a></p>
+<p><a href="#action">Действия</a></p>
+<p><a href="#sprite">Спрайты</a></p>
+<p><a href="#menu">Меню</a></p>
+<p><a href="#3d">3d графика</a></p>
+<p><a href="#updates">Планирование и обновление</a></p>
+<p><a href="#events">События</a></p>
+<p><a href="#sound">Звук</a></p>
+<p><a href="#files">Файлы</a></p>
+<p><a href="#physics">Физика</a></p>
+<p><a href="#scripts">Скрипты</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2 id="beginning" style="text-align: center;"><a href="#beginning">Cocos2d: Начало</a></h2>
+<p>&nbsp;</p>
+<p>Я начал изучать&nbsp;Cocos2d из-за его популярности, кросплатформенности и отличных возможностей.</p>
+<p>На данный момент меня сильнее всего интересует&nbsp;Cocos2d-X с выбором языка программирования javascript, поскольку код Cocos2d на&nbsp;javascript можно выполнять в браузере и преобразовать&nbsp;для многих платформ в C++ (используя&nbsp;SpiderMonkey, Firefox JS виртуальную машину&nbsp;(VM)).</p>
+<p>&nbsp;</p>
+<p>Плюсы:</p>
+<p>&nbsp;</p>
+<p style="padding-left: 30px;">Разрабатывается с&nbsp;2010 года</p>
+<p style="padding-left: 30px;">Популярен, много топовых мобильных игр на кокосе</p>
+<p style="padding-left: 30px;">cross-platform</p>
+<p style="padding-left: 30px;">Поддержка C++ и javascript. Имеется встроенная поддержка популярных скриптовых языков.</p>
+<p style="padding-left: 30px;">Хорошее&nbsp;API</p>
+<p style="padding-left: 30px;">Open Source,&nbsp;</p>
+<p style="padding-left: 30px;"><a href="https://opensource.org/licenses/MIT">MIT License</a>, бесплатен</p>
+<p style="padding-left: 30px;">&nbsp;</p>
+<p>Минусы:</p>
+<p>&nbsp;</p>
+<p style="padding-left: 30px;">Мало уроков на javascript для версии 3</p>
+<p style="padding-left: 30px;">Не все возможности cocos2d-x есть при программировании на&nbsp;javascript. <strong>Нет в js поддержки 3d</strong> (добавляется).</p>
+<p style="padding-left: 30px;">Возможно придется учить китайский, разрабатывается и документируется китайской&nbsp;Chukong Technologies</p>
+<p>&nbsp;</p>
+<p>Не поддерживается сейчас в javascript (можно реализовать самому используя cc.sys.isNative):</p>
+<p>jsb.Animate3D</p>
+<p>jsb.Animation3D</p>
+<p>jsb.Sprite3D</p>
+<p>jsb.Skeleton3D</p>
+<p>jsb.Mesh</p>
+<p>jsb.AttachNode</p>
+<p>jsb.BillBoard</p>
+<p>jsb.sprite3DCache</p>
+<p>jsb.ParticleSystem3D</p>
+<p>jsb.PUParticleSystem3D</p>
+<p>jsb.BaseLight</p>
+<p>jsb.DirectionLight</p>
+<p>jsb.PointLight</p>
+<p>jsb.SpotLight</p>
+<p>jsb.AmbientLight</p>
+<p>&nbsp;</p>
+<p>Найденные в интернете уроки я решил собирать в один <strong>большой список уроков</strong>: <a title="gist.github.com" href="https://gist.github.com/derofim/568e52ae75aff70a7213" target="_blank">https://gist.github.com/derofim/568e52ae75aff70a7213</a></p>
+<p>На этой странице я буду публиковать собственные уроки, преимущественно используя javascript как язык программирования (javascript проекты&nbsp;можно запускать в браузере).</p>
+<p>&nbsp;</p>
+<p>Свежая документация (многого нет еще на сйте):&nbsp;https://github.com/slackmoehrle/cocos-docs/tree/92bba2dcc94ad718c1bfbdde37d47b19da879e6a</p>
+<p>&nbsp;</p>
+<p>Официальные примеры:&nbsp;https://github.com/cocos2d/cocos2d-x-samples&nbsp;</p>
+<p>&nbsp;</p>
+<p>API:&nbsp;<a href="http://cocos2d-x.org/docs/api-ref/">http://cocos2d-x.org/docs/api-ref/</a></p>
+<p>Issues:&nbsp;https://github.com/cocos2d/cocos2d-x/issues</p>
+<p>Официальный&nbsp;IRC кокоса:&nbsp;<a href="https://webchat.freenode.net/"><strong>Freenode</strong></a>&nbsp;подключаться к&nbsp;<em>#cocos2d</em></p>
+<p>&nbsp;</p>
+<p><em>Код стайл:&nbsp;</em></p>
+<p><em>C++:&nbsp;<a href="https://github.com/cocos2d/cocos2d-x/blob/v3/docs/CODING_STYLE.md">https://github.com/cocos2d/cocos2d-x/blob/v3/docs/CODING_STYLE.md</a></em></p>
+<p><em>Python:&nbsp;https://www.python.org/dev/peps/pep-0008/</em></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2 id="setup" style="text-align: center;"><a href="#setup">Cocos2d:&nbsp;Установка</a></h2>
+<p>&nbsp;</p>
+<p>Я воспользовался установщиком&nbsp;WINDOWS V3.10 INSTALLER (BETA) с официального сайта.</p>
+<p>Команда cocos -v выводит&nbsp;2.1, установлена только 3.10&nbsp;версия движка.</p>
+<p>&nbsp;</p>
+<p>Создать первый проект можно с помощью встроенных интрументов&nbsp;</p>
+<p>&nbsp;</p>
+<p><img src="http://www.cocos2d-x.org/docs/cocos/cocos-img/main_window.png" alt="" /></p>
+<p>&nbsp;</p>
+<p>Но можно воспользоваться командной строкой http://www.cocos2d-x.org/docs/editors_and_tools/cocosCLTool/index.html.</p>
+<p>&nbsp;</p>
+<p>Убедитесь, что установлены необходимые программы и компоненты:</p>
+<ul>
+    <li>Python 2.7.5</li>
+    <li>NDK r10c+ is required to build Android games</li>
+    <li>Windows Phone/Store 8.1 VS 2013 Update 4+ or VS 2015</li>
+    <li>Windows Phone/Store 10.0 VS 2015</li>
+    <li>JRE or JDK 1.6+ is required for web publishing</li>
+    <li>
+        <ul>
+            <li>iOS 6.0+ for iPhone / iPad games</li>
+            <li>Android 2.3+ for Android games</li>
+            <li>Windows 8.1 or Windows 10.0 for Windows Phone/Store 8.1 games</li>
+            <li>Windows 10.0 for Windows Phone/Store 10.0 games</li>
+            <li>OS X v10.6+ for Mac games</li>
+            <li>Windows 7+ for Win games</li>
+            <li>Modern browsers and IE 9+ for web games</li>
+        </ul>
+    </li>
+</ul>
+<ul>
+    <li>
+        <p>JDK/SDK 1.6+ <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
+    </li>
+    <li>
+        <p>Android Studio Bundle <a href="http://developer.android.com/sdk/index.html">http://developer.android.com/sdk/index.html</a></p>
+    </li>
+    <li>
+        <p>NDK r10c <a href="https://developer.android.com/tools/sdk/ndk/index.html">https://developer.android.com/tools/sdk/ndk/index.html</a></p>
+    </li>
+    <li>
+        <p>Apache Ant <a href="http://ant.apache.org/bindownload.cgi">http://ant.apache.org/bindownload.cgi</a></p>
+    </li>
+    <li>
+        <p>Python 2.7.5 <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<p>Не забудьте установить переменные среды! Например jdk:</p>
+<p>&nbsp;</p>
+<p><img src="http://www.cocos2d-x.org/docs/installation/B-img/win-step8.png" alt="" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Подробные иструкции есть в документации&nbsp;<a href="http://www.cocos2d-x.org/docs/installation/F/index.html">http://www.cocos2d-x.org/docs/installation/F/index.html</a></p>
+<p>&nbsp;</p>
+<p>В папке установки cocos2d не забудьте запустить&nbsp;setup.py для настройки переменных.</p>
+<p>&nbsp;</p>
+<p>Пример создания javascript проекта в папке C:\MyGame:</p>
+<p>&nbsp;</p>
+<p>cocos new MyGame -<span class="hljs-tag">p</span> com<span class="hljs-class">.MyCompany</span><span class="hljs-class">.MyGame</span> -l js -d&nbsp;C:\MyGame</p>
+<p>&nbsp;</p>
+<p>Компиляция:&nbsp;cocos compile . -<span class="hljs-tag">p</span> ios -m release</p>
+<p>&nbsp;</p>
+<p>Поддерживаемые платформы:<strong> ios</strong>, <strong>android</strong>, <strong>mac</strong>, <strong>linux</strong>, <strong>win32</strong>, <strong>wp8_1</strong>&nbsp;и&nbsp;<strong>web</strong></p>
+<p>&nbsp;</p>
+<p>Запуск:&nbsp;cocos cocos run . -p ios -m release</p>
+<p>&nbsp;</p>
+<p>Подробнее о консоли кокоса: <a href="http://www.cocos2d-x.org/docs/editors_and_tools/cocosCLTool/index.html">http://www.cocos2d-x.org/docs/editors_and_tools/cocosCLTool/index.html&nbsp;</a></p>
+<p>Решение многих проблем с консолью: https://github.com/chukong/cocos-docs/blob/cf06ac86f6fb9630c8a65c1dcd4813eb5e95aa6f/manual/studio/v4/chapter4/FixPackageError/en.md</p>
+<p>Cocos Studio Manual:&nbsp;https://github.com/chukong/cocos-docs/blob/cf06ac86f6fb9630c8a65c1dcd4813eb5e95aa6f/manual/studio/v4/category/en.md</p>
+<p>&nbsp;</p>
+<p>Возможно вы захотите запустить игру на сервере. Можно установить локальный сервер, например openserver, denwer или&nbsp;wampserver. Можно воспользоваться хостингами, например heroku или Amazon E2. При желании можно настроить облачный редактор, например c9.io.</p>
+<p>&nbsp;</p>
+<p>В браузере можно осуществлять отладку приложения, есть специальные плагины, например,&nbsp;<a href="http://h5.cocos.com/static/cocos-devtools/index-en.html">http://h5.cocos.com/static/cocos-devtools/index-en.html</a></p>
+<p>&nbsp;</p>
+<h2 id="basics" style="text-align: center;"><a href="#basics">Cocos2d:&nbsp;Основы</a></h2>
+<p>&nbsp;</p>
+<p>Если игра написана на&nbsp;javascript и запускается в браузере, то используется библиотека&nbsp;cocos2d-js и игра запускается как любое другое веб приложение.&nbsp;Когда игра запускается как приложение (native app), то используется&nbsp;cocos2d-x&nbsp;и код на&nbsp;javascript переводится в быстродействующий код на&nbsp;C с помощью&nbsp;spidermonkey.&nbsp;JSB - связь между js и C++, используйте документированный javascript код (любой спецефичный для браузера код не запустится на native устройстве).</p>
+<p>&nbsp;</p>
+<p>cc.Node -&nbsp;базовый игровой класс наследуемый от&nbsp;cc.Class. От&nbsp;Node наследуется большинство остальных классов: Layer, Scene, Sprite и т.д.</p>
+<p>&nbsp;</p>
+<p>Основы хорошо описаны на&nbsp;<a href="http://www.cocos2d-x.org/docs/static-pages/theBasics.html">http://www.cocos2d-x.org/docs/static-pages/theBasics.html</a>, документацию&nbsp;можно спокойно прочитать с помощью кнопки Next сверху страницы.</p>
+<p>Я постараюсь кратко описать основы и поскорее приступить к более сложным и интересным вещам.</p>
+<p>&nbsp;</p>
+<p><strong>Director</strong> - Режиссер&nbsp;- управляет сценами</p>
+<p><strong>Scene</strong> - Сцена - выводится на экран рендером (renderer).</p>
+<p><strong>Layer</strong> - Слой - находится в сцене (один или несколько), поверх него отображается контент.</p>
+<p><strong>Граф сцен</strong> - задает порядок вывода элементов на экран по&nbsp;глубине (z-order)</p>
+<p><strong>Node</strong> - элемент сцены (картинки, меню и т.д.). Сцены также могут включать другие сцены.</p>
+<p>&nbsp;</p>
+<p>В сцену добавляются элементы, например добавление элемента&nbsp;title_node с порядком&nbsp;-<span class="hljs-number">2</span>: scene.<strong>addChild</strong>(title_node, -<span class="hljs-number">2</span>);</p>
+<p>Спрайты можно создать из картинок <span class="hljs-keyword">var</span> mySprite = <span class="hljs-keyword">new</span> cc.<strong>Sprite</strong>(res.mySprite_png);</p>
+<p>Спраты можно изменять и вращать&nbsp;mySprite.<strong>setRotation</strong>(<span class="hljs-number">40</span>);</p>
+<p>Точку относительно которой вращается (и изменяется) объект задает&nbsp;AnchorPoint:&nbsp;mySprite.<strong>setAnchorPoint</strong>(cc._p(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>));</p>
+<p>&nbsp;</p>
+<p>Простые движения можно создать с помощью&nbsp;<strong>Action</strong>:</p>
+<p><span class="hljs-keyword">var</span> moveBy = <span class="hljs-keyword">new</span> cc.MoveBy(<span class="hljs-number">2</span>, cc._p(<span class="hljs-number">50</span>,<span class="hljs-number">10</span>));</p>
+<p>mySprite.runAction(moveBy);</p>
+<p>&nbsp;</p>
+<p><strong>Sequence</strong> - последовательность&nbsp;Action, позволяет выполнять несколько&nbsp;Action по очереди:</p>
+<p><span class="hljs-keyword">var</span> moveTo1 = <span class="hljs-keyword">new</span> cc.MoveTo(<span class="hljs-number">2</span>, cc._p(<span class="hljs-number">50</span>,<span class="hljs-number">10</span>));</p>
+<p>// ...</p>
+<p>mySprite.runAction(Sequence.create(moveTo1, delay, moveBy1, delay.clone(), moveTo2));</p>
+<p>&nbsp;</p>
+<p><strong>Spawn</strong> - комбинация&nbsp;Action, позволяет выполнять несколько&nbsp;Action одновременно:</p>
+<p>myNode.runAction(Spawn.create(moveTo1, moveBy1, moveTo2));</p>
+<p>&nbsp;</p>
+<p><strong>Лог</strong> в консоль выполняется простой командой:&nbsp;cc.log(<span class="hljs-string">"Position x: "</span> + pos.x + <span class="hljs-string">' y:'</span> + pos.y);</p>
+<p>&nbsp;</p>
+<p>Если вы создали проект cocos2d на javascript (для этого можно выполнить команду "<code class="nx">cocos</code> <code class="k">new</code> <code class="nx">sampleproject</code> <code class="o">-</code><code class="nx">l</code> <code class="nx">js"</code>), то будут созданы папки:</p>
+<p>src - исходный код,</p>
+<p>res - файлы игры (картинки, музыка и т.д.),</p>
+<p>frameworks - папка с игровым движком</p>
+<p>&nbsp;</p>
+<p>project.json - главный конфигурационный файл</p>
+<p>mainfest.webapp - конфигурационный файл для web публикации</p>
+<p>main.js - файл для запуска игры</p>
+<p>&nbsp;</p>
+<p>Содержимое main.js:</p>
+<pre class="language-javascript"><code>cc.game.onStart = function(){
+    if(!cc.sys.isNative &amp;&amp; document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
+    document.body.removeChild(document.getElementById("cocosLoading"));
+    cc.view.enableRetina(cc.sys.os === cc.sys.OS_IOS ? true : false); // Pass true to enable retina display, on Android disabled by default to improve performance
+    cc.view.adjustViewPort(true); // Adjust viewport meta
+    cc.view.setDesignResolutionSize(960, 640, cc.ResolutionPolicy.SHOW_ALL); // Setup the resolution policy and design resolution size
+    cc.view.resizeWithBrowserSize(true);// The game will be resized when browser size change
+    cc.LoaderScene.preload(g_resources, function () {  //load resources
+    cc.director.runScene(new HelloWorldScene());
+    }, this);
+    };
+    cc.game.run();</code></pre>
+<p>&nbsp;</p>
+<p>Все настроки можно найти в документации&nbsp;<a href="http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.view.html#constructor">http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.view.html#constructor</a></p>
+<p>&nbsp;</p>
+<p>Например, сделаем игру полноэкранной (весь код на https://gist.github.com/derofim/0cf0517ff2b39a48e352):&nbsp;</p>
+<pre>cc.view.setDesignResolutionSize(cc.view.getFrameSize().width, cc.view.getFrameSize().height, cc.ResolutionPolicy.NO_BORDER);</pre>
+<p>&nbsp;</p>
+<p>Ресурсы хранятся в виде (resource.js):</p>
+<pre class="language-javascript"><code>var g_resources = [
+    "res/a.png",
+    "res/cocosgui/Marker Felt.ttf",
+    {
+    type:"font",
+    name:"Schwarzwald Regular",
+    srcs:["res/fonts/Schwarzwald_Regular.eot", "res/fonts/Schwarzwald Regular.ttf"]
+    }
+    ]
+</code></pre>
+<p>И загружаются в виде (код из main.js):</p>
+<pre class="language-javascript"><code>cc.LoaderScene.preload(g_resources, function () {
+    cc.director.runScene(new HelloWorldScene());
+    }, this);</code></pre>
+<p>Функция preload позволяет загрузить игровые файлы перед запуском&nbsp;(чтобы сократить время ожидания). По окончанию запуска выполняется функция запускающая первую игровую сцену.</p>
+<p>&nbsp;</p>
+<p>Файл project.json:</p>
+<pre class="language-javascript"><code>{
+    "project_type": "javascript",
+    "debugMode" : 1,
+    "showFPS" : true,
+    "frameRate" : 60,
+    "noCache" : false,
+    "id" : "gameCanvas",
+    "renderMode" : 0,
+    "engineDir":"frameworks/cocos2d-html5",
+    "modules" : ["cocos2d", "extensions"],
+    "jsList" : [
+    "src/resource.js",
+    "src/app.js"
+    ]
+    }</code></pre>
+<p>debugMode: Уровень предупреждений при отладке, от&nbsp;0 до&nbsp;6.</p>
+<p>showFPS:&nbsp;Показывает или скрывает счетчик fps, значения&nbsp;true или&nbsp;false;</p>
+<p>frameRate: Задает&nbsp;fps, для плавной игры рекомендуется&nbsp;60</p>
+<p>id: Элемент html страницы (DOM)&nbsp;для запуска игры&nbsp;(canvas)</p>
+<p>engineDir: Папка установки&nbsp;Cocos2d-JS</p>
+<p>modules: Библиотеки&nbsp;Cocos2d-JS.</p>
+<p>jsList: Массив игровых .js файлов.</p>
+<p>&nbsp;</p>
+<p>Если вам лень задавать массив&nbsp;jsList&nbsp;вручную, то вы можете воспользоваться инструментами вроде&nbsp;<a href="https://github.com/mutoo/cocos2d-jsList">https://github.com/mutoo/cocos2d-jsList</a></p>
+<p>&nbsp;</p>
+<p>Код начальной&nbsp;игровой сцены (задается в main.js):</p>
+<p>&nbsp;</p>
+<pre class="language-javascript"><code>var HelloWorldLayer = cc.Layer.extend({
+    ctor:function () {
+    this._super();
+    return true;
+    },
+    });
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter:function () {
+    this._super();
+    this.addChild( new HelloWorldLayer() );
+    }
+    });</code></pre>
+<p>&nbsp;</p>
+<p>При появлении на сцене вызывается событие&nbsp;<strong>onEnter</strong>(), есть и другие события, их можно найти в документации&nbsp;<a href="http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.Node.html#onEnter">http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.Node.html#onEnter</a></p>
+<p>&nbsp;</p>
+<p>Создадим сцену воводящую текст "Hello world" по центру экрана:</p>
+<p>&nbsp;</p>
+<pre class="language-javascript"><code>var HelloWorldLayer = cc.Layer.extend({
+    ctor:function () {
+    this._super();
+    var size = cc.winSize;
+    var helloLabel = new cc.LabelTTF("Hello World", "Arial", 38);
+    helloLabel.x = size.width / 2;// position the label on the center of the screen
+    helloLabel.y = size.height / 2;
+    this.addChild(helloLabel, 5);// add the label as a child to this layer
+    return true;
+    },
+    });</code></pre>
+<pre>Функция addChild позволяет добавить игровой элемент, убрать его можно командой removeChild, например удаление текста через 3 секунды:<br /><br /></pre>
+<pre class="language-javascript"><code>var context = this;
+    setTimeout(function(){
+    context.removeChild(helloLabel);
+    }, 3000);</code></pre>
+<p>&nbsp;</p>
+<p>Запустить код можно командой "<code class="nx">cocos</code> <code class="nx">run</code> <code class="o">-</code><code class="nx">p</code> <code class="nx">web"</code></p>
+<p>&nbsp;</p>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<h2 id="element" style="text-align: center;"><a href="#element">Элементы</a></h2>
+<p>&nbsp;</p>
+<p><code class="nx"><strong>Node</strong> - базовый элемент в cocos2d.</code></p>
+<p><code class="nx"><strong>Глубина</strong> или z-order определяет положение элемента над остальными, и тем самым, задает видимость элемента.</code></p>
+<pre class="language-javascript"><code>nodeName.setLocalZOrder( 5 ); // задает глубину на сцене
+    nodeName.getLocalZOrder(); // узнает глубину на сцене
+
+    nodeName.setGlobalZOrder( 5 ); // задает порядок отрисовки
+    nodeName.getGlobalZOrder( ); // узнает порядок отрисовки</code></pre>
+<p>Элементы можно <strong>масштабировать</strong>:&nbsp;</p>
+<pre class="language-javascript"><code>nodeName.setScaleX( 0.5 ); // задает ширину элемента и его потомков
+    nodeName.getScaleX( );  // узнает ширину элемента и его потомков
+
+    nodeName.setScaleY( 0.5 ); // задает высоту элемента и его потомков
+    nodeName.getScaleY( ); // узнает высоту элемента и его потомков
+
+    nodeName.setScaleZ( 0.5 ); // задает глубину элемента и его потомков
+    nodeName.getScaleZ( ); // узнает глубину элемента и его потомков
+
+    nodeName.setScale( 0.5 );  // задает ширину и высоту элемента и его потомков
+    nodeName.getScale( ); // узнает ширину и высоту элемента и его потомков
+
+    nodeName.setScale( 0.5, 0.2 ); // задает ширину и высоту элемента и его потомков</code></pre>
+<p>Масштаб по умолчанию равен 1. Физические элементы нельзя масштабировать таким способом.</p>
+<p>&nbsp;</p>
+<p><strong>Позиция</strong>&nbsp;элемента:</p>
+<pre class="language-javascript"><code>nodeName.setPosition( cc.p( 50, 100 ) ); // задает позицию
+    nodeName.getPosition( ); // узнает позицию
+
+    result.x; // узнает позицию по оси x
+    result.y;  // узнает позицию по оси y
+
+    nodeName.setPosition( 50.0, 100.0 ); // задает позицию
+
+    // задает позицию по оси
+    nodeName.setPositionX( 50.0 );
+    nodeName.setPositionY( 50.0 );
+
+    // узнает позицию по оси
+    nodeName.getPositionX( );
+    nodeName.getPositionY( );</code></pre>
+<p><code class="nx"><strong>Наклон</strong> спрайта - shear distortion (Физические элементы нельзя изменять&nbsp;таким способом):</code></p>
+<p><code class="nx"><img src="http://i.stack.imgur.com/GtPRS.png" alt="" /></code></p>
+<pre class="language-javascript"><code>nodeName.setSkewX( 10.0 );
+    nodeName.setSkewY( 10.0 );
+
+    nodeName.getSkewX( );
+    nodeName.getSkewY( );</code></pre>
+<p><code class="nx">Точка привязки -&nbsp;<strong>anchor point</strong> - точка относительно которой происходят изменения.</code></p>
+<pre class="language-javascript"><code>nodeName.setAnchorPoint( cc.p( 0.5, 0.5 ) );
+    nodeName.getAnchorPoint();
+    nodeName.getAnchorPointInPoints( ); // получает значение в пикселях</code></pre>
+<p><code class="nx">Размер элемента:</code></p>
+<pre class="language-javascript"><code>nodeName.setContentSize( cc.size( 30.0, 90.0 ) );
+    nodeName.getContentSize( );</code></pre>
+<p>Пример использования:</p>
+<pre class="language-javascript"><code>var layerGradient = new cc.LayerGradient( cc.color.ORANGE, new cc.Color(0,255,0,100), cc.p(0, -1) ); // layerGradient(Starting color, Ending color, Gradient direction)
+    layerGradient.setContentSize(cc.size(size.width / 2, size.height / 2));
+    layerGradient.setPosition(cc.p(size.width / 4, size.height / 4));
+    this.addChild(layerGradient);</code></pre>
+<p><img src="http://i.imgur.com/vM3ePYO.png?1" alt="" /></p>
+<p>&nbsp;</p>
+<p>Видимость элемента:</p>
+<pre class="language-javascript"><code>nodeName.setVisible( true );
+    nodeName.isVisible( );</code></pre>
+<p>Вращение:</p>
+<p>&nbsp;</p>
+<pre class="language-javascript"><code>nodeName.setRotation( 45.0 );
+    nodeName.getRotation( );
+
+    // задать вращение в градусах
+    nodeName.setRotationX( 40.0 );
+    nodeName.setRotationY( 60.0 );
+
+    // узнать вращение в градусах
+    nodeName.getRotationX( );
+    nodeName.getRotationY( );</code></pre>
+<p>&nbsp;</p>
+<p>Идентификация элемента:</p>
+<pre class="language-javascript"><code>nodeName.setTag( 5 );
+    nodeName.getTag( );
+
+    nodeName.setName( "Name" );
+    nodeName.getName( );</code></pre>
+<p>Получение сцены (<strong>только для C++</strong>):</p>
+<pre class="language-javascript"><code>nodeName-&gt;getScene( );</code></pre>
+<p>Получение прямоугольника для проверки столкновений:</p>
+<pre class="language-javascript"><code>nodeName.getBoundingBox( );</code></pre>
+<p>&nbsp;</p>
+<p>Действия:</p>
+<pre class="language-javascript"><code>nodeName.runAction( actionToRun );
+
+    nodeName.stopAllActions( );
+
+    nodeName.stopAction( actionToStop );
+
+    nodeName.stopActionByTag( 5 );
+
+    nodeName.getActionByTag( );</code></pre>
+<p>Прозрачность и цвет:</p>
+<pre class="language-javascript"><code>nodeName.setOpacity( 100 );
+
+    nodeName.getOpacity( );
+
+    nodeName.setColor( new cc.Color(red, green, blue, alpha) );
+
+    nodeName.getColor( );</code></pre>
+<p>&nbsp;</p>
+<p>Добавление и получение:</p>
+<pre class="language-javascript"><code>this.addChild( nodeName ); // добавить с z-index = 0
+
+    this.addChild( nodeName, 2 ); // добавить с z-index
+
+    this.addChild( nodeName, 2, 65 ); // добавить с z-index и tag
+
+    this.getChildByTag( 2 );
+
+    this.getChildByName( "Name of node" );</code></pre>
+<p>Удаление:</p>
+<p>&nbsp;</p>
+<pre class="language-javascript"><code>nodeName.removeFromParent( );  // удаляет и очищает действия
+
+    nodeName.removeFromParentAndCleanup( false ); // удаляет и может очистить действия
+
+    this.removeChild( nodeName );  // удаляет и очищает действия
+
+    this.removeChild( nodeName, false ); // удаляет и может очистить действия
+
+    this.removeChildByTag( 6 );  // удаляет по тегу и очищает действия
+
+    this.removeChildByTag( 6, false );
+
+    this.removeAllChildren( );
+
+    this.removeAllChildrenWithCleanup( false )</code></pre>
+<p>&nbsp;</p>
+<h2 id="sprite" style="text-align: center;"><a href="#sprite">Спрайты</a></h2>
+<p>Спрайт из одного изображения (определен в resource.js):</p>
+<pre class="language-javascript"><code>        var size = cc.winSize;
+    this.sprite = new cc.Sprite(res.HelloWorld_png);
+    this.sprite.attr({ x: size.width / 2, y: size.height / 2 });
+    this.addChild(this.sprite, 0);</code></pre>
+<p>Спрайт из таблицы спрайтов (Sprite Sheet), пример файла <a href="http://img13.deviantart.net/7fc3/i/2012/288/4/7/volt_sprite_sheet_by_kwelfury-d5hx008.png">http://img13.deviantart.net/7fc3/i/2012/288/4/7/volt_sprite_sheet_by_kwelfury-d5hx008.png</a> :</p>
+<pre class="language-javascript"><code>        var size = cc.winSize;
+    this.sprite = new cc.Sprite(res.volt_sprite_sheet_png,cc.rect(40,30,150,200));
+    this.sprite.attr({ x: size.width / 2, y: size.height / 2 });
+    this.addChild(this.sprite, 0);</code></pre>
+<p>Анимация спрайтов:</p>
+<p><img src="http://nutcrackify.com/books/rapid_2d_game_development_using_cocos2djs/images/sprite_sheet.png" alt="sprite_sheet.png" /></p>
+<pre class="language-javascript"><code>        var size = cc.winSize;
+    var walk01 = cc.rect(0,0,72,97);
+    var walk02 = cc.rect(73,0,72,97);
+    var walk03 = cc.rect(146,0,72,97);
+    var walk04 = cc.rect(0,98,72,97);
+    var walk05 = cc.rect(73,98,72,97);
+    var walk06 = cc.rect(146,98,72,97);
+    var walk07 = cc.rect(219,0,72,97);
+    var walk08 = cc.rect(292,0,72,97);
+    var walk09 = cc.rect(219,98,72,97);
+    var walk10 = cc.rect(365,0,72,97);
+    var walk11 = cc.rect(292,98,72,97);
+    var frameDatas=[walk01,walk02,walk03,walk04,walk05,walk06,walk07,walk08,walk09,walk10,walk11];
+    var texture = cc.textureCache.addImage(res.Sprite_Sheet);
+    var animFrames=[];
+    for(var index in frameDatas)
+    {
+    var spriteFrame =  new cc.SpriteFrame(texture, frameDatas[index]);
+    var animFrame = new cc.AnimationFrame();
+    animFrame.initWithSpriteFrame(spriteFrame, 1, null);
+    animFrames.push(animFrame);
+    }
+    this.sprite = new cc.Sprite();
+    this.sprite.attr({ x: size.width / 2,y: size.height / 2 });
+    this.addChild(this.sprite, 0);
+    var spAnim = new cc.Animation(animFrames, 0.08);
+    var animate   = new cc.Animate(spAnim);
+    this.sprite.runAction(animate.repeatForever());</code></pre>
+<p>&nbsp;</p>
+<p><strong>Анимация с помощью PLIST</strong> (используя программу&nbsp;texturepacker)</p>
+<p>Рекомендуется к прочтению&nbsp;<a href="https://www.codeandweb.com/blog/2015/12/15/animations-and-spritesheets-in-cocos2d-x">https://www.codeandweb.com/blog/2015/12/15/animations-and-spritesheets-in-cocos2d-x</a></p>
+<p>Чтобы разбить готовый sprite sheet на несколько изображений используйте&nbsp;<a href="https://github.com/ForkandBeard/Alferd-Spritesheet-Unpacker">https://github.com/ForkandBeard/Alferd-Spritesheet-Unpacker</a>&nbsp;</p>
+<p>Полученные несколько изображений можно оптимизировать в&nbsp;texturepacker сохранив снова в один файл.</p>
+<p>&nbsp;</p>
+<p><strong>Бесплатно создать sprite sheet</strong> можно и в cocos studio, что рекомендуется:&nbsp;<a href="http://www.cocos2d-x.org/docs/editors_and_tools/chapter2/SpriteSheet/en/index.html">http://www.cocos2d-x.org/docs/editors_and_tools/chapter2/SpriteSheet/en/index.html</a></p>
+<p>&nbsp;</p>
+<p>Мои настройки (заметьте старый формат при сохранении):</p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13373169/0274b958-dd71-11e5-9cbd-cde75da95418.png" alt="image" /></p>
+<p>&nbsp;</p>
+<p>Код анимации:</p>
+<pre class="language-javascript"><code>var res = {
+    HelloWorld_png : "res/HelloWorld.png",
+    //...
+    sheet_plist : "res/sheet.plist",
+    sheet_png : "res/sheet.png",
+    };</code></pre>
+<pre class="language-javascript"><code>        var size = cc.winSize;
+    cc.spriteFrameCache.addSpriteFrames(res.sheet_plist, res.sheet_png);
+    var animFrames=[];
+    for(var i=1;i&lt;10;i++)
+    {
+    var str = i+".png";
+    var spriteFrame=cc.spriteFrameCache.getSpriteFrame(str);
+    animFrames.push(spriteFrame);
+    }
+    this.sprite = new cc.Sprite();
+    this.sprite.attr({ x: size.width / 2,y: size.height / 2 });
+    this.addChild(this.sprite, 0);
+    var spAnim = new cc.Animation(animFrames, 0.08);
+    var animate   = new cc.Animate(spAnim);
+    this.sprite.runAction(animate.repeatForever());</code></pre>
+<p>Функции работы со спрайтами:</p>
+<pre class="language-javascript"><code>var coolSprite = new cc.Sprite( "Image Filename.png" ); // создание
+
+    var coolSprite = new cc.Sprite( res.CloseNormal_png, cc.Rect( 0, 0, 100, 50 ) ); // обрезка
+
+    // SPRITE FRAME CACHE -  sprite sheet
+    cc.spriteFrameCache.addSpriteFrames( "spriteSheet.plit" );
+    var coolSprite = new cc.Sprite( spriteFrameCache.getSpriteFrame( "coolFrameName.png" ) );
+
+    // SPRITE FRAME
+    cc.spriteFrameCache.addSpriteFrames( "spriteSheet.plit" );
+    var coolSprite = new cc.Sprite( "coolFrameName.png" );
+
+    // textureCache
+    cc.textureCache.addImage( "Cool Image.png" );
+    var coolSprite = new cc.Sprite( "Cool Image.png" );
+
+    cc.textureCache.addImage( "Cool Image.png" );
+    var coolSprite = new cc.Sprite( "Cool Image.png", cc.Rect( 0, 0, 100, 50 ) );
+
+    coolSprite.setSpriteFrame( spriteFrameCache.getSpriteFrame( "coolFrameName.png" ) );
+    coolSprite.setSpriteFrame( "coolFrameName.png" );
+
+    // Texture
+    coolSprite.getTexture( );
+    coolSprite.setTexture( "coolImage.png" );
+    coolSprite.setTexture( texture );
+
+    coolSprite.getTextureRect( );
+    coolSprite.setTextureRect( cc.Rect( 0, 0, 100, 50 ) );
+</code></pre>
+<p>&nbsp;</p>
+<h2 id="scene" style="text-align: center;"><a href="#scene">Работа со сценами</a></h2>
+<p><strong>Создание сцены</strong>:&nbsp;</p>
+<pre class="language-javascript"><code>var HelloWorldLayer = cc.Layer.extend({
+    ctor:function () {
+    this._super();
+    return true;
+    }
+    });
+
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter:function () {
+    this._super();
+    var layer = new HelloWorldLayer();
+    this.addChild(layer);
+    }
+    });</code></pre>
+<p><strong>Запуск первой игровой сцены</strong>:</p>
+<pre class="language-javascript"><code>var scene = new NewScene( );
+    cc.director.runScene( scene );</code></pre>
+<p><strong>Добавление текущей сцены</strong>:</p>
+<pre class="language-javascript"><code>cc.director.pushScene( scene );</code></pre>
+<p><strong>Снятие текущей сцены</strong>:</p>
+<pre class="language-javascript"><code>cc.director.popScene( );</code></pre>
+<p><strong>Замена сцены</strong>:</p>
+<pre class="language-javascript"><code>cc.director.replaceScene( scene );</code></pre>
+<p><strong>Эффекты</strong> появления сцены:</p>
+<pre class="language-javascript"><code>cc.director.runScene( new cc.TransitionCrossFade( 1.0, new HelloWorldScene() ) );</code></pre>
+<pre class="cm-s-neo" data-mode="javascript"><span class="cm-property">Все эффекты можно увидеть на примере <a href="./assets/demo/cocos-translations">[ assets/demo/cocos-translations ] </a><br /><strong>Код примера</strong>: <a href="https://gist.github.com/derofim/034db9530f32ed875e05">https://gist.github.com/derofim/034db9530f32ed875e05<br /></a><br />Список эффектов:</span></pre>
+<pre class="cm-s-neo" data-mode="javascript">cc.TransitionCrossFade</pre>
+<pre class="cm-s-neo" data-mode="javascript">cc.<span class="cm-property">TransitionFade<br /></span></pre>
+<pre class="cm-s-neo" data-mode="javascript">cc.TransitionFadeTR<br />cc.TransitionJumpZoom<br />cc.TransitionMoveInL<br />cc.TransitionPageTurn<br />cc.TransitionProgress<br />cc.TransitionRotoZoom<br />cc.TransitionSceneOriented<br />cc.TransitionShrinkGrow<br />cc.TransitionSlideInL<br />cc.TransitionSplitCols<br />cc.TransitionTurnOffTiles<br /><br /></pre>
+<pre class="cm-s-neo" data-mode="javascript"><span class="cm-property">Также существуют функции принимающие несколько аргументов:</span></pre>
+<pre class="code">cc.TransitionSceneOriented(time,scene,orientation);</pre>
+<pre class="code">cc.TransitionFlipAngular(time,scene,orientation);</pre>
+<pre class="code">cc.TransitionFlipX(t,scene,o);</pre>
+<pre class="code">cc.TransitionFlipY(t,scene,o);</pre>
+<pre class="code">cc.TransitionZoomFlipAngular(time,scene,o);</pre>
+<pre class="code">cc.TransitionZoomFlipX(time,scene,o);</pre>
+<pre class="code">cc.TransitionZoomFlipY(time,scene,o);<br /><br />Последний параметр у этих функций может принимать значения</pre>
+<div class="line number1 index0 alt2"><code class="cpp plain"><font>cc.TRANSITION_ORIENTATION_LEFT_OVER</font></code></div>
+<div class="line number2 index1 alt1"><code class="cpp plain"><font><font>cc.TRANSITION_ORIENTATION_RIGHT_OVER</font></font></code></div>
+<div class="line number3 index2 alt2"><code class="cpp plain"><font><font>cc.TRANSITION_ORIENTATION_UP_OVER</font></font></code></div>
+<div class="line number4 index3 alt1"><code class="cpp plain"><font><font>cc.TRANSITION_ORIENTATION_DOWN_OVER</font></font></code></div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number4 index3 alt1">Больше про переходы можно прочитать на&nbsp;<a href="http://cocos.sonarlearning.co.uk/docs/scene-transitions">http://cocos.sonarlearning.co.uk/docs/scene-transitions</a>&nbsp;</div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number4 index3 alt1"><code class="cpp plain"><font><font>Если сцену нужно <strong>заполнить сплошным цветом</strong>, то можно использовать&nbsp;new cc.LayerColor(cc.color(r, g ,b, a));</font></font></code></div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number4 index3 alt1"><code class="cpp plain"><font><font>Можно заполнить участок сцены цветом т.е. добавить <strong>цветной прямоугольник</strong>:</font></font></code></div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number4 index3 alt1">
+<pre class="language-javascript"><code>        var colorSprite = new cc.Sprite();
+    colorSprite.setTextureRect(cc.rect(0, 0, 200, 100)); // x y w h
+    colorSprite.setColor(cc.color(100,200,200)); // r g b
+    colorSprite.setNormalizedPosition(0.5,0.6); // 0..1
+    this.addChild(colorSprite);</code></pre>
+</div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<p>/</p>
+<h2 id="action" style="text-align: center;"><a href="#action">Действия</a></h2>
+<p>&nbsp;</p>
+<p>"To" действия изменяют элемент вне зависимости от его свойств.&nbsp;</p>
+<p>"By"действия изменяют элемент относительно&nbsp;от его свойств.&nbsp;</p>
+<p>&nbsp;</p>
+<pre class="language-javascript"><code>var nodeAction = new cc.MoveTo( 2, cc.p( 50, 100 ) );
+    nodeName.runAction( nodeAction );
+
+    var nodeAction = new cc.MoveBy( 2, cc.p( 50, 100 ) );
+    nodeName.runAction( nodeAction );</code></pre>
+<p>Подробнее можно прочитать на&nbsp;<a href="http://cocos.sonarlearning.co.uk/docs/actions">http://cocos.sonarlearning.co.uk/docs/actions</a></p>
+<p>&nbsp;</p>
+<p>Функции:</p>
+<pre class="language-javascript"><code>// Прыжки
+    // y - Необязательный параметр
+    cc.JumpTo(duration, position, y, height, jumps)
+    cc.JumpBy(duration, position, y, height, jumps)
+
+    // Движение по кривой, передается время и массив точек
+    var bezierOptions = [cc.p( 0, 400 ), cc.p( 300, 50 ), cc.p( 100, 100 )];
+    var nodeAction = new cc.BezierTo( 2, bezierOptions );
+    nodeName.runAction( nodeAction );
+
+    var nodeAction = new cc.BezierBy( 2, bezierOptions );
+    nodeName.runAction( nodeAction );
+
+    // Мгновенное перемещение
+    var nodeAction = new cc.Place( cc.p( 200, 150 ) );
+    nodeName.runAction( nodeAction );
+
+    // Масштабирование
+    var nodeAction = new cc.ScaleTo( 2, 3, 6 );
+    nodeName.runAction( nodeAction );
+    var nodeAction = new cc.ScaleBy( 2, 3, 6 );
+    nodeName.runAction( nodeAction );
+
+    // Вращение
+    var nodeAction = new cc.RotateTo( 2, 45 );
+    nodeName.runAction( nodeAction );
+    var nodeAction = new cc.RotateBy( 2, 45 );
+    nodeName.runAction( nodeAction );
+
+    // Изменение цвета
+    var nodeAction = new cc.TintTo( 2, 45, 45, 100 );
+    nodeName.runAction( nodeAction );
+    var nodeAction = new cc.TintBy( 2, 45, 45, 100 );
+    nodeName.runAction( nodeAction );
+
+    // Изменение прозрачности
+
+    var nodeAction = new cc.FadeTo( 2, 100 ); // получает время, прозрачность
+    nodeName.runAction( nodeAction );
+
+    var nodeAction = new cc.FadeIn( 2 ); // получает время, прозрачность станет = 255
+    nodeName.runAction( nodeAction );
+
+    var nodeAction = new cc.FadeOut( 2 ); получает время, прозрачность станет = 0
+    nodeName.runAction( nodeAction );
+
+    // Наклон (t, sx, sy)
+    var nodeAction = new cc.SkewTo( 2, 20, 20 );
+    nodeName.runAction( nodeAction );
+
+    var nodeAction = new cc.SkewBy( 2, 20, 20 );
+    nodeName.runAction( nodeAction );
+
+    // Задержка в секундах
+    var delayAction = new cc.DelayTime( 2.5 );
+
+    // Последовательное выполнение действий
+    var sequenceAction = new cc.Sequence( nodeAction1, nodeAction2, nodeAction3 );
+    nodeName.runAction( sequenceAction );
+
+    // Последовательное выполнение действий в обратном порядке
+    var sequenceAction = new cc.Sequence( nodeAction1, nodeAction2, nodeAction3 );
+    nodeName.runAction( sequenceAction.reverse( ) );
+
+    // Повтор дейсвтия
+    var repeatAction = new cc.Repeat( actionToRepeat, 5 ); // 5 раз
+    nodeName.runAction( repeatAction );
+
+    var repeatForeverAction = new cc.RepeatForever( actionToRepeat ); // вечно
+    nodeName.runAction( repeatForeverAction );
+
+    // Одновременное выполнение действий
+    var spawnAction = new cc.Spawn( nodeAction1, nodeAction2, nodeAction3 );
+    nodeName.runAction( spawnAction );
+
+    // Вызов функции при выполнении действия
+    var functionAction = new cc.CallFunc( functionToCall );
+    nodeName.runAction( functionAction );</code></pre>
+<pre class="cm-s-neo" data-mode="javascript">&nbsp;</pre>
+<p>Вспомогательные действия (удобны при создании меню и физики):</p>
+<p><img src="http://www.cocos2d-x.org/attachments/download/5507" alt="" /></p>
+<pre class="language-javascript"><code>var nodeAction = new cc.MoveBy( 2.0, cc.p( 300, 0 ) ); // Пример действия
+
+    var easeAction = new cc.EaseBackIn( nodeAction ); // Пример easeAction
+    nodeName.runAction( easeAction );
+
+    var easeAction = new cc.EaseBackInOut( nodeAction );
+    var easeAction = new cc.EaseBackOut( nodeAction );
+    var easeAction = new cc.EaseBounceIn( nodeAction );
+    var easeAction = new cc.EaseBounceInOut( nodeAction );
+    var easeAction = new cc.EaseBounceOut( nodeAction );
+    var easeAction = new cc.EaseCircleActionIn( nodeAction );
+    var easeAction = new cc.EaseCircleActionInOut( nodeAction );
+    var easeAction = new cc.EaseCircleActionOut( nodeAction );
+    var easeAction = new cc.EaseCubicActionIn( nodeAction );
+    var easeAction = new cc.EaseCubicActionInOut( nodeAction );
+    var easeAction = new cc.EaseCubicActionOut( nodeAction );
+    var easeAction = new cc.EaseElasticIn( nodeAction );
+    var easeAction = new cc.EaseElasticInOut( nodeAction );
+    var easeAction = new cc.EaseElasticOut( nodeAction );
+    var easeAction = new cc.EaseExponentialIn( nodeAction );
+    var easeAction = new cc.EaseExponentialInOut( nodeAction );
+    var easeAction = new cc.EaseExponentialOut( nodeAction );
+    var easeAction = new cc.EaseIn( nodeAction, 5.0 );
+    var easeAction = new cc.EaseInOut( nodeAction, 5.0 );
+    var easeAction = new cc.EaseOut( nodeAction, 5.0 );
+    var easeAction = new cc.EaseQuadraticActionIn( nodeAction );
+    var easeAction = new cc.EaseQuadraticActionInOut( nodeAction );
+    var easeAction = new cc.EaseQuadraticActionOut( nodeAction );
+    var easeAction = new cc.EaseQuarticActionIn( nodeAction );
+    var easeAction = new cc.EaseQuarticActionInOut( nodeAction );
+    var easeAction = new cc.EaseQuarticActionOut( nodeAction );
+    var easeAction = new cc.EaseQuinticActionIn( nodeAction );
+    var easeAction = new cc.EaseQuinticActionInOut( nodeAction );
+    var easeAction = new cc.EaseQuinticActionOut( nodeAction );
+    var easeAction = new cc.EaseSineIn( nodeAction );
+    var easeAction = new cc.EaseSineInOut( nodeAction );
+    var easeAction = new cc.EaseSineOut( nodeAction );
+</code></pre>
+<p>Подробнее можно прочитать на&nbsp;<a href="http://www.cocos2d-x.org/wiki/Actions">http://www.cocos2d-x.org/wiki/Actions</a></p>
+<p>&nbsp;</p>
+<h2 id="sprite" style="text-align: center;">&nbsp;</h2>
+<h2 id="menu" style="text-align: center;"><a href="#menu">Меню</a>&nbsp;&amp; UI</h2>
+<p>Не забудьте добавить <em>extensions</em>&nbsp;в&nbsp;<strong>project.json</strong></p>
+<pre class="language-javascript"><code> "modules" : ["cocos2d", "extensions"],</code></pre>
+<p>Также возможно примется обновить .h и .cpp файлы, а также&nbsp;<strong>Android.mk&nbsp;</strong>как написано в инстукции&nbsp;<a href="http://cocos.sonarlearning.co.uk/docs/ui-elements-such-as-uibutton">http://cocos.sonarlearning.co.uk/docs/ui-elements-such-as-uibutton</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Меню</strong>:</p>
+<pre class="language-javascript"><code>var menuItem = new cc.MenuItemAtlasFont( "TextToDisplay", "AtlasImageFilePath", 25, 25, functionToCall );
+
+    var menuItem = new cc.MenuItemFont( "TextToDisplay", functionToCall );
+
+    var menuItem = new cc.MenuItemImage( "normalImageFilePath", "selectedImageFilePath", "disabledImageFilePath", functionToCall );
+
+    var menuItem = new cc.MenuItemLabel( label, functionToCall );
+
+    var menuItem = new cc.MenuItemSprite( normalSprite, selectedSprite, disabledSprite, functionToCall );
+
+    var menu = new cc.Menu( menuItem1, menuItem2, menuItem3 );
+
+    menuItem.setFontName( "pathOfNewFontFile" );
+    menuItem.setFontSize( 5 );</code></pre>
+<p>Подробнее на&nbsp;<a href="http://cocos.sonarlearning.co.uk/docs/menus">http://cocos.sonarlearning.co.uk/docs/menus</a></p>
+<p>&nbsp;</p>
+<p><strong>Текст</strong></p>
+<pre class="language-javascript"><code>// atlas
+    var label = new cc.LabelAtlas( "String to display", "Filepath of the character map", 5, 5 );
+    // bitmap
+    var label = new cc.LabelBMFont( "String to display", "Filepath of the bmfont" );
+    // TrueType
+    var label = new cc.LabelTTF( "String to display", "Font filepath" );</code></pre>
+<p>Пример atlas (файлы можно скачать из <a href="https://gist.github.com/derofim/93a1c459752f7406f4f7">https://gist.github.com/derofim/93a1c459752f7406f4f7</a> ):</p>
+<pre class="language-javascript"><code>var res = {
+    tuffy_png : "res/tuffy.png",
+    tuffy_plist : "res/tuffy.plist",
+    };
+    //...
+    var label = new cc.LabelAtlas( "String to display", res.tuffy_plist );</code></pre>
+<p>Пример ttf:</p>
+<pre class="language-javascript"><code>        var size = cc.winSize;
+    var myLabelTTF = new cc.LabelTTF('label text',  'Times New Roman', 32, cc.size(320,32), cc.TEXT_ALIGNMENT_LEFT);
+    myLabelTTF.setPosition( cc.p( size.width / 2+150, 200 ) );
+    this.addChild(myLabelTTF, 0);
+    var fontDef = new cc.FontDefinition();
+    fontDef.fontName = "Arial";
+    fontDef.fontSize = "32";
+    var myLabel = new cc.LabelTTF('label text',  fontDef);
+    myLabel.setPosition( cc.p( size.width / 2+50, 100 ) );
+    this.addChild(myLabel, 0);</code></pre>
+<p><strong>UI</strong>:</p>
+<p><strong>Кнопка</strong>:</p>
+<pre class="language-javascript"><code>// создание кнопки
+    var button = new ccui.Button();
+    button.loadTextures( "Normal image filepath", "Selected image filepath" );
+
+    // создание событий нажатия
+    button.addTouchEventListener( this.touchEvent, this );
+
+    touchEvent: function(sender, type)
+    {
+    switch (type)
+    {
+    case ccui.Widget.TOUCH_BEGAN:
+    // ...
+    break;
+    case ccui.Widget.TOUCH_MOVED:
+    // ...
+    break;
+
+    case ccui.Widget.TOUCH_ENDED:
+    // ...
+    break;
+
+    case ccui.Widget.TOUCH_CANCELLED:
+    // ...
+    break;
+    }
+    }
+
+</code></pre>
+<pre class="cm-s-neo" data-mode="javascript"><span class="cm-property"><strong>CheckBox</strong>:<br /></span></pre>
+<pre class="language-javascript"><code>var checkBox = new ccui.CheckBox( );
+    checkBox.loadTextures( "Checkbox normal image file path",
+    "Checkbox normal pressed image filepath",
+    "Checkbox active image filepath",
+    "Checkbox normal disabled image filepath",
+    "Checkbox active disabled image filepath" );
+    checkBox.addEventListener( this.selectedStateEvent, this );
+
+    selectedStateEvent: function ( sender, type )
+    {
+    switch ( type )
+    {
+    case ccui.CheckBox.EVENT_SELECTED:
+    break;
+    case ccui.CheckBox.EVENT_UNSELECTED:
+    break;
+    default:
+    break;
+    }
+    }</code></pre>
+<p>Еще элементы:</p>
+<pre class="language-javascript"><code>// UIIMAGEVIEW
+    var imageView = new ccui.ImageView( );
+    imageView.loadTexture( "Image filepath" );
+
+    // UILAYOUT
+    var layout = new ccui.Layout();
+    layout.setLayoutType( ccui.Layout.LINEAR_HORIZONTAL );
+    layout.sizeType = ccui.Widget.SIZE_PERCENT;
+    layout.setSizePercent( cc.p( 0.5, 0.5 ) );
+    layout.setPositionType( ccui.Widget.POSITION_PERCENT );
+    layout.setPositionPercent( cc.p( 0.25, 0.25 ) );
+    layout.setBackGroundColorType( ccui.Layout.BG_COLOR_SOLID );
+    layout.setBackGroundColor( cc.color.GRAY );
+    layout.addChild( nodeToAdd );
+
+    // UILISTVIEW
+    var listView = new ccui.ListView( );
+    listView.setDirection( ccui.ScrollView.DIR_VERTICAL );
+    listView.setTouchEnabled( true );
+    listView.setBounceEnabled( true );
+    listView.setBackGroundImage( "Background image filepath" );
+    listView.pushBackCustomItem( customItem );
+
+    listView.addEventListener(this.selectedItemEvent, this);
+
+    selectedItemEvent: function ( sender, type )
+    {
+    switch ( type )
+    {
+    case ccui.ListView.EVENT_SELECTED_ITEM:
+    cc.log( "select child index = " + sender.getCurSelectedIndex( ) );
+    break;
+
+    default:
+    break;
+    }
+    }
+
+    // UILOADINGBAR
+    var loadingBar = new ccui.LoadingBar( );
+    loadingBar.loadTexture( "Loading bar image filepath" );
+    loadingBar.setPercent( 0 ); // 0 - 100
+
+    //UIPAGEVIEW
+    var pageView = new ccui.PageView( );
+    pageView.setTouchEnabled( true );
+    pageView.setContentSize( cc.size( 240.0, 900.0 ) );
+    pageView.setAnchorPoint( cc.p( 0.5, 0.5 ) );
+    var layout = new ccui.Layout( );
+    layout.setContentSize( cc.size( 240.0, 900.0 ) );
+    layout.addChild( elementToAddToLayout );
+    pageView.addPage( layout );
+    pageView.insertPage( layout, 1 );
+    pageView.removePageAtIndex( 0 );
+    pageView.removeAllPages( );
+    pageView.scrollToPage( 2 );
+
+    pageView.addEventListener( this.pageViewEvent, this );
+
+    pageViewEvent: function ( sender, type )
+    {
+    switch ( type )
+    {
+    case ccui.PageView.EVENT_TURNING:
+    var pageView = sender;
+
+    cc.log( "Current page " + pageView.getCurPageIndex( ) );
+
+    break;
+    default:
+    break;
+    }
+    }
+
+    // UIRICHTEXT
+    var richText = new ccui.RichText( );
+    richText.ignoreContentAdaptWithSize( false );
+    richText.width = 120;
+    richText.height = 100;
+    var re1 = new ccui.RichElementText( 1, cc.color.WHITE, 255, "This color is white", "Font filepath", 10 );
+    var re2 = new ccui.RichElementText( 2, cc.color.YELLOW, 255, "And this is yellow. ", "Font filepath", 10 );
+    richText.pushBackElement( re1 );
+    richText.pushBackElement( re2 );
+
+    // UISCROLLVIEW
+    var scrollView = new ccui.ScrollView( );
+    scrollView.setDirection( ccui.ScrollView.DIR_VERTICAL );
+    scrollView.setTouchEnabled( true );
+    scrollView.setBounceEnabled( true );
+    scrollView.setBackGroundImage( "Background image filepath" );
+    scrollView.setContentSize( cc.size( 300, 200 ) );
+    scrollView.setInnerContainerSize( cc.size( 1280, 2500 ) );
+    scrollView.setAnchorPoint( cc.p( 0.5, 0.5 ) );
+    scrollView.addChild( nodeToAdd );
+
+    // UISLIDER
+    var slider = new ccui.Slider( );
+    slider.setTouchEnabled( true );
+    slider.loadBarTexture( "Slider background" );
+    slider.loadSlidBallTextures( "Slider button", "Slider button clicked", "" );
+    slider.loadProgressBarTexture( "Progress bar" );
+
+    slider.addEventListener( this.sliderEvent, this );
+    sliderEvent: function( sender, type )
+    {
+    switch (type)
+    {
+    case ccui.Slider.EVENT_PERCENT_CHANGED:
+    cc.log("Percent " + sender.getPercent().toFixed(0));
+
+    break;
+    }
+    }
+
+    // UITEXT
+    var text = new ccui.Text( );
+    text.setString( "String to display" );
+    text.setFontName( "Font filepath" );
+    text.setFontSize( 32 );
+    text.setTextHorizontalAlignment( cc.TEXT_ALIGNMENT_CENTER );
+    text.setTextVerticalAlignment( cc.VERTICAL_TEXT_ALIGNMENT_CENTER );
+
+    // UITEXTATLAS
+    var textAtlas = new ccui.TextAtlas( );
+    textAtlas.setProperty( "String to display", "Character map filepath", 5, 5, "2" );
+
+    // UITEXTBMFONT
+    var labelBMFont = new ccui.TextBMFont( );
+    labelBMFont.setFntFile( "Bitmap font filepath" );
+    labelBMFont.setString( "String to display" );
+
+    // UITEXTFIELD
+    var textField = new ccui.TextField( );
+    textField.setTouchEnabled( true );
+    textField.fontName = "Font filepath";
+    textField.placeHolder = "Input text here";
+    textField.fontSize = 30;
+    textField.setMaxLengthEnabled( true );
+    textField.setMaxLength( 12 );
+    textField.setPasswordEnabled( true );
+    textField.setPasswordStyleText( "*" );
+    textField.addEventListener( this.textFieldEvent, this );
+
+    textFieldEvent: function( sender, type )
+    {
+    switch ( type )
+    {
+    case ccui.TextField.EVENT_ATTACH_WITH_IME:
+    break;
+    case ccui.TextField.EVENT_DETACH_WITH_IME:
+    break;
+    case ccui.TextField.EVENT_INSERT_TEXT:
+    cc.log( "%s", textField.string );
+    break;
+    case ccui.TextField.EVENT_DELETE_BACKWARD:
+    cc.log( "%s", textField.string );
+    break;
+    }
+    }
+
+    // UIVIDEOPLAYER
+    var videoPlayerField = new ccui.VideoPlayer(res.applause_mp4);
+    this.addChild(videoPlayerField);
+    videoPlayerField.x = size.width / 2;
+    videoPlayerField.y = size.height / 2;
+    videoPlayerField.play();
+
+    // UIWEBVIEW
+    var webview = new ccui.WebView ("http://localhost:9000/cocos2d.html#menu");
+    webview.setContentSize(400, 400);
+    webview.setPosition( cc.p( size.width / 2, size.height / 2 ) );
+    this.addChild(webview);</code></pre>
+<pre class="cm-s-neo" data-mode="javascript"><span class="cm-property">&nbsp;</span></pre>
+<p>&nbsp;</p>
+<h2 id="3d" style="text-align: center;"><a href="#3d">3d графика</a></h2>
+<p>3d&nbsp;только для C++</p>
+<h2 id="updates" style="text-align: center;"><a href="#updates">Планирование и обновление</a></h2>
+<pre class="language-javascript"><code>// Делать обновление каждый кадр
+    this.scheduleUpdate( );
+
+    update: function( dt )
+    {
+    // ...
+    }
+
+    // Несколько раз: schedule( functionToCall, timeBetweenFunctionCalls, numberOfTimesToCallFunction, firstFunctionCallDelay );
+    this.schedule( this.UpdateFunction, 3.0, 5, 1.0 );
+
+    // Вечно: schedule( functionToCall, timeBetweenFunctionCalls );
+    this.schedule( this.UpdateFunction, 1.0 );
+
+    // Каждый кадр
+    this.schedule( this.UpdateFunction );
+
+    // Один раз
+    this.scheduleOnce( this.UpdateFunction, 1.0 );
+
+    // UNSCHEDULING
+    this.unschedule( this.UpdateFunction );
+    this.unscheduleAllCallbacks( );
+    this.unscheduleUpdate( );</code></pre>
+<h2 id="events" style="text-align: center;"><a href="#events">События</a></h2>
+<p><strong>Ввод</strong> (одно касание):</p>
+<pre class="language-javascript"><code>if ( cc.sys.capabilities.hasOwnProperty( 'touches' ) )
+    {
+    cc.eventManager.addListener(
+    {
+    event: cc.EventListener.TOUCH_ONE_BY_ONE,
+
+    // called when the touch first begins
+    onTouchBegan:function( touch, event )
+    {
+    cc.log( "Touch Began X: " + touch.getLocationX( ) );
+    cc.log( "Touch Began Y: " + touch.getLocationY( ) );
+
+    return true;
+    },
+
+    // called when the user moves their finger
+    onTouchMoved:function( touch, event )
+    {
+    cc.log( "Touch Moved X: " + touch.getLocationX( ) );
+    cc.log( "Touch Moved Y: " + touch.getLocationY( ) );
+    },
+
+    // called when the user lifts their finger
+    onTouchEnded:function( touch, event )
+    {
+    cc.log( "Touch Ended X: " + touch.getLocationX( ) );
+    cc.log( "Touch Ended Y: " + touch.getLocationX( ) );
+    },
+
+    // called when the device goes to another application such as a phone call
+    onTouchCancelled:function( touch, event )
+    {
+    cc.log( "Touch Cancelled X: " + touch.getLocationX( ) );
+    cc.log( "Touch Cancelled Y: " + touch.getLocationX( ) );
+    }
+    }, this );
+    }</code></pre>
+<p>Ввод <strong>нескольких касаний</strong>:</p>
+<pre class="language-javascript"><code>// checks if the device you are using is capable of touch
+    if ( cc.sys.capabilities.hasOwnProperty( 'touches' ) )
+    {
+    cc.eventManager.addListener(
+    {
+    event: cc.EventListener.TOUCH_ALL_AT_ONCE,
+
+    onTouchesBegan:function( touches, event )
+    {
+    cc.log( "Touch Began: " + touches[touchIndex].getLocationX( ) );
+    },
+
+    onTouchesMoved:function( touches, event )
+    {
+    cc.log( "Touch Moved: " + touches[touchIndex].getLocationX( ) );
+    },
+
+    onTouchesEnded:function( touches, event )
+    {
+    cc.log( "Touch Ended: " + touches[touchIndex].getLocationX( ) );
+    },
+
+    onTouchesCancelled:function( touches, event )
+    {
+    cc.log( "Touch Cancelled: " + touches[touchIndex].getLocationX( ) );
+    }
+    }, this);
+    }</code></pre>
+<p>Ввод <strong>мышью</strong>:</p>
+<pre class="language-javascript"><code>if ( cc.sys.capabilities.hasOwnProperty( 'mouse' ) )
+    {
+    cc.eventManager.addListener(
+    {
+    event: cc.EventListener.MOUSE,
+
+    onMouseDown: function( event )
+    {
+    if ( event.getButton( ) == cc.EventMouse.BUTTON_LEFT )
+    {
+    cc.log( "Left mouse button pressed at " + event.getLocationX( ) );
+    }
+    },
+
+    onMouseUp: function(event)
+    {
+    if ( event.getButton() == cc.EventMouse.BUTTON_LEFT )
+    {
+    cc.log( "Left mouse button released at " + event.getLocationX( ) );
+    }
+    },
+
+    onMouseMove: function(event)
+    {
+    cc.log( "Mouse Moved: " + event.getLocationX( ) );
+    },
+
+    onMouseScroll: function(event)
+    {
+    cc.log( "Scroll: " + event.getLocationX( ) );
+    }
+    }, this );
+    }</code></pre>
+<p>Ввод с <strong>клавиатуры</strong>:</p>
+<pre class="language-javascript"><code>if ( cc.sys.capabilities.hasOwnProperty( 'keyboard' ) )
+    {
+    cc.eventManager.addListener(
+    {
+    event: cc.EventListener.KEYBOARD,
+
+    onKeyPressed: function( key, event )
+    {
+    cc.log( "Key Pressed: " + key.toString( ) );
+    },
+
+    onKeyReleased: function( key, event )
+    {
+    cc.log( "Key Released: " + key.toString( ) );
+    }
+    }, this );
+    }</code></pre>
+<p>Акселерометр - <strong>ввод наклоном</strong>:</p>
+<pre class="language-javascript"><code>if ( cc.sys.capabilities.hasOwnProperty( 'accelerometer' ) )
+    {
+    cc.inputManager.setAccelerometerInterval( 1 / 60 );
+    cc.inputManager.setAccelerometerEnabled( true );
+
+    cc.eventManager.addListener(
+    {
+    event: cc.EventListener.ACCELERATION,
+
+    callback: function( accelEvent, event )
+    {
+    cc.log( 'Accel X: ' + accelEvent.x + ' Y: ' + accelEvent.y + ' Z: ' + accelEv
+    }
+    }, this );
+    }</code></pre>
+<p>&nbsp;</p>
+<h2 id="sound" style="text-align: center;"><a href="#sound">Звук</a></h2>
+<p><strong>Проигрывание</strong>:</p>
+<pre class="language-javascript"><code>cc.audioEngine.playEffect( "audioFilePath" );
+
+    cc.audioEngine.playEffect( "audioFilePath", true ); // повторение
+
+    cc.audioEngine.stopEffect-&gt;stopEffect( soundEffectID );
+
+    cc.audioEngine.pauseEffect( soundEffectID );
+
+    cc.audioEngine.resumeEffect( soundEffectID );
+
+    cc.audioEngine.stopAllEffect( soundEffectID );
+
+    cc.audioEngine.pauseAllEffect( soundEffectID );
+
+    cc.audioEngine.resumeAllEffect( soundEffectID );
+
+    cc.audioEngine.setEffectsVolume( 0.25 );</code></pre>
+<p><strong>Музыка</strong>:</p>
+<pre class="language-javascript"><code>cc.audioEngine.playMusic( "audioFilePath", true );
+    cc.audioEngine.stopMusic( );
+    cc.audioEngine.pauseMusic( );
+    cc.audioEngine.resumeMusic( );
+    cc.audioEngine.setMusicVolume( ( 0.25 );</code></pre>
+<p>&nbsp;</p>
+<h2 id="files" style="text-align: center;"><strong><a href="#files">Файлы</a></strong></h2>
+<p><strong>Чтение и запись&nbsp;PLIST</strong>:</p>
+<p>http://cocos.sonarlearning.co.uk/docs/plist</p>
+<h2 id="physics" style="text-align: center;"><a href="#physics">Физика</a></h2>
+<p><strong>Столкновения</strong> (Rect/Bounding Box):</p>
+<pre class="language-javascript"><code>var rect1 = node1.getBoundingBox( );
+    var rect2 = node2.getBoundingBox( );
+    if ( cc.rectIntersectsRect( rect1, rect2 ) )
+    {
+    cc.log( "Collided" );
+    }
+    else
+    {
+    cc.log( "Not collided" );
+    }</code></pre>
+<p><strong>Проверка касания</strong>:</p>
+<pre class="language-javascript"><code>onTouchBegan:function( touch, event )
+    {
+    var rect1 = node1.getBoundingBox( );
+    var touchPoint = touch.getLocation( );
+    if ( cc.rectContainsPoint( rect1, touchPoint ) )
+    {
+    cc.log( "Touched" );
+    }
+    else
+    {
+    cc.log( "Not touched" );
+    }
+
+    return true;
+    },</code></pre>
+<p>&nbsp;</p>
+<h2 id="scripts" style="text-align: center;"><a href="#scripts">Скрипты</a></h2>
+
+
+    </div>
+
+    
+    <div class="infofooter">
+    <ul class="pager pager-justified">
+  
+  
+  
+  
+  
+<div class="right"><a href="editor.html" class="footerlnk">Далее &rarr;</a></div>
+  
+  
+</ul>
+
+
+    </div>
+
+    
+
+    <div class="footer">
+      <div class="left">© 2015 Denis Trofimov</div>
+
+      <div class="right"><a href="sitemap.xml" class="footerlnk">Карта сайта</a></div>
+    </div>
+
+
+    <script src=assets/scripts/vendor.js></script>
+    <script src=assets/scripts/main.js></script>
+    <script src="assets/scripts/pattern/js/geopattern.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/g/prism@1.4.1(prism.js+components/prism-javascript.min.js+components/prism-c.min.js+components/prism-actionscript.min.js+components/prism-git.min.js+components/prism-java.min.js)"></script>
+
+  </body>
+</html>
