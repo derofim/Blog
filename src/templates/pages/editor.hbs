@@ -12,11 +12,13 @@ tags:
 categories:
 - no
 ---
+<style>.mce-window{max-height:400px !important; overflow: scroll;}</style>
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <script type="text/javascript">
   window.onbeforeunload = function() {
       return "Did you save your stuff?"
   }
+
   tinymce.init({
       setup : function(ed) {
           ed.on('change', function(e) {
@@ -24,7 +26,7 @@ categories:
               console.log('the editor object '+ed);
               console.log('the content '+ed.getContent());
               var content = ed.getContent().toString();
-              content.replace("Easy", "W3Schools");
+              content.replace("Easy", "");
               $("#preview").html(content);
           });
       },
@@ -32,13 +34,13 @@ categories:
       height: 500,
       theme: 'modern',
       plugins: [
-          'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+          'codesample advlist autolink lists link image charmap print preview hr anchor pagebreak',
           'searchreplace wordcount visualblocks visualchars code fullscreen',
           'insertdatetime media nonbreaking save table contextmenu directionality',
-          'emoticons template paste textcolor colorpicker textpattern imagetools'
+          'emoticons template paste textcolor colorpicker textpattern imagetools', 'customem'
       ],
       toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-      toolbar2: 'print preview media | forecolor backcolor emoticons',
+      toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
       image_advtab: true,
       templates: [
           { title: 'Test template 1', content: 'Test 1' },
@@ -47,13 +49,48 @@ categories:
       content_css: [
           'http://derofim.github.io/blog/assets/styles/vendor.css',
           'http://derofim.github.io/blog/assets/styles/main.css'
-      ]
+      ],
+      convert_urls: false,
+      allow_script_urls: true,
+      media_filter_html: false,
+      extended_valid_elements : "script[language|type|src],emstart,emend",
+      custom_elements: "emstart,emend",
+      code_dialog_height: 200
+  });
+  tinymce.PluginManager.add('customem', function(editor, url) {
+      // Add a button that opens a window
+      editor.addButton('customEmElementButton', {
+          text: 'Custom EM',
+          icon: false,
+          onclick: function() {
+              // Open window
+              editor.windowManager.open({
+                  title: 'Please input text',
+                  body: [
+                      {type: 'textbox', name: 'description', label: 'Text'}
+                  ],
+                  onsubmit: function(e) {
+                      // Insert content when the window form is submitted
+
+                      editor.insertContent("" + e.data.description + '</p><emend>EM End</emend>');
+                  }
+              });
+          }
+      });
+
+      // Adds a menu item to the tools menu
+      editor.addMenuItem('customEmElementMenuItem', {
+          text: 'Custom EM Element',
+          context: 'tools',
+          onclick: function() {
+              editor.insertContent('<emstart>EM Start</emstart><p>Example text!</p><emend>EM End</emend>');
+          }
+      });
   });
 </script>
 <textarea> </textarea>
 <br/><br/>
 <div id="preview"></div>
-
 
 
 
