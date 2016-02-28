@@ -70,6 +70,10 @@
 <p><a href="#files">Файлы</a></p>
 <p><a href="#physics">Физика</a></p>
 <p><a href="#scripts">Скрипты</a></p>
+<p><a href="#shaders">Шейдеры</a></p>
+<p><a href="#network">Network</a></p>
+<p><a href="#effects">Эффекты</a></p>
+<p><a href="#games">Примеры игр</a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <h2 id="beginning" style="text-align: center;"><a href="#beginning">Cocos2d: Начало</a></h2>
@@ -200,6 +204,8 @@
 <p>Возможно вы захотите запустить игру на сервере. Можно установить локальный сервер, например openserver, denwer или&nbsp;wampserver. Можно воспользоваться хостингами, например heroku или Amazon E2. При желании можно настроить облачный редактор, например c9.io.</p>
 <p>&nbsp;</p>
 <p>В браузере можно осуществлять отладку приложения, есть специальные плагины, например,&nbsp;<a href="http://h5.cocos.com/static/cocos-devtools/index-en.html">http://h5.cocos.com/static/cocos-devtools/index-en.html</a></p>
+<p>&nbsp;</p>
+<p>Можно использовать готовые шаблоны приложений&nbsp;https://github.com/goodzsq/cocos_template</p>
 <p>&nbsp;</p>
 <h2 id="basics" style="text-align: center;"><a href="#basics">Cocos2d:&nbsp;Основы</a></h2>
 <p>&nbsp;</p>
@@ -344,6 +350,97 @@
 <p>&nbsp;</p>
 <p>Запустить код можно командой "<code class="nx">cocos</code> <code class="nx">run</code> <code class="o">-</code><code class="nx">p</code> <code class="nx">web"</code></p>
 <p>&nbsp;</p>
+<p><code class="nx">Базовые&nbsp;простые&nbsp;фигуры позволяет выводить&nbsp;<strong>cc.drawNode</strong>:</code></p>
+<pre class="language-javascript"><code>this.draw=new cc.DrawNode();
+    this.addChild(this.draw);
+
+    this.draw.drawCircle(cc.p(size.width / 2, size.height / 2), 100, 0, 10, false, 6, cc.color(0, 255, 0, 255));
+    this.draw.drawCircle(cc.p(size.width / 2, size.height / 2), 50, cc.degreesToRadians(90), 50, true, 2, cc.color(0, 255, 255, 255));
+</code></pre>
+<p>Мы нарисовали круг с помощью&nbsp;<strong>drawCircle</strong>(center, radius, angle, segments, drawLineToCenter, lineWidth, color)</p>
+<p>&nbsp;</p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13374028/9350b07c-dd89-11e5-9f26-c0fcaa0ed02b.png" alt="image" /></p>
+<p>&nbsp;</p>
+<p>Очистить фигуры в draw можно с помощью&nbsp;<code class="k">this</code><code class="p">.</code><code class="nx">draw</code><code class="p">.</code><code class="nx">clear</code><code class="p">();</code></p>
+<p>&nbsp;</p>
+<p><code class="p">Пример рисования кривой с помощью <strong>drawCardinalSpline</strong>(config, tension, segments, lineWidth, color):</code></p>
+<pre class="language-javascript"><code>        var size = cc.winSize;
+    var centerPos = cc.p(cc.winSize.width / 2, cc.winSize.height / 2);
+
+    this.draw=new cc.DrawNode();
+    this.addChild(this.draw);
+
+    var vertices4 = [
+    cc.p(centerPos.x - 130, centerPos.y - 130),
+    cc.p(centerPos.x - 130, centerPos.y + 130),
+    cc.p(centerPos.x + 130, centerPos.y + 130),
+    cc.p(centerPos.x + 130, centerPos.y - 130),
+    cc.p(centerPos.x - 130, centerPos.y - 130)
+    ];
+    this.draw.drawCardinalSpline(vertices4, 0.5, 100, 2, cc.color(255, 255, 255, 255));</code></pre>
+<div class="line number4 index3 alt1"><img src="https://cloud.githubusercontent.com/assets/9510143/13374026/70963f98-dd89-11e5-8527-cdea70fc5b63.png" alt="image" /></div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number4 index3 alt1">Пример рисования линий c помощью&nbsp;<strong>drawSegment</strong>(from, to, lineWidth, color):</div>
+<div class="line number4 index3 alt1">
+<pre class="language-javascript"><code>this.draw.drawSegment(cc.p(0, 0), cc.p(size.width, size.height), 1, cc.color(255, 0, 255, 255));
+    this.draw.drawSegment(cc.p(0, size.height), cc.p(size.width, 0), 5, cc.color(255, 0, 0, 255));</code></pre>
+</div>
+<div class="line number4 index3 alt1"><img src="https://cloud.githubusercontent.com/assets/9510143/13374018/364e30a2-dd89-11e5-9240-8c4a829bfcf0.png" alt="image" width="367" height="242" /></div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number4 index3 alt1">Рисование точек <strong><a href="http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.DrawNode.html#drawDot">drawDot</a></strong>(pos, radius, color) и <strong><a href="http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.DrawNode.html#drawDots">drawDots</a></strong>(points, radius, color):</div>
+<div class="line number4 index3 alt1">
+<pre class="language-javascript"><code>this.draw.drawDot(cc.p(size.width / 2, size.height / 2), 40, cc.color(0, 0, 255, 128));
+    var po = size.width / 2; // position offset
+    var points = [cc.p(po+60, 60), cc.p(po+70, 70), cc.p(po+60, 70), cc.p(po+70, 60)];
+    this.draw.drawDots(points, 4, cc.color(0, 255, 255, 255));</code></pre>
+</div>
+<div class="line number4 index3 alt1"><img src="https://cloud.githubusercontent.com/assets/9510143/13374049/20f41928-dd8a-11e5-99d0-791055bfa0c2.png" alt="image" /></div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number4 index3 alt1"><strong>Многоугольник</strong>:</div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number4 index3 alt1">
+<pre class="language-javascript"><code>        //draw.drawPoly(verts, fillColor, lineWidth, color)
+    var vertices = [cc.p(0, 0), cc.p(50, 50), cc.p(100, 50), cc.p(100, 100), cc.p(50, 100) ];
+    this.draw.drawPoly(vertices, null, 5, cc.color(255, 255, 0, 255)); // не заполненный
+    var vertices2 = [cc.p(30, 130), cc.p(30, 230), cc.p(50, 200)];
+    this.draw.drawPoly(vertices2, null, 2, cc.color(255, 0, 255, 255)); // не заполненный
+    var vertices3 = [cc.p(60, 130), cc.p(60, 230), cc.p(80, 200)];
+    this.draw.drawPoly(vertices3, cc.color(0, 255, 255, 50), 2, cc.color(255, 0, 255, 255)); // заполненный</code></pre>
+</div>
+<div class="line number4 index3 alt1"><img src="https://cloud.githubusercontent.com/assets/9510143/13374063/86fa2b0e-dd8a-11e5-908a-3d4fb8d6acec.png" alt="image" /></div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number4 index3 alt1"><strong>Прямоугольник</strong>:</div>
+<div class="line number4 index3 alt1">
+<pre class="language-javascript"><code>        //draw.drawRect(origin, destination, fillColor, lineWidth, lineColor)
+    draw.drawRect(cc.p(120, 120), cc.p(200, 200), null, 2, cc.color(255, 0, 255, 255)); // not fill
+    draw.drawRect(cc.p(120, 220), cc.p(200, 300), cc.color(0, 255, 255, 180), 2, cc.color(128, 128, 0, 255)); // fill</code></pre>
+</div>
+<div class="line number4 index3 alt1"><img src="https://cloud.githubusercontent.com/assets/9510143/13374071/e9dbaff4-dd8a-11e5-9e27-07b9c2aee457.png" alt="image" /></div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number4 index3 alt1"><strong>Кривая Безье</strong>&nbsp;https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Quadratic_curves</div>
+<div class="line number4 index3 alt1">
+<pre class="language-javascript"><code> // draw.drawQuadBezier(origin, control, destination, segments, lineWidth, color)
+    var centerPos = cc.p(size.width / 2, size.height / 2);
+    this.draw.drawQuadBezier(cc.p(0, size.height), cc.p(centerPos.x, centerPos.y), cc.p(size.width, size.height), 50, 2, cc.color(255, 0, 255, 255));</code></pre>
+    <p><img src="https://cloud.githubusercontent.com/assets/9510143/13374076/2d57a2c4-dd8b-11e5-98dc-9d72d075fe16.png" alt="image" /></p>
+    <p>&nbsp;</p>
+    <p><a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Cubic_B.C3.A9zier_curves">https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Cubic_B.C3.A9zier_curves</a></p>
+    <p>&nbsp;</p>
+<pre class="language-javascript"><code>        // draw.drawCubicBezier(origin, control1, control2, destination, segments, lineWidth, color)
+    this.draw.drawCubicBezier(
+    cc.p(size.width / 2, size.height / 2), cc.p(size.width / 2 + 30, size.height / 2 + 50),
+    cc.p(size.width / 2 + 60, size.height / 2 - 50), cc.p(size.width, size.height / 2), 100,
+    2, // lineWidth
+    cc.color(255, 0, 255, 255) // color
+    );</code></pre>
+    <p>&nbsp;</p>
+    <p><img src="https://cloud.githubusercontent.com/assets/9510143/13374091/caf147d8-dd8b-11e5-9ea3-76f153a96986.png" alt="image" /></p>
+    <p>&nbsp;</p>
+    <p>Пример&nbsp;задания своей кривой&nbsp;http://cubic-bezier.com/#.17,.67,.63,1.41</p>
+    <p>&nbsp;</p>
+</div>
+<div class="line number4 index3 alt1">Все базовые фигуры можно найти в документации&nbsp;<a href="http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.DrawNode.html">http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.DrawNode.html</a>&nbsp;</div>
+<div class="line number4 index3 alt1">&nbsp;</div>
 <div class="line number4 index3 alt1">&nbsp;</div>
 <h2 id="element" style="text-align: center;"><a href="#element">Элементы</a></h2>
 <p>&nbsp;</p>
@@ -669,6 +766,11 @@
     var nodeAction = new cc.BezierTo( 2, bezierOptions );
     nodeName.runAction( nodeAction );
 
+    // cc.CardinalSplineTo(duration, points, tension)
+    // Cardinal Spline path - http://en.wikipedia.org/wiki/Cubic_Hermite_spline#Cardinal_spline Absolute coordinates
+    var action = cc.cardinalSplineTo(3, array, 0);
+    var action = cc.cardinalSplineTo(3, array, 0);
+
     var nodeAction = new cc.BezierBy( 2, bezierOptions );
     nodeName.runAction( nodeAction );
 
@@ -737,9 +839,23 @@
     // Вызов функции при выполнении действия
     var functionAction = new cc.CallFunc( functionToCall );
     nodeName.runAction( functionAction );</code></pre>
-<pre class="cm-s-neo" data-mode="javascript">&nbsp;</pre>
+<pre class="cm-s-neo" data-mode="javascript">&nbsp;<br />Действиям можно назначить функции по завершению:<br /><br /></pre>
+<pre class="language-javascript"><code>var seq=new cc.Sequence(action1,function(){/*action1 end callback*/}, action2,function(){/*action2 end callback*/});</code></pre>
+<pre class="cm-s-neo" data-mode="javascript">Анимация спрайтов:</pre>
+<pre class="language-javascript"><code>var animation = new cc.Animation(spriteFrames, 0.08);
+    this.sprite.runAction(cc.animate(animation).repeatForever()); //or new cc.Animation(..) patten can be used.</code></pre>
+<pre class="cm-s-neo" data-mode="javascript">До этого мы уже использовали код анимации:</pre>
+<pre class="language-javascript"><code>var animate   = new cc.Animate(spAnim);
+    this.sprite.runAction(animate.repeatForever());</code></pre>
+<pre class="cm-s-neo" data-mode="javascript"><br /><br /></pre>
 <p>Вспомогательные действия (удобны при создании меню и физики):</p>
-<p><img src="http://www.cocos2d-x.org/attachments/download/5507" alt="" /></p>
+<p><img src="http://www.cocos2d-x.org/attachments/download/5507" alt="" width="397" height="416" /></p>
+<p>Можно создавать в виде:</p>
+<pre class="language-javascript"><code>var easing=cc.easeBackIn(); // или
+    var easing=new cc.EaseBackIn();
+    action.easing(easing);</code></pre>
+<p>&nbsp;</p>
+<p>Функции:</p>
 <pre class="language-javascript"><code>var nodeAction = new cc.MoveBy( 2.0, cc.p( 300, 0 ) ); // Пример действия
 
     var easeAction = new cc.EaseBackIn( nodeAction ); // Пример easeAction
@@ -784,11 +900,144 @@
 <h2 id="menu" style="text-align: center;"><a href="#menu">Меню</a>&nbsp;&amp; UI</h2>
 <p>Не забудьте добавить <em>extensions</em>&nbsp;в&nbsp;<strong>project.json</strong></p>
 <pre class="language-javascript"><code> "modules" : ["cocos2d", "extensions"],</code></pre>
-<p>Также возможно примется обновить .h и .cpp файлы, а также&nbsp;<strong>Android.mk&nbsp;</strong>как написано в инстукции&nbsp;<a href="http://cocos.sonarlearning.co.uk/docs/ui-elements-such-as-uibutton">http://cocos.sonarlearning.co.uk/docs/ui-elements-such-as-uibutton</a></p>
+<p>Также возможно примется обновить .h и .cpp файлы, а также&nbsp;<strong>Android.mk&nbsp;</strong>как написано в инструкции&nbsp;<a href="http://cocos.sonarlearning.co.uk/docs/ui-elements-such-as-uibutton">http://cocos.sonarlearning.co.uk/docs/ui-elements-such-as-uibutton</a></p>
 <p>&nbsp;</p>
+<p><strong>Label</strong> - используется для вывода текста.</p>
 <p>&nbsp;</p>
+<pre><code class="nx"><strong>LabelTTF</strong> - TrueType формат создан для хранения информации o контуре символа (векторное изображение). В отличие от растрового символа &mdash; векторный легко масштабируется.<br /></code></pre>
+<pre class="language-javascript"><code>var label= cc.LabelTTF("текст", "шрифт.ttf", размер, пропорции, hAlignment, vAlignment);
+    // [cc.Size] пропорции - dimensions- отвечают ширине и высоте, если не указаны вычисляются автоматмчески.
+    // hAlignment - горизонтальное положение текста {cc.TEXT_ALIGNMENT_LEFT | cc.TEXT_ALIGNMENT_CENTER | cc.TEXT_ALIGNMENT_RIGHT}
+    // vAlignment - вертикальное положение текста {cc.VERTICAL_TEXT_ALIGNMENT_TOP|cc.VERTICAL_TEXT_ALIGNMENT_CENTER|cc.VERTICAL_TEXT_ALIGNMENT_BOTTOM}</code></pre>
+<ul>
+    <li>Поддерживаются также и системные шрифты. cc.LabelTTF может быть медленным при js-binding на мобильных устройствах. Функции для работы с&nbsp;LabelTTF можно посмотреть в документации&nbsp;<a href="http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.LabelTTF.html">http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.LabelTTF.html</a>&nbsp;</li>
+</ul>
+<pre><code class="p">&nbsp;</code></pre>
+<pre><code class="nx"><strong>LabelBMFont</strong> - позволяет загружать растровые шрифты .fnt. Каждый символ является cc.Sprite, а значит может быть повернут, перемещен и т.д. Рекомендуется к использованию.<br /></code></pre>
+<pre class="language-javascript"><code>var label = cc.LabelBMFont(text, fntFile, width, alignment, imageOffset)
+    // [string] text - текст для вывода.
+    // [fntFile] fntFile - шрифт.fnt
+    // [width] width - ширина label.
+    // alignment - горизонтальное положение {cc.TEXT_ALIGNMENT_LEFT|cc.TEXT_ALIGNMENT_CENTER|cc.TEXT_ALIGNMENT_RIGHT}
+    // [cc.point] imageOffset - xy оффсет выравнивая центра изображения.</code></pre>
+<pre><code class="nx">Можно использовать редакторы:<br />http://glyphdesigner.71squared.com/ (Commercial, Mac OS X)<br />http://www.n4te.com/hiero/hiero.jnlp (Free, Java)<br />http://slick.cokeandcode.com/demos/hiero.jnlp (Free, Java)<br />http://www.angelcode.com/products/bmfont/ (Free, Windows only)<br /><br />Примеры:<br /></code></pre>
+<pre class="language-javascript"><code>var label1 = new cc.LabelBMFont("Test case", "test.fnt");
+    var label2 = new cc.LabelBMFont("test case", "test.fnt", 200, cc.TEXT_ALIGNMENT_LEFT);
+    var label3 = new cc.LabelBMFont("This is a \n test case", "test.fnt", 200, cc.TEXT_ALIGNMENT_LEFT, cc.p(0,0));</code></pre>
+<pre><code class="nx">Пример использования разных шрифтов (файлы можно скачать с https://github.com/nutcrackify/Rapid_Game_Development_Using_Cocos2d-js/tree/master/res):<br /></code></pre>
+<pre class="language-javascript"><code>var counter = 0;
+    HelloWorldLayer = cc.Layer.extend({
+    ctor:function () {
+    this._super();
+    // var res = {     BM_Font_png : "res/bitmapFontTest.png", BM_Font : "res/bitmapFontTest.fnt",  Abduction_ttf : "res/Abduction.ttf", };
+    var layer = new cc.LayerColor(cc.color(255, 0 , 100, 255));
+    this.addChild(layer);
+
+    var size = cc.winSize;
+    this.Label1 = new cc.LabelTTF('Default Font Label','', 32);
+    this.Label1.attr({
+    x: size.width / 2,
+    y: size.height / 1.3
+    });
+    this.addChild(this.Label1);
+
+    this.Label2 = new cc.LabelTTF('Custom Font Label','Abduction', 32);
+    this.Label2.attr({
+    x: size.width / 2,
+    y: size.height / 1.5
+    });
+    this.addChild(this.Label2);
+
+    this.Label3 = new cc.LabelTTF('Label With Stroke','Abduction', 32);
+    this.Label3.attr({
+    x: size.width / 2,
+    y: size.height / 1.9
+    });
+    this.Label3.enableStroke(cc.color(0,0,0),10);
+    this.addChild(this.Label3);
+
+    this.Label4 = new cc.LabelTTF('Label With Shadow','Abduction', 32);
+    this.Label4.attr({
+    x: size.width / 2,
+    y: size.height / 2.3
+    });
+    this.Label4.enableShadow(cc.color(0,0,0), 50, 50);
+    this.addChild(this.Label4);
+
+    this.Label5 = new cc.LabelBMFont("Bitmap Font", res.BM_Font);
+    this.Label5.attr({
+    x: size.width / 2,
+    y: size.height / 2.9
+    });
+    this.addChild(this.Label5);
+    return true;
+    },
+    });
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter:function () {
+    this._super();
+    this.addChild( new HelloWorldLayer() );
+    }
+    });
+</code></pre>
+<pre><code class="nx">&nbsp;</code></pre>
+<pre><code class="nx"><img src="http://i.imgur.com/01mDRvX.png?1" alt="" width="416" height="277" /></code></pre>
 <p>&nbsp;</p>
 <p><strong>Меню</strong>:</p>
+<p>cc.Menu - базовый класс. В него нужно добавлять&nbsp;<code class="nx">addChild остальных.</code></p>
+<p><code class="nx"> cc.MenuItem - должен быть потомком&nbsp;cc.Menu.</code></p>
+<p>&nbsp;</p>
+<p><strong>MenuItemLabel</strong> - поддерживает cc.Label</p>
+<pre class="language-javascript"><code>var menuitemLabel = new cc.MenuItemLabel(label,selector,target);
+    // [cc.Label] label - экземпляр cc.Label.
+    // [string] selector - callback функция нажатия.
+    // [object] target - обьект содержащий callback функцию.</code></pre>
+<p><strong>MenuItemImage</strong> - поддерживает изображения</p>
+<pre class="language-javascript"><code>var menuItem = new cc.MenuItemImage(normalImage, selectedImage, disabledImage, selector, target);
+    // [string] normalImage - изображение стандартного состояния.
+    // [string] selectedImage - изображение выбранного состояния.
+    // [string] disabledImage - изображение отключенного состояния.
+    // [string] selector - callback функция нажатия.
+    // [object] target - объект с функцией.</code></pre>
+<p>Пример:</p>
+<pre class="language-javascript"><code>var counter = 0;
+    HelloWorldLayer = cc.Layer.extend({
+    ctor:function () {
+    this._super();
+    var size = cc.winSize;
+    var layer = new cc.LayerColor(cc.color(255, 0 , 100, 255));
+    this.addChild(layer);
+
+    this.Menu=new cc.Menu();
+    this.Menu.attr({ x: 0, y: 0 });
+
+    var label=new cc.LabelTTF('MenuItem with label',36);
+    this.MenuItem1 = new cc.MenuItemLabel(label,'onMenuClicked',this);
+    this.MenuItem1.attr({  x: size.width / 2, y: size.height / 1.3 });
+    this.Menu.addChild(this.MenuItem1);
+
+    // var res = { /* .. */ MenuItemImage_Normal:"res/menuitem_normal.png", MenuItemImage_Selected:"res/menuitem_selected.png", };
+    this.MenuItem2 = new cc.MenuItemImage(res.MenuItemImage_Normal,res.MenuItemImage_Selected,null,'onMenuClicked',this);
+    this.MenuItem2.attr({ x: size.width / 2, y: size.height / 1.8 });
+    this.Menu.addChild(this.MenuItem2);
+
+    this.addChild(this.Menu);
+    return true;
+    },
+    onMenuClicked:function(){
+
+    }
+    });
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter:function () {
+    this._super();
+    this.addChild( new HelloWorldLayer() );
+    }
+    });
+</code></pre>
+<p><img src="http://nutcrackify.com/books/rapid_2d_game_development_using_cocos2djs/images/menuitem.png" alt="MenuItem" width="259" height="460" /></p>
+<p>&nbsp;</p>
+<p>Функции:</p>
 <pre class="language-javascript"><code>var menuItem = new cc.MenuItemAtlasFont( "TextToDisplay", "AtlasImageFilePath", 25, 25, functionToCall );
 
     var menuItem = new cc.MenuItemFont( "TextToDisplay", functionToCall );
@@ -1058,7 +1307,16 @@
 <pre class="cm-s-neo" data-mode="javascript"><span class="cm-property">&nbsp;</span></pre>
 <p>&nbsp;</p>
 <h2 id="3d" style="text-align: center;"><a href="#3d">3d графика</a></h2>
-<p>3d&nbsp;только для C++</p>
+<p>3d&nbsp;только для нативных платформ.</p>
+<p>Пример загрузки спрайта на мобильном устройстве/компьютере (файлы можно скачать с https://github.com/mmvlad/simplerpgcocos/tree/master/Resources/Sprite3DTest):</p>
+<pre class="language-javascript"><code>        if (cc.sys.isNative) { // no web support
+    var sprite3d = new jsb.Sprite3D(res.boss_obj);
+    sprite3d.setTexture(res.boss_png);
+    this.addChild(sprite3d, 0);
+    }</code></pre>
+<p>Еще примеры:&nbsp;<a href="https://github.com/goodzsq/cocos_template/blob/77b4e669d7a6c87d2446c74e7d486106fd2055c3/doc/sample/cocos_3d.js">https://github.com/goodzsq/cocos_template/blob/77b4e669d7a6c87d2446c74e7d486106fd2055c3/doc/sample/cocos_3d.js</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <h2 id="updates" style="text-align: center;"><a href="#updates">Планирование и обновление</a></h2>
 <pre class="language-javascript"><code>// Делать обновление каждый кадр
     this.scheduleUpdate( );
@@ -1085,6 +1343,205 @@
     this.unscheduleAllCallbacks( );
     this.unscheduleUpdate( );</code></pre>
 <h2 id="events" style="text-align: center;"><a href="#events">События</a></h2>
+<p>Event Trigger - основа всех событий, срабатывает при любом касании.</p>
+<p>Event Manager -&nbsp;вызывается при любом событии.</p>
+<p>Event Listener - именно здесь содержится логика событий.</p>
+<p>Touch Event - Может быть&nbsp;cc.EventListener.TOUCH_ONE_BY_ONE и&nbsp;cc.EventListener.TOUCH_ALL_AT_ONCE т.е. одно или несколько касаний.</p>
+<p>&nbsp;</p>
+<p><strong>Пример касания</strong> (движение спрайта мышью):</p>
+<pre class="language-javascript"><code>HelloWorldLayer = cc.Layer.extend({
+    ctor:function () {
+    this._super();
+
+    var size = cc.winSize;
+    this.sprite = new cc.Sprite(res.HelloWorld_png);
+    this.sprite.attr({ x: size.width / 2, y: size.height / 2 });
+    this.addChild(this.sprite, 0);
+
+    var listener = cc.EventListener.create({
+    event: cc.EventListener.TOUCH_ONE_BY_ONE,
+    swallowTouches: true, // поглотить событие и не передавать другим EventListener
+    onTouchBegan: function (touch, event) {
+    var target = event.getCurrentTarget();
+    var locationInNode = target.convertToNodeSpace(touch.getLocation());
+    var s = target.getContentSize();
+    var rect = cc.rect(0, 0, s.width, s.height);
+    if (cc.rectContainsPoint(rect, locationInNode)) {
+    cc.log('Touch began: Inside the sprite');
+    return true;
+    }
+    cc.log('Touch began: Outside the sprite');
+    return false;
+    },
+    onTouchMoved: function (touch, event) {
+    var target = event.getCurrentTarget();
+    target.setPosition(touch.getLocation());
+    },
+    onTouchEnded: function (touch, event) {
+    cc.log('Touch end');
+    }
+    });
+
+    cc.eventManager.addListener(listener, this.sprite);
+
+    return true;
+    },
+    });
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter:function () {
+    this._super();
+    this.addChild( new HelloWorldLayer() );
+    }
+    });
+</code></pre>
+<p>Заметьте, что касание обрабатывается относительно сцены, хотя спрайт является целью события, поэтому нужно проверять попадание точки касания в спрайт.</p>
+<p>&nbsp;</p>
+<p><strong>Пример нажатия мышью</strong>:</p>
+<pre class="language-javascript"><code>HelloWorldLayer = cc.Layer.extend({
+    ctor:function () {
+    this._super();
+
+    var size = cc.winSize;
+    this.sprite = new cc.Sprite(res.HelloWorld_png);
+    this.sprite.attr({ x: size.width / 2, y: size.height / 2 });
+    this.addChild(this.sprite, 0);
+
+    var listener = cc.EventListener.create({
+    event: cc.EventListener.MOUSE,
+    swallowTouches: true,
+    ismousedown:false, // создаем флаг для проверки нажатия на спрайт
+    onMouseDown: function (event) {
+    var target = event.getCurrentTarget();
+    var locationInNode = target.convertToNodeSpace(event.getLocation());
+    var s = target.getContentSize();
+    var rect = cc.rect(0, 0, s.width, s.height);
+    if (cc.rectContainsPoint(rect, locationInNode)) {
+    cc.log('Mouse Down: Inside the sprite');
+    this.ismousedown=true;
+    return true;
+    }
+    cc.log('Mouse Down: Outside the sprite');
+    return false;
+    },
+    onMouseMove: function (event) {
+    if(this.ismousedown)
+    {
+    var target = event.getCurrentTarget();
+    target.setPosition(event.getLocation());
+    }
+    },
+    onMouseUp: function (event) {
+    cc.log('Mouse Up');
+    this.ismousedown=false;
+    }
+    });
+
+    //Added Event Listener To Sprite
+    cc.eventManager.addListener(listener, this.sprite);
+    return true;
+    },
+    });
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter:function () {
+    this._super();
+    this.addChild( new HelloWorldLayer() );
+    }
+    });
+</code></pre>
+<p>Заметьте, что понадобилась переменная&nbsp;ismousedown для проверки нажатия.</p>
+<p>&nbsp;</p>
+<p><strong>Пример&nbsp;нажатия клавиш&nbsp;</strong>(движение спрайта с клавиатуры):</p>
+<pre class="language-javascript"><code>HelloWorldLayer = cc.Layer.extend({
+    ctor:function () {
+    this._super();
+    var KeyCode={
+    LEFT:37,
+    UP:38,
+    RIGHT:39,
+    DOWN:40
+    };
+    var MoveOffSet=20;
+    var size = cc.winSize;
+    this.sprite = new cc.Sprite(res.HelloWorld_png);
+    this.sprite.attr({ x: size.width / 2, y: size.height / 2 });
+    this.addChild(this.sprite, 0);
+    var listener = cc.EventListener.create({
+    event: cc.EventListener.KEYBOARD,
+    swallowTouches: true,
+    onKeyPressed: function (keyCode,event) {
+    var target = event.getCurrentTarget();
+    var position=target.getPosition();
+    switch(keyCode)
+    {
+    case KeyCode.LEFT:
+    position.x-=MoveOffSet;
+    break;
+
+    case KeyCode.RIGHT:
+    position.x+=MoveOffSet;
+    break;
+
+    case KeyCode.UP:
+    position.y+=MoveOffSet;
+    break;
+
+    case KeyCode.DOWN:
+    position.y-=MoveOffSet;
+    break;
+    }
+    target.setPosition(position);
+    },
+    onKeyReleased: function (event) {
+    cc.log('onKeyReleased');
+    }
+    });
+    cc.eventManager.addListener(listener, this.sprite);
+    return true;
+
+    },
+    });
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter:function () {
+    this._super();
+    this.addChild( new HelloWorldLayer() );
+    }
+    });
+</code></pre>
+<p>Можно создавать <strong>собственные события</strong>, пример:</p>
+<pre class="language-javascript"><code>var counter = 0;
+    HelloWorldLayer = cc.Layer.extend({
+    sendEvent:function () {
+    counter++;
+    var event = new cc.EventCustom("my_custom_event");
+    event.setUserData(counter.toString());
+    cc.eventManager.dispatchEvent(event);
+    },
+    ctor:function () {
+    this._super();
+    var size = cc.winSize;
+    this.sprite = new cc.Sprite(res.HelloWorld_png);
+    this.sprite.attr({ x: size.width / 2, y: size.height / 2 });
+    this.addChild(this.sprite, 0);
+    var listener = cc.EventListener.create({
+    event: cc.EventListener.CUSTOM,
+    eventName: "my_custom_event",
+    callback: function(event){ cc.log("Custom event 1 received, " + event.getUserData() + " times"); }
+    });
+    cc.eventManager.addListener(listener, 1);
+    this.sendEvent();
+    this.sendEvent();
+    return true;
+    },
+    });
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter:function () {
+    this._super();
+    this.addChild( new HelloWorldLayer() );
+    }
+    });
+</code></pre>
+<p>Функция&nbsp;dispatchEvent используется для срабатывания события.</p>
+<p>&nbsp;</p>
 <p><strong>Ввод</strong> (одно касание):</p>
 <pre class="language-javascript"><code>if ( cc.sys.capabilities.hasOwnProperty( 'touches' ) )
     {
@@ -1220,9 +1677,119 @@
     }
     }, this );
     }</code></pre>
+<p>&nbsp;<strong>virtual pads</strong></p>
+<p><strong><img src="https://cloud.githubusercontent.com/assets/9510143/13381608/1070bc04-de71-11e5-8f66-572728016473.png" alt="image" /></strong></p>
+<p>&nbsp;<strong>Ghost buttons</strong></p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13381612/1a1f0cf6-de71-11e5-821c-60b89feaa549.png" alt="image" /></p>
+<p><strong> virtual analogic pad</strong></p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13381621/3d46610c-de71-11e5-9388-ade366d09ac3.png" alt="image" /></p>
 <p>&nbsp;</p>
+<p>Примеры в игре:&nbsp;<a href="https://github.com/noelyahan/cocos2djstut/blob/415694ebd4e58afd05855d45473d71ee9bb9a3ed/game-five/src/gamescript.js">https://github.com/noelyahan/cocos2djstut/blob/415694ebd4e58afd05855d45473d71ee9bb9a3ed/game-five/src/gamescript.js</a></p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13381642/e5319f6c-de71-11e5-9c46-7dab4c8ff5b7.png" alt="image" width="294" height="197" /></p>
+<p>Разделение экрана:</p>
+<p>&nbsp;</p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13381674/d65ab040-de72-11e5-96b9-ff9bb6f70fd6.png" alt="image" width="344" height="226" /></p>
+<pre class="language-javascript"><code>var touchListener = cc.EventListener.create({
+    event: cc.EventListener.TOUCH_ONE_BY_ONE,
+    swallowTouches: true,
+    onTouchBegan: function (touch, event) {
+    if(touch.getLocation().x &lt; 240){
+    xSpeed = -2;
+    left.setOpacity(255);
+    right.setOpacity(128);
+    }
+    else{
+    xSpeed = 2;
+    right.setOpacity(255);
+    left.setOpacity(128);
+    }
+    return true;
+    },
+    onTouchEnded:function (touch, event) {
+    xSpeed = 0;
+    left.setOpacity(128);
+    right.setOpacity(128);
+    }
+    })</code></pre>
+<p>Виртуальные кнопки из двух окружностей:</p>
+<pre class="language-javascript"><code>var itemsLayer;
+    var cart;
+    var xSpeed = 0;
+    var touchOrigin;
+    var touching = false;
+    var touchEnd;
+    // ...
+    var touchListener = cc.EventListener.create({
+    event: cc.EventListener.TOUCH_ONE_BY_ONE,
+    swallowTouches: true,
+    onTouchBegan: function (touch, event) {
+    touchOrigin = cc.Sprite.create("assets/touchorigin.png");
+    topLayer.addChild(touchOrigin,0);
+    touchOrigin.setPosition(touch.getLocation().x,touch.
+    getLocation().y);
+    touchEnd = cc.Sprite.create("assets/touchend.png");
+    topLayer.addChild(touchEnd,0);
+    touchEnd.setPosition(touch.getLocation().x,touch.getLocation().y);
+    touching = true;
+    return true;
+    },
+    onTouchMoved: function (touch, event) {
+    touchEnd.setPosition(touch.getLocation().x,touchEnd.
+    getPosition().y);
+    },
+    onTouchEnded:function (touch, event) {
+    touching = false;
+    topLayer.removeChild(touchOrigin);
+    topLayer.removeChild(touchEnd);
+    }
+    })</code></pre>
+<p>Управление&nbsp;без вывода спрайтов:</p>
+<p>detectedX and savedX to store the initial and current touch horizontal coordinate.</p>
+<pre class="language-javascript"><code>var itemsLayer;
+    var xSpeed = 0;
+    var cart;
+    var detectedX;
+    var savedX;
+    var touching=false;
+    // ...
+    var touchListener = cc.EventListener.create({
+    event: cc.EventListener.TOUCH_ONE_BY_ONE,
+    swallowTouches: true,
+    onTouchBegan: function (touch, event) {
+    touching = true;
+    detectedX = touch.getLocation().x;
+    savedX = detectedX
+    return true;
+    },
+    onTouchMoved: function (touch, event) {
+    detectedX = touch.getLocation().x;
+    },
+    onTouchEnded:function (touch, event) {
+    touching = false;
+    }
+    })</code></pre>
+<p>&nbsp;</p>
+<h2 id="effects" style="text-align: center;"><a href="#effects">Эффекты</a></h2>
+<p>&nbsp;</p>
+<p>Создать эффект частиц можно используя&nbsp;<a href="https://71squared.com/particledesigner">https://71squared.com/particledesigner</a></p>
+<p>&nbsp;</p>
+<p>Пример:</p>
+<pre class="language-javascript"><code>var emitter = cc.ParticleSun.create();
+    this.addChild(emitter,1);
+    var myTexture = cc.textureCache. addImage("assets/particle.png");
+    emitter.setTexture(myTexture);
+    emitter.setStartSize(2);
+    emitter.setEndSize(4);</code></pre>
 <h2 id="sound" style="text-align: center;"><a href="#sound">Звук</a></h2>
-<p><strong>Проигрывание</strong>:</p>
+<p>Лучшие форматы для разных систем:&nbsp;MP3, WAV, and OGG.</p>
+<p>Редактор музыки -&nbsp;<a href="http://audacity.sourceforge.net/">http://audacity.sourceforge.net/</a></p>
+<p>&nbsp;</p>
+<p>Пример меню со звуками:&nbsp;<a href="https://github.com/noelyahan/cocos2djstut/blob/415694ebd4e58afd05855d45473d71ee9bb9a3ed/game-four/src/gamescript.js">https://github.com/noelyahan/cocos2djstut/blob/415694ebd4e58afd05855d45473d71ee9bb9a3ed/game-four/src/gamescript.js</a>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Предзагрузка</strong>&nbsp;(в cc.game.onStart):</p>
+<pre class="language-javascript"><code>cc.audioEngine.preloadMusic(s_music_background);
+    cc.audioEngine.preloadEffect(s_music_jump);</code></pre>
+<p><strong>Проигрывание</strong>: эффект представляет короткий звук</p>
 <pre class="language-javascript"><code>cc.audioEngine.playEffect( "audioFilePath" );
 
     cc.audioEngine.playEffect( "audioFilePath", true ); // повторение
@@ -1240,18 +1807,24 @@
     cc.audioEngine.resumeAllEffect( soundEffectID );
 
     cc.audioEngine.setEffectsVolume( 0.25 );</code></pre>
-<p><strong>Музыка</strong>:</p>
+<p><strong>Музыка</strong>: Представляет долгий фоновый звук</p>
 <pre class="language-javascript"><code>cc.audioEngine.playMusic( "audioFilePath", true );
     cc.audioEngine.stopMusic( );
     cc.audioEngine.pauseMusic( );
     cc.audioEngine.resumeMusic( );
     cc.audioEngine.setMusicVolume( ( 0.25 );</code></pre>
+<p>The getMusicVolume and setMusicVolume methods get and set music volume with values from 0 (no volume) to 1 (full volume), respectively</p>
 <p>&nbsp;</p>
 <h2 id="files" style="text-align: center;"><strong><a href="#files">Файлы</a></strong></h2>
+<p><strong>Домументация:</strong></p>
+<p><a href="https://github.com/skmygdrs/code/blob/7e2c311c1e5fca321b59f2968620e1bba3b7826e/cocos-docs-master/manual/framework/html5/v3.0/cc-loader/en.md">https://github.com/skmygdrs/code/blob/7e2c311c1e5fca321b59f2968620e1bba3b7826e/cocos-docs-master/manual/framework/html5/v3.0/cc-loader/en.md</a></p>
+<p>&nbsp;</p>
+<p>Из класса&nbsp;cc.sys можно узнать свойства системы, например, язык <span class="pl-smi">cc</span>.<span class="pl-smi">sys</span>.<span class="pl-c1">language -</span>&nbsp;<a href="https://github.com/cocos2d/cocos2d-x/blob/4ab1540ccc27185bb468d361fcfe6bd4d284b4f5/tests/js-tests/src/CurrentLanguageTest/CurrentLanguageTest.js">https://github.com/cocos2d/cocos2d-x/blob/4ab1540ccc27185bb468d361fcfe6bd4d284b4f5/tests/js-tests/src/CurrentLanguageTest/CurrentLanguageTest.js</a>&nbsp;</p>
+<p>&nbsp;</p>
 <p><strong>Чтение и запись&nbsp;PLIST</strong>:</p>
 <p>http://cocos.sonarlearning.co.uk/docs/plist</p>
 <h2 id="physics" style="text-align: center;"><a href="#physics">Физика</a></h2>
-<p><strong>Столкновения</strong> (Rect/Bounding Box):</p>
+<p><strong>Простейшие столкновения</strong> (Rect/Bounding Box):</p>
 <pre class="language-javascript"><code>var rect1 = node1.getBoundingBox( );
     var rect2 = node2.getBoundingBox( );
     if ( cc.rectIntersectsRect( rect1, rect2 ) )
@@ -1279,7 +1852,1117 @@
     return true;
     },</code></pre>
 <p>&nbsp;</p>
+<p>Пример игры на Box2d и cocos: <a href="#box2d">в разделе примеров</a></p>
+<p>&nbsp;</p>
+<p>В cocos2d популярна физическая библиотека&nbsp;<strong>Chipmung</strong>. Спрайты&nbsp;cocos2d-js сопоставляются физическим телам, а&nbsp;Chipmung сам обновит их&nbsp;свойства.</p>
+<p>&nbsp;</p>
+<p><img src="http://nutcrackify.com/books/rapid_2d_game_development_using_cocos2djs/images/chipmung.png" alt="Chipmung Overview" /></p>
+<p>&nbsp;</p>
+<p>staticBody - не подвержен физике.</p>
+<p>PhysicsSprite - подвержены физике.</p>
+<p>&nbsp;</p>
+<p>Не забудьте подключить в project.json:</p>
+<pre><code class="s2">"modules"</code> <code class="o">:</code> <code class="p">[</code><code class="s2">"cocos2d"</code><code class="p">,....,</code><code class="s2">"chipmunk"</code><code class="p">]<br /><br /><strong>Пример </strong></code><strong><code class="s2">chipmunk </code></strong><code class="p"><strong>кода</strong>:<br /></code></pre>
+<pre class="language-javascript"><code>var g_groundHeight = 57;
+    var g_runnerStartX = 80;
+
+    var WALLS_WIDTH = 5;
+    var WALLS_ELASTICITY = 1;
+    var WALLS_FRICTION = 1;
+    HelloWorldLayer = cc.Layer.extend({
+    sprite:null,
+    ctor:function () {
+    this._super();
+    this.initPhysics();
+    this.setupDebugNode();
+    this.addWallsAndGround();
+    this.addPhysicsCircle();
+    this.addPhysicsBox();
+    this.addCollisionCallBack();
+    this.scheduleUpdate();
+    return true;
+    },
+    initPhysics:function() {
+
+    this.space = new cp.Space();
+    this.space.gravity = cp.v(0, -800); // Гравитация
+    this.space.iterations = 30;
+    this.space.sleepTimeThreshold = Infinity;
+    this.space.collisionSlop = Infinity;
+    },
+    addCollisionCallBack:function(){
+    this.space.addCollisionHandler(0, 1, function(){
+    cc.log('Box and Circle collaiding !');
+    return true;
+    }, null, null, null);
+    },
+    update:function (dt) {
+    this.space.step(dt);
+    },
+    addWallsAndGround: function() {
+    var leftWall = new cp.SegmentShape(this.space.staticBody, new cp.v(0, 0), new cp.v(0, 1000000), WALLS_WIDTH);
+    leftWall.setElasticity(WALLS_ELASTICITY);
+    leftWall.setFriction(WALLS_FRICTION);
+    this.space.addStaticShape(leftWall);
+
+    var rightWall = new cp.SegmentShape(this.space.staticBody, new cp.v(cc.winSize.width, 1000000), new cp.v(cc.winSize.width, 0), WALLS_WIDTH);
+    rightWall.setElasticity(WALLS_ELASTICITY);
+    rightWall.setFriction(WALLS_FRICTION);
+    this.space.addStaticShape(rightWall);
+
+    var bottomWall = new cp.SegmentShape(this.space.staticBody, new cp.v(0, 0), new cp.v(cc.winSize.width, 0), WALLS_WIDTH);
+    bottomWall.setElasticity(WALLS_ELASTICITY);
+    bottomWall.setFriction(WALLS_FRICTION);
+    this.space.addStaticShape(bottomWall);
+
+    var upperWall = new cp.SegmentShape(this.space.staticBody, new cp.v(0, cc.winSize.height), new cp.v(cc.winSize.width, cc.winSize.height), WALLS_WIDTH);
+    upperWall.setElasticity(WALLS_ELASTICITY);
+    upperWall.setFriction(WALLS_FRICTION);
+    this.space.addStaticShape(upperWall);
+
+    },
+    setupDebugNode : function()
+    {
+    this._debugNode = new cc.PhysicsDebugNode(this.space);
+    this.addChild( this._debugNode );
+    },
+    addPhysicsCircle: function() {
+    var width=50,height=50,mass=1;
+
+    this.phBodyCircle = this.space.addBody(new cp.Body(mass, cp.momentForCircle(mass,0,width*0.5,cc.p(0,0))));
+    this.phBodyCircle.setPos(cc.p(cc.winSize.width * 0.5, cc.winSize.height * 0.3));
+
+    var phShape = this.space.addShape(new cp.CircleShape(this.phBodyCircle, width, cc.p(0, 0)));
+    phShape.setFriction(0);
+    phShape.setElasticity(1);
+    phShape.setCollisionType(0);
+    },
+
+    addPhysicsBox: function() {
+    var width=50,height=50,mass=1;
+    this.phBodyBox = this.space.addBody(new cp.Body(mass, cp.momentForBox(mass, width,height)));
+    this.phBodyBox.setPos(cc.p(cc.winSize.width * 0.5, cc.winSize.height * 0.1));
+
+    var phShape = this.space.addShape(new cp.BoxShape(this.phBodyBox, width, height));
+    phShape.setFriction(0);
+    phShape.setElasticity(1);
+    phShape.setCollisionType(1);
+    }
+    });
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter:function () {
+    this._super();
+    this.addChild( new HelloWorldLayer() );
+    }
+    });
+
+</code></pre>
+<p>В результате на сцене будут прыгающие круг и квадрат ограниченные стенами.</p>
+<p>&nbsp;</p>
+<p><img src="http://nutcrackify.com/books/rapid_2d_game_development_using_cocos2djs/images/physicsdemo.png" alt="Physics Demo" width="254" height="446" /></p>
+<p>&nbsp;</p>
+<p>cp.Space -&nbsp;основное физическое пространство, ему задается гравитация и т.д.</p>
+<p>Физика обновляется с помощью&nbsp;<code class="k">this</code><code class="p">.</code><code class="nx">space</code><code class="p">.</code><code class="nx">step</code><code class="p">(</code><code class="nx">dt</code><code class="p">)</code></p>
+<pre><code class="k">Тела cp.Body добавляются this</code><code class="p">.</code><code class="nx">space</code><code class="p">.</code><code class="nx">addBody. Мы добавили cp.CircleShape и cp.BoxShape<br />Для создания стен т.е. границ сцены используется cp.SegmentShape которые добавляются к </code><code class="k">this</code><code class="p">.</code><code class="nx">space</code><code class="p">.</code><code class="nx">staticBody</code></pre>
+<pre><code class="p">Поскольку для фигур не задан PhysicSprite, то чтобы их увидеть надо использовать отладку </code><code class="nx">cc</code><code class="p">.</code><code class="nx">PhysicsDebugNode.</code></pre>
+<pre><code class="p">setCollisionType определяет будет ли проверка столкновений для тела.</code></pre>
+<pre><code class="nx">addCollisionHandler с тегами 0, 1 для квадрата и круга используется для проверки столкновения.<br /></code></pre>
+<p>&nbsp;</p>
 <h2 id="scripts" style="text-align: center;"><a href="#scripts">Скрипты</a></h2>
+<p>/</p>
+<h2 id="shaders" style="text-align: center;"><a href="#shaders">Шейдеры</a></h2>
+<p>Графику можно обрабатывать с помощью шейдеров.</p>
+<p>vertex shader - обрабатые данные вершин</p>
+<p>fragment shader - обрабатывает цвет пикселей</p>
+<p>Используются&nbsp;GL шейдеры. Класс&nbsp;<strong>cc.GLProgram</strong> - представляет шейдер элемента.&nbsp;</p>
+<p>setShaderProgram&nbsp;и&nbsp;getShaderProgram позволяют задать/получить&nbsp;GLProgram.</p>
+<p>&nbsp;</p>
+<p>Рекомендуется к изучению&nbsp; <a href="https://www.khronos.org/files/opengles_shading_language.pdf" target="_blank" rel="external">OpenGL ES Shading Language v1.0 Spec</a>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Примеры того что можно сделать с помощью шейдеров: <a href="https://www.shadertoy.com/">https://www.shadertoy.com/</a></p>
+<p>&nbsp;</p>
+<p>Простой вершинный шейдер:</p>
+<pre class="language-cpp"><code>attribute vec4 a_position;
+    attribute vec2 a_texCoord;
+    attribute vec4 a_color;
+
+    #ifdef GL_ES
+    varying mediump vec2 v_texCoord;
+    varying mediump vec4 v_fragmentColor;
+    #else
+    varying vec2 v_texCoord;
+    varying vec4 v_fragmentColor;
+    #endif
+
+    void main()
+    {
+    gl_Position = (CC_PMatrix * CC_MVMatrix) * a_position; // on web
+    // gl_Position = CC_PMatrix * a_position; // on native and mobile
+    v_fragmentColor = a_color;
+    v_texCoord = a_texCoord;
+    }</code></pre>
+<p>Простой фрагментный шейдер:</p>
+<pre class="language-javascript"><code>#ifdef GL_ES
+    precision lowp float;
+    #endif
+
+    varying vec2 v_texCoord;
+
+    void main() {
+    vec4 normalColor = texture2D(CC_Texture0, v_texCoord).rgba;
+    gl_FragColor = normalColor;
+    }</code></pre>
+<p>Создание шейдера:</p>
+<pre class="language-javascript"><code>this.shader = new cc.GLProgram(res.gray_vsh, res.gray_fsh);
+    this.shader.addAttribute(cc.ATTRIBUTE_NAME_POSITION, cc.VERTEX_ATTRIB_POSITION); // a_position
+    this.shader.addAttribute(cc.ATTRIBUTE_NAME_TEX_COORD, cc.VERTEX_ATTRIB_TEX_COORDS); // a_texCoord
+    this.shader.addAttribute(cc.ATTRIBUTE_NAME_COLOR, cc.VERTEX_ATTRIB_COLOR); // a_color
+    this.shader.link(); // links the glProgram
+    this.shader.updateUniforms(); // updateUniforms will create PMATRIX, MVMATRIX, MVPMATRIX, SAMPLER
+    this.shader.use();
+    this.sprite.setShaderProgram(this.shader);</code></pre>
+<p>Код может немного изменяться в зависимости от платформы, поэтому рекомендуется использовать&nbsp;cc.sys.isNative.</p>
+<p>&nbsp;</p>
+<p>Уроки по созданию шейдеров&nbsp;<a href="https://github.com/mattdesl/lwjgl-basics/wiki/ShaderLesson3">https://github.com/mattdesl/lwjgl-basics/wiki/ShaderLesson3</a>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Работа с писельным шейдером (.fsh):</p>
+<p>Заливка цветом:</p>
+<pre class="language-javascript"><code>gl_FragColor = vec4(1,0.0,0.0,1.0);</code></pre>
+<p>Градиент:</p>
+<pre class="language-javascript"><code>	vec2 xy = v_texCoord.xy;
+    gl_FragColor = vec4(xy.x,0.0,0.0,1.0);</code></pre>
+<p>Градиент поверх текстуры:</p>
+<pre class="language-javascript"><code>	vec4 normalColor = texture2D(CC_Texture0, v_texCoord).rgba;
+    normalColor.b = v_texCoord.x;
+    gl_FragColor = normalColor;</code></pre>
+<p>Передача праметра в шейдер:</p>
+<pre class="language-javascript"><code>var param = 0.6;
+    if (cc.sys.isNative) {
+    var glProgram_state = cc.GLProgramState.getOrCreateWithGLProgram(this.shader);
+    glProgram_state.setUniformFloat("u_param", param);
+    this.sprite.setGLProgramState(glProgram_state);
+    } else {
+    this.shader.setUniformLocationWith1f(this.shader.getUniformLocationForName('u_param'), param);
+    this.sprite.setShaderProgram(this.shader);
+    }</code></pre>
+<p>Пример: вектор глобального освещения</p>
+<pre class="language-javascript"><code>        var light = new cc.math.Vec3(0.2, 0.2, 0.2);
+    if (cc.sys.isNative) {
+    var glProgram_state = cc.GLProgramState.getOrCreateWithGLProgram(this.shader);
+    glProgram_state.setUniformVec3("vLighting", light);
+    this.sprite.setGLProgramState(glProgram_state);
+    } else {
+    this.shader.setUniformLocationWith3f(this.shader.getUniformLocationForName('vLighting'), light.x, light.y, light.z);
+    this.sprite.setShaderProgram(this.shader);
+    }</code></pre>
+<p>Шейдер .fsh:</p>
+<pre class="language-cpp"><code>#ifdef GL_ES
+    precision lowp float;
+    #endif
+
+    varying vec2 v_texCoord;
+    uniform vec3 vLighting;
+
+    void main() {
+    vec4 normalColor = texture2D(CC_Texture0, v_texCoord).rgba;
+    gl_FragColor = vec4(normalColor.rgb * vLighting, normalColor.a);
+    }</code></pre>
+<p>&nbsp;</p>
+<p>Пример анимации шума:</p>
+<pre class="language-javascript"><code>var shaderScene;
+    HelloWorldLayer = cc.Layer.extend({
+    ctor:function () {
+    this._super();
+    var size = cc.winSize;
+    this.addChild(new cc.LayerColor(cc.color(200, 200 ,200, 255)));
+    this.sprite = new cc.Sprite(res.HelloWorld_png);
+    this.sprite.attr({ x: size.width / 2, y: size.height / 2 });
+    if (cc.sys.isNative) {
+    shaderScene = new cc.GLProgram(res.gray_vsh, res.gray_fsh);
+    } else {
+    shaderScene = new cc.GLProgram(res.grayweb_vsh, res.gray_fsh);
+    }
+    shaderScene.addAttribute(cc.ATTRIBUTE_NAME_POSITION, cc.VERTEX_ATTRIB_POSITION); // a_position
+    shaderScene.addAttribute(cc.ATTRIBUTE_NAME_TEX_COORD, cc.VERTEX_ATTRIB_TEX_COORDS); // a_texCoord
+    shaderScene.addAttribute(cc.ATTRIBUTE_NAME_COLOR, cc.VERTEX_ATTRIB_COLOR); // a_color
+    shaderScene.link(); // links the glProgram
+    shaderScene.updateUniforms();
+    shaderScene.setUniformsForBuiltins();
+    shaderScene.use();
+    var light = new cc.math.Vec3(0.2, 0.2, 0.2);
+    if (cc.sys.isNative) {
+    var glProgram_state = cc.GLProgramState.getOrCreateWithGLProgram(shaderScene);
+    glProgram_state.setUniformVec3("vLighting", light);
+    this.sprite.setGLProgramState(glProgram_state);
+    } else {
+    shaderScene.setUniformLocationWith3f(shaderScene.getUniformLocationForName('vLighting'), light.x, light.y, light.z);
+    this.sprite.setShaderProgram(shaderScene);
+    }
+    this.addChild(this.sprite, 0);
+    this.scheduleUpdate();
+    return true;
+    },
+    update: function( dt )
+    {
+    shaderScene.updateUniforms();
+    shaderScene.setUniformsForBuiltins();
+    shaderScene.use();
+    }
+    });
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter:function () {
+    this._super();
+    this.addChild( new HelloWorldLayer() );
+    }
+    });
+
+</code></pre>
+<p>fsh:</p>
+<pre class="language-c"><code>#ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    //uniform vec3 vLighting;
+
+    varying vec4 v_fragmentColor;
+    varying vec2 v_texCoord;
+
+    float randomNoise(vec2 p, float t) {
+    return fract(6791.*sin(47.*p.x+p.y*9973.) + t);
+    }
+
+    void main() {
+    vec2 pos = v_texCoord;
+    float n = randomNoise(pos, CC_Time.x);
+    gl_FragColor = vec4(vec3(n), 1.);
+    }</code></pre>
+<p>vsh:</p>
+<pre class="language-c"><code>#ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    attribute vec4 a_position;
+    attribute vec2 a_texCoord;
+    attribute vec4 a_color;
+
+    #ifdef GL_ES
+    varying mediump vec2 v_texCoord;
+    varying mediump vec4 v_fragmentColor;
+    #else
+    varying vec2 v_texCoord;
+    varying vec4 v_fragmentColor;
+    #endif
+
+    void main()
+    {
+    gl_Position = (CC_PMatrix * CC_MVMatrix) * a_position; // on web
+    // gl_Position = CC_PMatrix * a_position; // on native and mobile
+
+    v_fragmentColor = a_color;
+    v_texCoord = a_texCoord;
+    }</code></pre>
+<p>Пример рисования окружности с контуром:</p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13377941/31bb94ca-de02-11e5-8b29-386a090b85a1.png" alt="image" /></p>
+<pre class="language-c"><code>#ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    varying vec4 v_fragmentColor;
+    varying vec2 v_texCoord;
+
+    //uniform vec3 vLighting;
+
+    void main() {
+
+    float center = 0.5;
+    float radius = 0.5;
+    vec2 position = v_texCoord.xy - center;
+    float thickness = radius/2.; // толщина контура, при thickness = radius будет заполненный овал
+
+    float z = sqrt(radius*radius - position.x*position.x - position.y*position.y);
+    vec3 normal = normalize(vec3(position.x, position.y, z));
+
+    if (length(position) &gt; radius || (length(position) &lt; radius-thickness)) {
+    gl_FragColor = vec4(vec3(0.5), 1.);
+    } else {
+    gl_FragColor = vec4((normal+1.)/2., 1.);
+    }
+
+    //gl_FragColor = texture2D(CC_Texture0,v_texCoord).bgra;
+    }</code></pre>
+<p>&nbsp;</p>
+<p>Пример обрезки текстуры по окружности:</p>
+<pre class="language-c"><code>#ifdef GL_ES
+    precision mediump float;
+    #endif
+    varying vec4 v_fragmentColor;
+    varying vec2 v_texCoord;
+    //uniform vec3 vLighting;
+    void main() {
+
+    float center = 0.5;
+    float radius = 0.5;
+    vec2 position = v_texCoord.xy - center;
+    float thickness = radius/1.2; // толщина контура, при thickness = radius будет заполненный овал
+    const vec3 cLight = normalize(vec3(.5, .5, 1.));
+
+    float z = sqrt(radius*radius - position.x*position.x - position.y*position.y);
+    vec3 normal = normalize(vec3(position.x, position.y, z));
+
+    if (length(position) &gt; radius || (length(position) &lt; radius-thickness)) {
+    gl_FragColor = vec4(vec3(0.5), 1.);
+    } else {
+    float diffuse = max(0., dot(normal, cLight));
+    gl_FragColor = vec4(vec3(diffuse), 1.)*texture2D(CC_Texture0,v_texCoord);
+    }
+
+    }</code></pre>
+<p>&nbsp;</p>
+<p>Пример простого затемнения / освещения спрайта:</p>
+<pre class="language-c"><code>#ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    //uniform vec3 vLighting;
+
+    varying vec4 v_fragmentColor;
+    varying vec2 v_texCoord;
+
+    void main() {
+    const vec3 lightPos = vec3(0., 0., 1.);
+    float lightRadius = 0.5;
+    float lightCenter = 0.5;
+    vec2 position = v_texCoord.xy - lightCenter;
+    const vec3 cLight = normalize(lightPos);
+
+    float z = sqrt(lightRadius*lightRadius - position.x*position.x - position.y*position.y);
+    vec3 normal = normalize(vec3(position.x, position.y, z));
+
+    float diffuse = max(0., dot(normal, cLight));
+    gl_FragColor = vec4(vec3(diffuse), 1.)*texture2D(CC_Texture0,v_texCoord);
+    }</code></pre>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13378162/24e7f252-de0c-11e5-9ec9-52f22d1e02cf.png" alt="image" /></p>
+<p>&nbsp;</p>
+<p>Подобным образом можно создать динамическое освещение&nbsp;<a href="https://www.codeandweb.com/blog/2015/05/12/lighting-demo-cocos2d-x">https://www.codeandweb.com/blog/2015/05/12/lighting-demo-cocos2d-x</a>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Сглаженный увеличенный шум (подробнее на <a href="http://www.raywenderlich.com/70208/opengl-es-pixel-shaders-tutorial">http://www.raywenderlich.com/70208/opengl-es-pixel-shaders-tutorial</a> ):</p>
+<pre class="language-c"><code>#ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    //uniform vec3 vLighting;
+
+    varying vec4 v_fragmentColor;
+    varying vec2 v_texCoord;
+
+    float randomNoise(vec2 p) {
+    return fract(6791.*sin(47.*p.x+p.y*9973.));
+    }
+
+    float smoothNoise(vec2 p) {
+    vec2 nn = vec2(p.x, p.y+1.);
+    vec2 ee = vec2(p.x+1., p.y);
+    vec2 ss = vec2(p.x, p.y-1.);
+    vec2 ww = vec2(p.x-1., p.y);
+    vec2 cc = vec2(p.x, p.y);
+
+    float sum = 0.;
+    sum += randomNoise(nn)/8.;
+    sum += randomNoise(ee)/8.;
+    sum += randomNoise(ss)/8.;
+    sum += randomNoise(ww)/8.;
+    sum += randomNoise(cc)/2.;
+
+    return sum;
+    }
+
+    void main() {
+    float scaleResolution = 20.;
+    vec2 pos = v_texCoord.xy/scaleResolution;
+    //vec2 position = gl_FragCoord.xy/uResolution.xx;
+    float tiles = 128.;
+    vec2 position = floor(pos*tiles);
+    float n = smoothNoise(position);
+    gl_FragColor = vec4(vec3(n), 1.);
+    }</code></pre>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13378350/6aea0878-de14-11e5-8253-22f0470dd0a7.png" alt="image" /></p>
+<p>&nbsp;</p>
+<p>Размытие изображения:</p>
+<p>vsh:</p>
+<pre class="language-c"><code>#ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    attribute vec4 a_position;
+    attribute vec2 a_texCoord;
+    attribute vec4 a_color;
+
+    #ifdef GL_ES
+    varying mediump vec2 v_texCoord;
+    varying mediump vec4 v_fragmentColor;
+    #else
+    varying vec2 v_texCoord;
+    varying vec4 v_fragmentColor;
+    #endif
+
+    varying vec2 v_blurTexCoords[14];
+
+    //uniform float u_rate;
+
+    void main()
+    {
+    float u_rate = 1.8;
+    gl_Position = (CC_PMatrix * CC_MVMatrix) * a_position; // on web
+    // gl_Position = CC_PMatrix * a_position; // on native and mobile
+
+    v_fragmentColor = a_color;
+    v_texCoord = a_texCoord;
+    v_blurTexCoords[ 0] = v_texCoord + vec2(-0.028 * u_rate, 0.0);
+    v_blurTexCoords[ 1] = v_texCoord + vec2(-0.024 * u_rate, 0.0);
+    v_blurTexCoords[ 2] = v_texCoord + vec2(-0.020 * u_rate, 0.0);
+    v_blurTexCoords[ 3] = v_texCoord + vec2(-0.016 * u_rate, 0.0);
+    v_blurTexCoords[ 4] = v_texCoord + vec2(-0.012 * u_rate, 0.0);
+    v_blurTexCoords[ 5] = v_texCoord + vec2(-0.008 * u_rate, 0.0);
+    v_blurTexCoords[ 6] = v_texCoord + vec2(-0.004 * u_rate, 0.0);
+    v_blurTexCoords[ 7] = v_texCoord + vec2( 0.004 * u_rate, 0.0);
+    v_blurTexCoords[ 8] = v_texCoord + vec2( 0.008 * u_rate, 0.0);
+    v_blurTexCoords[ 9] = v_texCoord + vec2( 0.012 * u_rate, 0.0);
+    v_blurTexCoords[10] = v_texCoord + vec2( 0.016 * u_rate, 0.0);
+    v_blurTexCoords[11] = v_texCoord + vec2( 0.020 * u_rate, 0.0);
+    v_blurTexCoords[12] = v_texCoord + vec2( 0.024 * u_rate, 0.0);
+    v_blurTexCoords[13] = v_texCoord + vec2( 0.028 * u_rate, 0.0);
+    }</code></pre>
+<p>fsh:</p>
+<pre class="language-c"><code>#ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    //uniform vec3 vLighting;
+
+    varying vec4 v_fragmentColor;
+    varying vec2 v_texCoord;
+    varying vec2 v_blurTexCoords[14];
+
+    uniform vec2 u_resolution;
+
+    void main() {
+    vec2 resolution = u_resolution;
+    gl_FragColor = vec4(0.0);
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[ 0])*0.0044299121055113265;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[ 1])*0.00895781211794;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[ 2])*0.0215963866053;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[ 3])*0.0443683338718;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[ 4])*0.0776744219933;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[ 5])*0.115876621105;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[ 6])*0.147308056121;
+    gl_FragColor += texture2D(CC_Texture0, v_texCoord         )*0.159576912161;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[ 7])*0.147308056121;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[ 8])*0.115876621105;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[ 9])*0.0776744219933;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[10])*0.0443683338718;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[11])*0.0215963866053;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[12])*0.00895781211794;
+    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[13])*0.0044299121055113265;
+    }</code></pre>
+<p>&nbsp;</p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13378659/501a65a6-de1e-11e5-83f1-9ffc14adc9af.png" alt="image" /></p>
+<p>&nbsp;</p>
+<p>Cocos javascript shader cross platform from file and passing parameter:&nbsp;https://gist.github.com/derofim/ff68fb252da8f70b33f9</p>
+<p>cocos2d-x position issue when using setShaderProgram: http://stackoverflow.com/questions/34369687/cocos2d-x-position-issue-when-using-setshaderprogram</p>
+<p>Мой пример загрузки простого шейдера из файлов:&nbsp;<a href="https://gist.github.com/derofim/69a4077c09708b7f562f">https://gist.github.com/derofim/69a4077c09708b7f562f</a></p>
+<p>Мой пример шейдера используя&nbsp;initWithVertexShaderByteArray: https://gist.github.com/derofim/39ceb8a67d24284f32a9</p>
+<p>Bare-Bones Shader Example in Cocos2d-x v.3.2:&nbsp;http://www.roguish.com/blog/?p=746</p>
+<p>Официальные тесты:&nbsp;<a href="https://github.com/cocos2d/cocos2d-x/blob/0abe235323aaf03f457d5fa395ded1cd38c43713/tests/js-tests/src/OpenGLTest/OpenGLTest.js">https://github.com/cocos2d/cocos2d-x/blob/0abe235323aaf03f457d5fa395ded1cd38c43713/tests/js-tests/src/OpenGLTest/OpenGLTest.js</a>&nbsp;</p>
+<p>Разделение кода&nbsp;http://discuss.cocos2d-x.org/t/shader-is-causing-transparent-part-of-png-files-to-render-black/22902</p>
+<p>&nbsp;</p>
+<p>При работе с шейдерами может потребоваться настроить сглаживание.</p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13375785/1b0ae7b4-ddba-11e5-85a6-61b28997540e.png" alt="image" /></p>
+<p>Вдохновленный статьей&nbsp;<a href="http://www.gamedevcraft.com/2015/10/disable-texture-anti-aliasing.html">http://www.gamedevcraft.com/2015/10/disable-texture-anti-aliasing.html</a>&nbsp;я нашел функцию&nbsp;setTexParameters:</p>
+<pre class="language-javascript"><code>        // GL_NEAREST, GL_NEAREST, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE
+    var texParams  = {minFilter: gl.NEAREST, magFilter: gl.NEAREST, wrapS: gl.CLAMP_TO_EDGE, wrapT: gl.CLAMP_TO_EDGE};
+    this.sprite.getTexture().setTexParameters(texParams);</code></pre>
+<p>Эта функция задает&nbsp;texParameteri:</p>
+<pre class="language-javascript"><code>        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, texParams.minFilter);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, texParams.magFilter);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, texParams.wrapS);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, texParams.wrapT);</code></pre>
+<p>Этого же&nbsp;можно добиться с помощью setAliasTexParameters:</p>
+<pre class="language-javascript"><code>        var sprite2 = cc.Sprite.create(res.sprites_png);
+    sprite2.attr({ x: size.width / 2, y: size.height / 2 });
+    var texture = sprite2.getTexture();
+    texture.setAliasTexParameters(); // включить Alias
+    texture.setAntiAliasTexParameters(); // снова выключить Alias
+    sprite2.scale = 10;
+    this.addChild(sprite2, 0);</code></pre>
+<p>&nbsp;</p>
+<p>Еще примеры шейдеров:</p>
+<p><a href="https://github.com/zhuzujie/shaderStudy/tree/059c8944158a2f04ef797cccd59e44744b11492f/Resources/shader/2D">https://github.com/zhuzujie/shaderStudy/tree/059c8944158a2f04ef797cccd59e44744b11492f/Resources/shader/2D</a></p>
+<p><a href="https://github.com/uqtimes/Cocos2d-x_Study_20140127/tree/bbe15bdb0a31075047fafdc8d91b4c0eb93b67bd/Cocos2d-x_Shader/Resources/shaders">https://github.com/uqtimes/Cocos2d-x_Study_20140127/tree/bbe15bdb0a31075047fafdc8d91b4c0eb93b67bd/Cocos2d-x_Shader/Resources/shaders</a></p>
+<p><a href="https://github.com/super626/LessonDemo/tree/f06e8fe3c2b985f5fb955f75a4a5cb34f14cc7aa/Resources/res/Material">https://github.com/super626/LessonDemo/tree/f06e8fe3c2b985f5fb955f75a4a5cb34f14cc7aa/Resources/res/Material</a></p>
+<p>&nbsp;</p>
+<h2 id="network" style="text-align: center;"><a href="#network">Network</a></h2>
+<p>Socket.io и cocos2d:&nbsp;https://gist.github.com/derofim/1cd407d8ec414d0007df</p>
+<h2 id="games" style="text-align: center;"><a href="#games">Примеры игр</a></h2>
+<p>&nbsp;</p>
+<p><strong>Плитки</strong></p>
+<p>&nbsp;</p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13379041/f5df6c7c-de2b-11e5-922d-2be69252fd98.png" alt="image" /></p>
+<p>Игра на угадывание (найти одинаковые плитки).</p>
+<p>Демо:&nbsp;<a href="http://www.ipastimes.com/game/LearningCocos/">http://www.ipastimes.com/game/LearningCocos/</a></p>
+<p>Исходный код:&nbsp;<a href="http://www.ipastimes.com/post/48.html">http://www.ipastimes.com/post/48.html</a></p>
+<p>Картинки:&nbsp;<a href="https://gist.github.com/derofim/94ed75aeceaa1eb0f333#gistcomment-1709854">https://gist.github.com/derofim/94ed75aeceaa1eb0f333#gistcomment-1709854</a></p>
+<pre class="language-javascript"><code>var gameLayer;
+    var gameArray = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7];
+    var pickedTiles = [];
+    var scoreText;
+    var moves=0;
+
+    var gameScene = cc.Scene.extend({
+    onEnter:function () {
+    this._super();
+    gameArray = shuffle(gameArray);   //打乱数组排序
+    gameLayer = new game();
+    gameLayer.init();
+    this.addChild(gameLayer);
+    }
+    });
+
+    var game = cc.Layer.extend({
+    init: function () {
+    this._super();
+    var backgroundLayer = new cc.LayerColor(new cc.Color(40,40,40,255),320, 480);
+    this.addChild(backgroundLayer);
+
+    var gradient = new cc.LayerGradient(cc.color(0,0,0,255),cc.color(0x46,0x82,0xB4,255));
+    this.addChild(gradient);
+
+    scoreText = cc.LabelTTF.create("Moves: 0","Arial","32",cc.TEXT_ALIGNMENT_CENTER);
+    this.addChild(scoreText);
+    scoreText.setPosition(90,50);
+
+    for(i=0;i&lt;16;i++){
+    var tile = new MemoryTile();
+    tile.pictureValue = gameArray[i];
+    this.addChild(tile,0);
+    tile.setPosition(49+i%4*74,400-Math.floor(i/4)*74);
+    }
+    }
+    });</code></pre>
+<p>В игре класс sprite используется для создания нового класса MemoryTile:</p>
+<pre class="language-javascript"><code>var MemoryTile = cc.Sprite.extend({
+    ctor:function() {
+    this._super();
+    this.initWithFile("assets/cover.png");
+
+    var listener = cc.EventListener.create({
+    event: cc.EventListener.TOUCH_ONE_BY_ONE,
+    swallowTouches: true,
+    onTouchBegan: function (touch, event) {
+    if(pickedTiles.length&lt;2) {
+    var target = event.getCurrentTarget();
+    var location = target.convertToNodeSpace(touch.getLocation());
+    var targetSize = target.getContentSize();
+    var targetRectangle = cc.rect(0, 0, targetSize.width, targetSize.height);
+    if (cc.rectContainsPoint(targetRectangle, location)) {
+    if(pickedTiles.indexOf(target)==-1) {
+    target.initWithFile("assets/tile_" + target.pictureValue + ".png");
+    pickedTiles.push(target);
+    if(pickedTiles.length==2){
+    checkTiles();
+    }
+    }
+    }
+    }
+    }
+    });
+    cc.eventManager.addListener(listener.clone(), this);
+    }
+    });</code></pre>
+<p>Заметьте&nbsp;clone() в&nbsp;cc.eventManager.addListener(listener.clone(), this); использующийся для создания нового события.</p>
+<p>Массив&nbsp;pickedTiles позволяет избежать выбора одного и того же тайла. В&nbsp;pickedTiles хранятся&nbsp;event.getCurrentTarget() - текущие нажатые элементы.Когда в&nbsp;pickedTiles содержатся два тайла вызывается проверка&nbsp;checkTiles:</p>
+<pre class="language-javascript"><code>function checkTiles(){
+    moves++;
+    scoreText.setString("Moves: "+moves);
+    var pause = setTimeout(function(){
+    if(pickedTiles[0].pictureValue!=pickedTiles[1].pictureValue){
+    pickedTiles[0].initWithFile("assets/cover.png");
+    pickedTiles[1].initWithFile("assets/cover.png");
+    }else{
+    gameLayer.removeChild(pickedTiles[0]);
+    gameLayer.removeChild(pickedTiles[1]);
+    }
+    pickedTiles = [];
+    },500);
+    }</code></pre>
+<p>checkTiles показывает тайлы две секунды и скрывает несовпавшие или удаляет совпавшие.</p>
+<p>Фкнкция&nbsp;shuffle перемешивает элементы массива, она использует алгоритм <a href="http://jsfromhell.com/array/shuffle">http://jsfromhell.com/array/shuffle</a>&nbsp;</p>
+<pre class="language-javascript"><code>shuffle = function(v){
+    for(var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
+    return v;
+    };</code></pre>
+<p>&nbsp;</p>
+<p><strong>Пример игры с бесконечной прокруткой</strong>:</p>
+<p><a href="https://cloud.githubusercontent.com/assets/9510143/13380564/ad1580ae-de57-11e5-8446-19819bce543b.png" target="_blank"><img src="https://cloud.githubusercontent.com/assets/9510143/13380564/ad1580ae-de57-11e5-8446-19819bce543b.png" alt="image" /></a></p>
+<p>Исходный код:&nbsp;<a href="https://github.com/noelyahan/cocos2djstut/tree/415694ebd4e58afd05855d45473d71ee9bb9a3ed/game-two">https://github.com/noelyahan/cocos2djstut/tree/415694ebd4e58afd05855d45473d71ee9bb9a3ed/game-two</a></p>
+<p>Мои изменения чтобы спрайты были в полный экран (todo):&nbsp;<a href="https://gist.github.com/derofim/34da0d09bf696630a027">https://gist.github.com/derofim/34da0d09bf696630a027</a></p>
+<p>Демо: <a href="./assets/demo/cocos-scroll">играть</a></p>
+<p>&nbsp;</p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13379623/b2c1cb5a-de3b-11e5-8510-541b95a810fb.png" alt="image" width="588" height="196" /></p>
+<pre class="language-javascript"><code>var res = {
+    background : "assets/background.png",
+    ship : "assets/ship.png",
+    particle : "assets/particle.png",
+    asteroid : "assets/asteroid.png"
+    };
+
+    var gameResources = [];
+    for (var i in res) {
+    gameResources.push(res[i]);
+    }</code></pre>
+<p>Для игры размером&nbsp;480 x 320 фон должен быть&nbsp;480*2=960 для создания эффекта плавной прокрутки. Код для прокрутки спрайта:</p>
+<pre class="language-javascript"><code>var ScrollingBG = cc.Sprite.extend({
+    ctor:function() {
+    this._super();
+    this.initWithFile("assets/background.png");
+    },
+    onEnter:function() {
+    this.setPosition(480,160);
+    },
+    scroll:function(){
+    this.setPosition(this.getPosition().
+    x-scrollSpeed,this.getPosition().y);
+    if(this.getPosition().x&lt;0){
+    this.setPosition(this.getPosition().x+480,this.getPosition().y);
+    }
+    }
+    });</code></pre>
+<p>Код астероида:</p>
+<pre class="language-javascript"><code>var Asteroid = cc.Sprite.extend({
+    ctor:function() {
+    this._super();
+    this.initWithFile("assets/asteroid.png");
+    },
+    onEnter:function() {
+    this._super();
+    this.setPosition(600,Math.random()*320);
+    var moveAction= cc.MoveTo.create(2.5, new cc.Point(-100,Math.
+    random()*320));
+    this.runAction(moveAction);
+    this.scheduleUpdate();
+    },
+    update:function(dt){
+    if(this.getPosition().x&lt;-50){
+    gameLayer.removeAsteroid(this)
+    }
+    }
+    });</code></pre>
+<p>&nbsp;</p>
+<p><strong>Пример игры&nbsp;Sokoban - передвижение блоков -&nbsp;tile-based game</strong></p>
+<p>&nbsp;</p>
+<p><img src="https://www.packtpub.com/graphics/9781784390075/graphics/0075SOS_06_01.jpg" alt="" width="397" height="232" /></p>
+<p>&nbsp;</p>
+<p>Исходный код и файлы:&nbsp;<a href="https://github.com/noelyahan/cocos2djstut/tree/415694ebd4e58afd05855d45473d71ee9bb9a3ed/game-three">https://github.com/noelyahan/cocos2djstut/tree/415694ebd4e58afd05855d45473d71ee9bb9a3ed/game-three</a></p>
+<p>&nbsp;</p>
+<p>Игровые файлы в plist:</p>
+<pre class="language-javascript"><code>var gameResources = [ "assets/spritesheet.plist", "assets/spritesheet.png" ];</code></pre>
+<p>Уровень:</p>
+<pre class="language-javascript"><code>var level = [
+    [1,1,1,1,1,1,1],
+    [1,1,0,0,0,0,1],
+    [1,1,3,0,2,0,1],
+    [1,0,0,4,0,0,1],
+    [1,0,3,1,2,0,1],
+    [1,0,0,1,1,1,1],
+    [1,1,1,1,1,1,1]
+    ];
+    Each item represents a tile, and each value represents an item, which I coded this way:
+    &bull; 0: This item is an empty tile
+    &bull; 1: This item is a wall
+    &bull; 2: This item is the place where to drop a crate
+    &bull; 3: This item is the crate
+    &bull; 4: This item is the player
+    &bull; 5: This item is the crate on a place where to drop a crate (3+2)
+    &bull; 6: This item is the player on a place where to drop a crate (4+2)</code></pre>
+<p>Загрузка статического изображения и настройка сглаживания:</p>
+<pre class="language-javascript"><code>var game = cc.Layer.extend({
+    init:function () {
+    this._super();
+    cache = cc.spriteFrameCache;
+    cache.addSpriteFrames("assets/spritesheet.plist", "assets/
+    spritesheet.png");
+    var backgroundSprite = cc.Sprite.create(cache.
+    getSpriteFrame("background.png"));
+    backgroundSprite.getTexture().setAliasTexParameters();
+    backgroundSprite.setPosition(240,160);
+    backgroundSprite.setScale(5);
+    this.addChild(backgroundSprite);
+    var levelSprite = cc.Sprite.create(cache.getSpriteFrame("level.
+    png"));
+    levelSprite.setPosition(240,110);
+    levelSprite.setScale(5);
+    this.addChild(levelSprite);
+    }
+    });</code></pre>
+<p>setAliasTexParameters задает за один раз параметры сглаживания сразу всем спрайтам.</p>
+<p>&nbsp;</p>
+<p>&bull; cratesArray: This is the array that will contain all crate sprites</p>
+<p>&bull; playerPosition: This is the variable that will be used to store a player's position inside the maze</p>
+<p>&bull; playerSprite: This variable represents the player itself</p>
+<p>&nbsp;</p>
+<pre class="language-javascript"><code>var game = cc.Layer.extend({
+    init:function () {
+    this._super();
+    // same as before
+    this.addChild(levelSprite);
+    for(i=0;i&lt;7;i++){
+    cratesArray[i]=[];
+    for(j=0;j&lt;7;j++){
+    switch(level[i][j]){
+    case 4:
+    case 6:
+    playerSprite = cc.Sprite.create(cache.
+    getSpriteFrame("player.png"));
+    playerSprite.setPosition(165+25*j,185-25*i);
+    playerSprite.setScale(5);
+    this.addChild(playerSprite);
+    playerPosition = {x:j,y:i};
+    cratesArray[i][j]=null;
+    break;
+    case 3:
+    case 5:
+    var crateSprite = cc.Sprite.create(cache.
+    getSpriteFrame("crate.png"));
+    crateSprite.setPosition(165+25*j,185-25*i);
+    crateSprite.setScale(5);
+    this.addChild(crateSprite);
+    cratesArray[i][j]=crateSprite;
+    break;
+    default:
+    cratesArray[i][j]=null;
+    }
+    }
+    }
+    }
+    });</code></pre>
+<p>Жесты и касания:</p>
+<pre class="language-javascript"><code>var listener = cc.EventListener.create({
+    event: cc.EventListener.TOUCH_ONE_BY_ONE,
+    swallowTouches: true,
+    onTouchBegan:function (touch,event) {
+    startTouch = touch.getLocation();
+    return true;
+    },
+    onTouchEnded:function(touch, event){
+    endTouch = touch.getLocation();
+    swipeDirection();
+    }
+    });</code></pre>
+<p><strong> swipeTolerance</strong> is the minimum allowed distance in pixels between startTouch and endTouch in order to consider the whole action as a swipe.</p>
+<p>Заметьте, что функции болжны возвращать истину, т.е. return true</p>
+<pre class="language-javascript"><code>function swipeDirection(){
+    var distX = startTouch.x - endTouch.x;
+    var distY = startTouch.y - endTouch.y;
+    if(Math.abs(distX)+Math.abs(distY)&gt;swipeTolerance){
+    if(Math.abs(distX)&gt;Math.abs(distY)){
+    if(distX&gt;0){
+    playerSprite.setPosition(playerSprite.getPosition().
+    x-25,playerSprite.getPosition().y);
+    //move(-1,0);
+    }
+    else{
+    playerSprite.setPosition(playerSprite.getPosition().
+    x+25,playerSprite.getPosition().y);
+    //move(1,0);
+    }
+    }
+    else{
+    if(distY&gt;0){
+    playerSprite.setPosition(playerSprite.getPosition().
+    x,playerSprite.getPosition().y-25);
+    //move(0,1);
+    }
+    else{
+    playerSprite.setPosition(playerSprite.getPosition().
+    x,playerSprite.getPosition().y+25);
+    //move(0,-1);
+    }
+    }
+    }
+    }</code></pre>
+<p>Проверку движения и перемещение коробок можно сделать в отдельной функции:</p>
+<pre class="language-javascript"><code>function move(deltaX,deltaY){
+    switch(level[playerPosition.y+deltaY][playerPosition.x+deltaX]){
+    case 0:
+    case 2:
+    level[playerPosition.y][playerPosition.x]-=4;
+    playerPosition.x+=deltaX;
+    playerPosition.y+=deltaY;
+    level[playerPosition.y][playerPosition.x]+=4;
+    playerSprite.setPosition(165+25*playerPosition.x,185-
+    25*playerPosition.y);
+    break;
+    case 3:
+    case 5:
+    if(level[playerPosition.y+deltaY*2][playerPosition.x+deltaX*2]==0
+    || level[playerPosition.y+deltaY*2][playerPosition.x+deltaX*2]==2){
+    level[playerPosition.y][playerPosition.x]-=4;
+    playerPosition.x+=deltaX;
+    playerPosition.y+=deltaY;
+    level[playerPosition.y][playerPosition.x]+=1;
+    playerSprite.setPosition(165+25*playerPosition.x,185-
+    25*playerPosition.y);
+    level[playerPosition.y+deltaY][playerPosition.x+deltaX]+=3;
+    var movingCrate = cratesArray[playerPosition.y]
+    [playerPosition.x];
+    movingCrate.setPosition(movingCrate.getPosition().
+    x+25*deltaX,movingCrate.getPosition().y-25*deltaY);
+    cratesArray[playerPosition.y+deltaY][playerPosition.
+    x+deltaX]=movingCrate;
+    cratesArray[playerPosition.y][playerPosition.x]=null;
+    }
+    break;
+    }
+    }</code></pre>
+<p>&nbsp;</p>
+<p><strong id="box2d">Пример игры с Box2D физикой</strong>:</p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13381746/c1042666-de74-11e5-87e6-5fbd8128f7bc.png" alt="image" /></p>
+<p>Исходный код:&nbsp;<a href="https://github.com/noelyahan/cocos2djstut/tree/415694ebd4e58afd05855d45473d71ee9bb9a3ed/game-six">https://github.com/noelyahan/cocos2djstut/tree/415694ebd4e58afd05855d45473d71ee9bb9a3ed/game-six</a></p>
+<p>Не забудьте подключить&nbsp;"modules" : ["cocos2d","external"],</p>
+<p>&nbsp;</p>
+<pre class="language-javascript"><code>var res = {
+    brick1x1 : "res/brick1x1.png",
+    brick2x1 : "res/brick2x1.png",
+    brick3x1 : "res/brick3x1.png",
+    brick4x1 : "res/brick4x1.png",
+    brick4x2 : "res/brick4x2.png",
+    ground : "res/ground.png",
+    totem : "res/totem.png"
+    };</code></pre>
+<p>&nbsp;</p>
+<p>Box2D is a realistic physics engine that uses real-world units of measurement. This way, everything you will create in Box2D world will be measured in meters. So, we need to find a ratio between pixels and meters. In almost every project, the 1 meter = 30 pixels setting works fine and allows us to think and work in pixels without caring about the Box2D internal unit of measurement.</p>
+<p>&nbsp;</p>
+<pre class="language-javascript"><code>var world;
+    var worldScale = 30;
+    var gravity = new Box2D.Common.Math.b2Vec2(0, -10);
+    var world = new Box2D.Dynamics.b2World(gravity, true);
+
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter : function() {
+    this._super();
+    gameLayer = new HelloWorldLayer();
+    gameLayer.init();
+    this.addChild(gameLayer);
+    }
+    });
+
+    HelloWorldLayer = cc.Layer.extend({
+    init : function() {
+    this._super();
+    var backgroundLayer = new cc.LayerGradient(cc.color(0xdf,0x9f,0x83,255), cc.color(0xfa,0xf7,0x9f,255));
+    this.addChild(backgroundLayer);
+    this.scheduleUpdate();
+    },
+    update:function(dt){
+    world.Step(dt,10,10);
+    console.log(world);
+    },
+    });</code></pre>
+<p>&nbsp;</p>
+<p>Then, we already know that a physics world has gravity. Here is how we define the gravity: var gravity = new Box2D.Common.Math.b2Vec2(0, -10);</p>
+<p>&nbsp;</p>
+<p>you already know Cocos2d-JS has its origin coordinate in the bottom left of the stage; so, as long as you move from bottom to top, your y coordinate increases. On the other hand, Box2D works in the opposite way: as long as a physics body falls down; its y coordinate increases,</p>
+<p>&nbsp;</p>
+<p>world = new Box2D.Dynamics.b2World(gravity, true); As you can see, the world has two arguments: the gravity variable we created before, and a Boolean flag to determine whether bodies can sleep. Normally, to save CPU time, physics bodies that don't receive hits and aren't affected by forces for some amount of time are put to sleep. This means they still exist in the Box2D world although their position isn't updated at each frame until they wake up because of some event such as a collision or a force applied to them.</p>
+<p>&nbsp;</p>
+<p>world.Step(dt,10,10) The Step method advances the simulation for a certain amount of time, dt in this case and to be as accurate as possible, while the other two arguments represent the velocity and position iterations, respectively.</p>
+<p>&nbsp;</p>
+<pre class="language-javascript"><code>this.addBody(240,10,480,20,false,"assets/ground.png","ground");</code></pre>
+<p>&bull; &nbsp;240: This is the horizontal centre of the body, in pixels.</p>
+<p>&bull; 10: This is the vertical centre of the body, in pixels.</p>
+<p>&bull; 480: This is the body width, in pixels.</p>
+<p>&bull; 20: This is the body height, in pixels.</p>
+<p>&bull; false: This Boolean value determines whether the body is dynamic or not. We are building two kinds of bodies, dynamic bodies, which are affected by forces such as gravity and react to collisions, and static bodies, which can't be moved. This will be a static body.</p>
+<p>&bull; "assets/ground.png": These are the graphic assets to be bound to the body.</p>
+<p>&bull; "ground": This is the body type. We call it ground because it will represent the ground.</p>
+<p>&nbsp;</p>
+<p>var fixtureDef = new Box2D.Dynamics.b2FixtureDef; - Think about a fixture as a relationship between a body, which is the physics actor, and its shape, which determines how the body looks&mdash;like a box, like a circle, and so on.</p>
+<p>&nbsp;</p>
+<p>fixtureDef.density = 1.0; fixtureDef.friction = 0.5; fixtureDef.restitution = 0.2; -&nbsp;The density attribute affects the mass of the body, friction determines how bodies slide along each other, and restitution is used to see how a body bounces.</p>
+<p>&nbsp;</p>
+<p>fixtureDef.shape = new Box2D.Collision.Shapes.b2PolygonShape; fixtureDef.shape.SetAsBox(0.5*width/worldScale,0.5*height/worldScale); -&nbsp;The SetAsBox method creates a box given a width and a height that Box2D accepts as half of the actual width and height. So, if you want a box with a width of 30 meters, you'll have to set its width to 30*0.5.</p>
+<p>&nbsp;</p>
+<pre class="language-javascript"><code>var world;
+    var worldScale = 30;
+    var gravity = new Box2D.Common.Math.b2Vec2(0, -10);
+    var world = new Box2D.Dynamics.b2World(gravity, true);
+
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter : function() {
+    this._super();
+    gameLayer = new HelloWorldLayer();
+    gameLayer.init();
+    this.addChild(gameLayer);
+    }
+    });
+
+    HelloWorldLayer = cc.Layer.extend({
+    init : function() {
+    this._super();
+    var backgroundLayer = new cc.LayerGradient(cc.color(0xdf,0x9f,0x83,255), cc.color(0xfa,0xf7,0x9f,255));
+    this.addChild(backgroundLayer);
+    this.scheduleUpdate();
+    this.addBody(10,10,cc.winSize.width,20,false,res.ground,"ground");
+    },
+    update:function(dt){
+    world.Step(dt,10,10);
+    console.log(world);
+    },
+    addBody: function (posX,posY,width,height,isDynamic,spriteImage,type) {
+    var fixtureDef = new Box2D.Dynamics.b2FixtureDef;
+    fixtureDef.density = 1.0;
+    fixtureDef.friction = 0.5;
+    fixtureDef.restitution = 0.2;
+    fixtureDef.shape = new Box2D.Collision.Shapes.b2PolygonShape;
+    fixtureDef.shape.SetAsBox(0.5 * width/worldScale,0.5 * height / worldScale);
+    var bodyDef = new Box2D.Dynamics.b2BodyDef;
+    if(isDynamic){
+    bodyDef.type = Box2D.Dynamics.b2Body.b2_dynamicBody;
+    }
+    else{
+    bodyDef.type = Box2D.Dynamics.b2Body.b2_staticBody;
+    }
+    bodyDef.position.Set(posX/worldScale,posY/worldScale);
+    var userSprite = cc.Sprite.create(spriteImage);
+    // TODO: userSprite.setScaleX((cc.winSize.width / 2 / background.getContentSize().width)*2); userSprite.setScaleY((cc.winSize.height / background.getContentSize().height) * 1);
+    this.addChild(userSprite, 0);
+    userSprite.setPosition(posX,posY);
+    bodyDef.userData = {
+    type: type,
+    asset: userSprite
+    }
+    var body = world.CreateBody(bodyDef)
+    body.CreateFixture(fixtureDef);
+    }
+    });
+</code></pre>
+<p>Обновление игровой сцены:</p>
+<pre class="language-javascript"><code>var world;
+    var worldScale = 30;
+    var gravity = new Box2D.Common.Math.b2Vec2(0, -10);
+    var world = new Box2D.Dynamics.b2World(gravity, true);
+
+    var HelloWorldScene = cc.Scene.extend({
+    onEnter : function() {
+    this._super();
+    gameLayer = new HelloWorldLayer();
+    gameLayer.init();
+    this.addChild(gameLayer);
+    }
+    });
+
+    HelloWorldLayer = cc.Layer.extend({
+    init : function() {
+    this._super();
+    var backgroundLayer = new cc.LayerGradient(cc.color(0xdf,0x9f,0x83,255), cc.color(0xfa,0xf7,0x9f,255));
+    this.addChild(backgroundLayer);
+    this.scheduleUpdate();
+    this.addBody(10,10,cc.winSize.width,20,false,res.ground,"ground");
+    //this.addBody(204,32,24,24,true, res.brick1x1, "destroyable");
+    this.addBody(276,32,24,24,true, res.brick1x1, "destroyable");
+    this.addBody(240,56,96,24,true, res.brick4x1, "destroyable");
+    this.addBody(240,80,48,24,true, res.brick2x1,"solid");
+    this.addBody(228,104,72,24,true,res.brick3x1, "destroyable");
+    this.addBody(240,140,96,48,true,res.brick4x2,"solid");
+    this.addBody(240,188,24,48,true,res.totem,"totem");
+    },
+    update:function(dt){
+    world.Step(dt,10,10);
+    for (var b = world.GetBodyList(); b; b = b.GetNext()) {
+    if (b.GetUserData() != null) {
+    var mySprite = b.GetUserData().asset;
+    mySprite.setPosition(b.GetPosition().x * worldScale,
+    b.GetPosition().y * worldScale);
+    mySprite.setRotation(-1 * cc.radiansToDegrees (b.GetAngle()));
+    }
+    }
+    },
+    addBody: function (posX,posY,width,height,isDynamic,spriteImage,type) {
+    var fixtureDef = new Box2D.Dynamics.b2FixtureDef;
+    fixtureDef.density = 1.0;
+    fixtureDef.friction = 0.5;
+    fixtureDef.restitution = 0.2;
+    fixtureDef.shape = new Box2D.Collision.Shapes.b2PolygonShape;
+    fixtureDef.shape.SetAsBox(0.5 * width/worldScale,0.5 * height / worldScale);
+    var bodyDef = new Box2D.Dynamics.b2BodyDef;
+    if(isDynamic){
+    bodyDef.type = Box2D.Dynamics.b2Body.b2_dynamicBody;
+    }
+    else{
+    bodyDef.type = Box2D.Dynamics.b2Body.b2_staticBody;
+    }
+    bodyDef.position.Set(posX/worldScale,posY/worldScale);
+    var userSprite = cc.Sprite.create(spriteImage);
+    // TODO: userSprite.setScaleX((cc.winSize.width / 2 / background.getContentSize().width)*2); userSprite.setScaleY((cc.winSize.height / background.getContentSize().height) * 1);
+    this.addChild(userSprite, 0);
+    userSprite.setPosition(posX,posY);
+    bodyDef.userData = {
+    type: type,
+    asset: userSprite
+    }
+    var body = world.CreateBody(bodyDef)
+    body.CreateFixture(fixtureDef);
+    }
+    });
+</code></pre>
+<p>&nbsp;</p>
+<p>Удаление элемента при нажатии и преобразование координат:</p>
+<p>&nbsp;</p>
+<pre class="language-javascript"><code>cc.eventManager.addListener(touchListener, this);
+    // ...
+    var touchListener = cc.EventListener.create({
+    event: cc.EventListener.TOUCH_ONE_BY_ONE,
+    swallowTouches: true,
+    onTouchBegan: function (touch, event) {
+    var worldPoint = new Box2D.Common.Math.b2Vec2(touch.
+    getLocation().x/worldScale,touch.getLocation().y/worldScale);
+    for (var b = world.GetBodyList(); b; b = b.GetNext()) {
+    if (b.GetUserData() != null &amp;&amp; b.GetUserData().
+    type=="destroyable") {
+    for(var f = b.GetFixtureList();f; f=f.GetNext()){
+    if(f.TestPoint(worldPoint)){
+    gameLayer.removeChild(b.GetUserData().asset)
+    world.DestroyBody(b);
+    }
+    }
+    }
+    }
+    }
+    });</code></pre>
+<p>&nbsp;</p>
+<p>Проверка столкновения тотема с землей:</p>
+<pre class="language-javascript"><code>    update:function(dt){
+    world.Step(dt,10,10);
+    for (var b = world.GetBodyList(); b; b = b.GetNext()) {
+    if (b.GetUserData() != null) {
+    var mySprite = b.GetUserData().asset;
+    mySprite.setPosition(b.GetPosition().x * worldScale,
+    b.GetPosition().y * worldScale);
+    mySprite.setRotation(-1 * cc.radiansToDegrees (b.GetAngle()));
+    if(b.GetUserData().type=="totem"){
+    for(var c = b.GetContactList(); c; c = c.m_next){
+    if(c.other.GetUserData() &amp;&amp; c.other.GetUserData().
+    type=="ground"){
+    console.log("Oh no!!!!");
+    }
+    }
+    }
+    }
+    }
+    },</code></pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 
     </div>
