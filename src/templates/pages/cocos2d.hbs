@@ -14,8 +14,8 @@ categories:
 ---
 <h2 style="text-align: center;">Оглавление</h2>
 <p><a href="#beginning">Cocos2d: Начало</a></p>
-<p><a href="#setup">Cocos2d: Установка</a></p>
-<p><a href="#basics">Cocos2d: Основы</a></p>
+<p><a href="#setup">Установка</a></p>
+<p><a href="#basics">Основы</a></p>
 <p><a href="#scene">Работа со сценами</a></p>
 <p><a href="#element">Элементы</a></p>
 <p><a href="#action">Действия</a></p>
@@ -32,6 +32,7 @@ categories:
 <p><a href="#network">Network</a></p>
 <p><a href="#effects">Эффекты</a></p>
 <p><a href="#games">Примеры игр</a></p>
+<p><a href="#ai">AI</a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <h2 id="beginning" style="text-align: center;"><a href="#beginning">Cocos2d: Начало</a></h2>
@@ -101,39 +102,39 @@ categories:
 <p>&nbsp;</p>
 <p>Убедитесь, что установлены необходимые программы и компоненты:</p>
 <ul>
-    <li>Python 2.7.5</li>
-    <li>NDK r10c+ is required to build Android games</li>
-    <li>Windows Phone/Store 8.1 VS 2013 Update 4+ or VS 2015</li>
-    <li>Windows Phone/Store 10.0 VS 2015</li>
-    <li>JRE or JDK 1.6+ is required for web publishing</li>
-    <li>
-        <ul>
-            <li>iOS 6.0+ for iPhone / iPad games</li>
-            <li>Android 2.3+ for Android games</li>
-            <li>Windows 8.1 or Windows 10.0 for Windows Phone/Store 8.1 games</li>
-            <li>Windows 10.0 for Windows Phone/Store 10.0 games</li>
-            <li>OS X v10.6+ for Mac games</li>
-            <li>Windows 7+ for Win games</li>
-            <li>Modern browsers and IE 9+ for web games</li>
-        </ul>
-    </li>
+<li>Python 2.7.5</li>
+<li>NDK r10c+ is required to build Android games</li>
+<li>Windows Phone/Store 8.1 VS 2013 Update 4+ or VS 2015</li>
+<li>Windows Phone/Store 10.0 VS 2015</li>
+<li>JRE or JDK 1.6+ is required for web publishing</li>
+<li>
+<ul>
+<li>iOS 6.0+ for iPhone / iPad games</li>
+<li>Android 2.3+ for Android games</li>
+<li>Windows 8.1 or Windows 10.0 for Windows Phone/Store 8.1 games</li>
+<li>Windows 10.0 for Windows Phone/Store 10.0 games</li>
+<li>OS X v10.6+ for Mac games</li>
+<li>Windows 7+ for Win games</li>
+<li>Modern browsers and IE 9+ for web games</li>
+</ul>
+</li>
 </ul>
 <ul>
-    <li>
-        <p>JDK/SDK 1.6+ <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
-    </li>
-    <li>
-        <p>Android Studio Bundle <a href="http://developer.android.com/sdk/index.html">http://developer.android.com/sdk/index.html</a></p>
-    </li>
-    <li>
-        <p>NDK r10c <a href="https://developer.android.com/tools/sdk/ndk/index.html">https://developer.android.com/tools/sdk/ndk/index.html</a></p>
-    </li>
-    <li>
-        <p>Apache Ant <a href="http://ant.apache.org/bindownload.cgi">http://ant.apache.org/bindownload.cgi</a></p>
-    </li>
-    <li>
-        <p>Python 2.7.5 <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
-    </li>
+<li>
+<p>JDK/SDK 1.6+ <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
+</li>
+<li>
+<p>Android Studio Bundle <a href="http://developer.android.com/sdk/index.html">http://developer.android.com/sdk/index.html</a></p>
+</li>
+<li>
+<p>NDK r10c <a href="https://developer.android.com/tools/sdk/ndk/index.html">https://developer.android.com/tools/sdk/ndk/index.html</a></p>
+</li>
+<li>
+<p>Apache Ant <a href="http://ant.apache.org/bindownload.cgi">http://ant.apache.org/bindownload.cgi</a></p>
+</li>
+<li>
+<p>Python 2.7.5 <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
+</li>
 </ul>
 <p>&nbsp;</p>
 <p>Не забудьте установить переменные среды! Например jdk:</p>
@@ -161,7 +162,13 @@ categories:
 <p>&nbsp;</p>
 <p>Возможно вы захотите запустить игру на сервере. Можно установить локальный сервер, например openserver, denwer или&nbsp;wampserver. Можно воспользоваться хостингами, например heroku или Amazon E2. При желании можно настроить облачный редактор, например c9.io.</p>
 <p>&nbsp;</p>
+<p>Еще лучше использовать node, например, https://www.codetutorial.io/livereload-with-grunt/ и https://webpack.github.io/docs/usage-with-grunt.html</p>
+<p>&nbsp;</p>
 <p>В браузере можно осуществлять отладку приложения, есть специальные плагины, например,&nbsp;<a href="http://h5.cocos.com/static/cocos-devtools/index-en.html">http://h5.cocos.com/static/cocos-devtools/index-en.html</a></p>
+<p>Настройка Webstorm:&nbsp;https://github.com/chukong/cocos-docs/blob/v3-unified-documentation/tutorial/framework/html5/parkour-game-with-javascript-v3.0/chapter1/en.md</p>
+<p>&nbsp;</p>
+<p>Настройка Sublime:&nbsp;
+http://www.sitepoint.com/essential-sublime-text-javascript-plugins/</p>
 <p>&nbsp;</p>
 <p>Можно использовать готовые шаблоны приложений&nbsp;<a href="https://github.com/goodzsq/cocos_template">https://github.com/goodzsq/cocos_template</a></p>
 <p>&nbsp;</p>
@@ -182,13 +189,45 @@ categories:
 <p><strong>Публикация в сети</strong>:</p>
 <p>Newgrounds (http://www.newgrounds.com/)</p>
 <p>Kongregate (http://www.kongregate.com/)</p>
+<p>Notdoppler :http://www.notdoppler.com/</p>
+<p>Y8 : <a href="http://www.y8.com/ ">http://www.y8.com/ </a></p>
+<p>Addicting Games : <a href="http://www.addictinggames.com/ ">http://www.addictinggames.com/ </a></p>
+<p>GameJolt : <a href="http://gamejolt.com/ ">http://gamejolt.com/ </a></p>
+<p>Itch.io : <a href="http://itch.io/ ">http://itch.io/ </a></p>
+<p>MindJolt : <a href="http://www.mindjolt.com/ ">http://www.mindjolt.com/ </a></p>
+<p>GamesFreak : <a href="http://www.gamesfreak.net/">http://www.gamesfreak.net/</a></p>
 <p>&nbsp;</p>
 <p><strong>Лицензирование игр</strong>:</p>
 <p>За лицензировани ваших игр и изменение могут заплатить. Сервис&nbsp;FGL (https://www.fgl.com/) позмоляет найти покупателей.</p>
 <p>&nbsp;</p>
 <p><strong>Форумы об играх</strong>:</p>
 <p>HTML5GameDevs (http://www.html5gamedevs.com/)</p>
+<p>Форумы о разработке игр:</p>
+<p>gamedev.net</p>
 <p>&nbsp;</p>
+<p><strong>Маркетинг, продвижение</strong>:</p>
+<p>1 Социальные сети</p>
+<p>twitter,...</p>
+<p>2 Форумы</p>
+<p>&nbsp;</p>
+<p>3 Пресса</p>
+<p><a href="http://indiegamemag.com/">http://indiegamemag.com/</a></p>
+<p>&nbsp;</p>
+<p>4 Блоги</p>
+<p>&nbsp;</p>
+<p>5 Реклама</p>
+<p>&nbsp;</p>
+<p>6 Обзоры, стримы</p>
+<p>&nbsp;</p>
+<p>7 Статьи о разработке</p>
+<p>&nbsp;</p>
+<p>8 Портирование и т.п.</p>
+<p>Добавление игры в социальные сети. Поддержка новых устройств и т.д.</p>
+<p>&nbsp;</p>
+<p>9 Лицензирование для продажи</p>
+<p><a href="https://www.fgl.com/">https://www.fgl.com/</a></p>
+<p>&nbsp;</p>
+<p>10 Выставки, конкурсы, чемпионаты</p>
 <h2 id="basics" style="text-align: center;"><a href="#basics">Cocos2d:&nbsp;Основы</a></h2>
 <p>&nbsp;</p>
 <p>Если игра написана на&nbsp;javascript и запускается в браузере, то используется библиотека&nbsp;cocos2d-js и игра запускается как любое другое веб приложение.&nbsp;Когда игра запускается как приложение (native app), то используется&nbsp;cocos2d-x&nbsp;и код на&nbsp;javascript переводится в быстродействующий код на&nbsp;C с помощью&nbsp;spidermonkey.&nbsp;JSB - связь между js и C++, используйте документированный javascript код (любой спецефичный для браузера код не запустится на native устройстве).</p>
@@ -333,6 +372,9 @@ categories:
 <p>Запустить код можно командой "<code class="nx">cocos</code> <code class="nx">run</code> <code class="o">-</code><code class="nx">p</code> <code class="nx">web"</code></p>
 <p>&nbsp;</p>
 <p><code class="nx">Базовые&nbsp;простые&nbsp;фигуры позволяет выводить&nbsp;<strong>cc.drawNode</strong>:</code></p>
+<p>&nbsp;</p>
+<p>Cocos2dx how to draw primitives: http://acherkashin.me/2014/11/14/cocos2dx-how-to-draw-primitives/</p>
+<p>&nbsp;</p>
 <pre class="language-javascript"><code>this.draw=new cc.DrawNode();
     this.addChild(this.draw);
 
@@ -404,10 +446,10 @@ categories:
 <pre class="language-javascript"><code> // draw.drawQuadBezier(origin, control, destination, segments, lineWidth, color)
     var centerPos = cc.p(size.width / 2, size.height / 2);
     this.draw.drawQuadBezier(cc.p(0, size.height), cc.p(centerPos.x, centerPos.y), cc.p(size.width, size.height), 50, 2, cc.color(255, 0, 255, 255));</code></pre>
-    <p><img src="https://cloud.githubusercontent.com/assets/9510143/13374076/2d57a2c4-dd8b-11e5-98dc-9d72d075fe16.png" alt="image" /></p>
-    <p>&nbsp;</p>
-    <p><a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Cubic_B.C3.A9zier_curves">https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Cubic_B.C3.A9zier_curves</a></p>
-    <p>&nbsp;</p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13374076/2d57a2c4-dd8b-11e5-98dc-9d72d075fe16.png" alt="image" /></p>
+<p>&nbsp;</p>
+<p><a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Cubic_B.C3.A9zier_curves">https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Cubic_B.C3.A9zier_curves</a></p>
+<p>&nbsp;</p>
 <pre class="language-javascript"><code>        // draw.drawCubicBezier(origin, control1, control2, destination, segments, lineWidth, color)
     this.draw.drawCubicBezier(
     cc.p(size.width / 2, size.height / 2), cc.p(size.width / 2 + 30, size.height / 2 + 50),
@@ -415,11 +457,11 @@ categories:
     2, // lineWidth
     cc.color(255, 0, 255, 255) // color
     );</code></pre>
-    <p>&nbsp;</p>
-    <p><img src="https://cloud.githubusercontent.com/assets/9510143/13374091/caf147d8-dd8b-11e5-9ea3-76f153a96986.png" alt="image" /></p>
-    <p>&nbsp;</p>
-    <p>Пример&nbsp;задания своей кривой&nbsp;http://cubic-bezier.com/#.17,.67,.63,1.41</p>
-    <p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><img src="https://cloud.githubusercontent.com/assets/9510143/13374091/caf147d8-dd8b-11e5-9ea3-76f153a96986.png" alt="image" /></p>
+<p>&nbsp;</p>
+<p>Пример&nbsp;задания своей кривой&nbsp;http://cubic-bezier.com/#.17,.67,.63,1.41</p>
+<p>&nbsp;</p>
 </div>
 <div class="line number4 index3 alt1">Все базовые фигуры можно найти в документации&nbsp;<a href="http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.DrawNode.html">http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.DrawNode.html</a>&nbsp;</div>
 <div class="line number4 index3 alt1">&nbsp;</div>
@@ -918,7 +960,7 @@ categories:
     // hAlignment - горизонтальное положение текста {cc.TEXT_ALIGNMENT_LEFT | cc.TEXT_ALIGNMENT_CENTER | cc.TEXT_ALIGNMENT_RIGHT}
     // vAlignment - вертикальное положение текста {cc.VERTICAL_TEXT_ALIGNMENT_TOP|cc.VERTICAL_TEXT_ALIGNMENT_CENTER|cc.VERTICAL_TEXT_ALIGNMENT_BOTTOM}</code></pre>
 <ul>
-    <li>Поддерживаются также и системные шрифты. cc.LabelTTF может быть медленным при js-binding на мобильных устройствах. Функции для работы с&nbsp;LabelTTF можно посмотреть в документации&nbsp;<a href="http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.LabelTTF.html">http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.LabelTTF.html</a>&nbsp;</li>
+<li>Поддерживаются также и системные шрифты. cc.LabelTTF может быть медленным при js-binding на мобильных устройствах. Функции для работы с&nbsp;LabelTTF можно посмотреть в документации&nbsp;<a href="http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.LabelTTF.html">http://www.cocos2d-x.org/docs/api-ref/js/v3x/symbols/cc.LabelTTF.html</a>&nbsp;</li>
 </ul>
 <pre><code class="p">&nbsp;</code></pre>
 <pre><code class="nx"><strong>LabelBMFont</strong> - позволяет загружать растровые шрифты .fnt. Каждый символ является cc.Sprite, а значит может быть повернут, перемещен и т.д. Рекомендуется к использованию.<br /></code></pre>
@@ -1879,6 +1921,8 @@ categories:
 <p>&nbsp;</p>
 <p>В cocos2d популярна физическая библиотека&nbsp;<strong>Chipmung</strong>. Спрайты&nbsp;cocos2d-js сопоставляются физическим телам, а&nbsp;Chipmung сам обновит их&nbsp;свойства.</p>
 <p>&nbsp;</p>
+<p>Уроки Chipmung: http://blog.galantegames.com/tag/cocos2d-x/</p>
+<p>&nbsp;</p>
 <p><img src="http://nutcrackify.com/books/rapid_2d_game_development_using_cocos2djs/images/chipmung.png" alt="Chipmung Overview" /></p>
 <p>&nbsp;</p>
 <p>staticBody - не подвержен физике.</p>
@@ -1992,7 +2036,8 @@ categories:
 <pre><code class="nx">addCollisionHandler с тегами 0, 1 для квадрата и круга используется для проверки столкновения.<br /></code></pre>
 <p>&nbsp;</p>
 <h2 id="scripts" style="text-align: center;"><a href="#scripts">Скрипты</a></h2>
-<p>/</p>
+<p>http://www.cocos2d-x.org/docs/programmers-guide/10/index.html</p>
+<p>&nbsp;</p>
 <h2 id="shaders" style="text-align: center;"><a href="#shaders">Шейдеры</a></h2>
 <p>Графику можно обрабатывать с помощью шейдеров.</p>
 <p>vertex shader - обрабатые данные вершин</p>
@@ -2005,6 +2050,8 @@ categories:
 <p>Примеры того что можно сделать с помощью шейдеров: <a href="https://www.shadertoy.com/">https://www.shadertoy.com/</a></p>
 <p>&nbsp;</p>
 <p>Примеры шейдеров в cocos:&nbsp;http://acherkashin.me/2015/07/10/cocos2d-xshaders/</p>
+<p>&nbsp;</p>
+<p>Space glsl cocos2d shader (процедурная генерация космоса): https://gist.github.com/derofim/22c63b41305cd3684d47</p>
 <p>&nbsp;</p>
 <p>Урок:&nbsp;[Cocos3.8 Tutorial] RenderTexture + Blur&nbsp;http://discuss.cocos2d-x.org/t/cocos3-8-tutorial-rendertexture-blur/13622</p>
 <p>&nbsp;</p>
@@ -3661,7 +3708,34 @@ categories:
     }
     });
 </code></pre>
+<p><strong>Parkour game</strong></p>
 <p>&nbsp;</p>
+<p><strong><img src="http://www.cocos2d-x.org/docs/tutorials/javascript/parkour-game-with-javascript-v3.0/chapter4/res/result.png" alt="gamescene" width="447" height="307" /></strong></p>
+<p>&nbsp;</p>
+<p>Уроки:&nbsp;<a href="http://www.cocos2d-x.org/docs/tutorials/javascript/javascript/index.html">http://www.cocos2d-x.org/docs/tutorials/javascript/javascript/index.html</a></p>
+<p>В главе 6 заменить&nbsp;</p>
+<pre>var contentSize = this.sprite.getContentSize();<br />на</pre>
+<pre>var contentSize = this.sprite.getTextureRect();</pre>
+<p>Исходный код:&nbsp;https://github.com/iTyran/Parkhour-src/tree/50bb4aca26f3bcfe7314983f4469bebe751abd4c/Parkour</p>
+<p>В главе 7 если будут полосы на экране поменяйте&nbsp;</p>
+<pre>"renderMode" : 1,<br />Суть скроллинга: У игрока задана скорость бега в applyImpulse, когда игрок пройдет расстояние eyeX, то фон игры и игрок сдвигается на такое же расстояние. А именно: неподвижный ранее фон сдвигается на -eyeX и игрок сдвигается на -eyeX. В результате движется только фон и нам остается его повторять в checkAndReload.<br />Заметьте сохранение тегов:</pre>
+<pre class="language-javascript"><code>if(typeof TagOfLayer == "undefined") {
+    var TagOfLayer = {};
+    TagOfLayer.background = 0;
+    TagOfLayer.Animation = 1;
+    TagOfLayer.Status = 2;
+    };</code></pre>
+<p>Это позволяет писать код вида:</p>
+<pre class="language-javascript"><code>this.gameLayer.addChild(new BackgroundLayer(), 0, TagOfLayer.background);
+    // ...
+    this.gameLayer.getChildByTag(TagOfLayer.background).setPosition(cc.p(-eyeX,0));
+    // ...
+    var animationLayer = this.getParent().getChildByTag(TagOfLayer.Animation);</code></pre>
+<p>Я изменил немного код определения прыжка:&nbsp;https://gist.github.com/derofim/3c7020048c3394837eea</p>
 <p style="text-align: center;">&nbsp;</p>
-<p style="text-align: center;">Искусственный интеллект</p>
+<p><strong>magicBall</strong></p>
+<p>&nbsp;</p>
+<p>Игра на физике и шейдерах:&nbsp;https://github.com/shuidong/magicBall/</p>
+<p>Демо:&nbsp;http://shuidong.github.io/magicBall/</p>
+<h2 id="ai" style="text-align: center;"><a href="#ai">Искусственный интеллект</a></h2>
 <p>http://wizardfu.com/book/cocos2d-x/artificial-intelligence/</p>
