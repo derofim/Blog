@@ -204,8 +204,13 @@
 <p>&nbsp;</p>
 <p>Возможно вы захотите запустить игру на сервере. Можно установить локальный сервер, например openserver, denwer или&nbsp;wampserver. Можно воспользоваться хостингами, например heroku или Amazon E2. При желании можно настроить облачный редактор, например c9.io.</p>
 <p>&nbsp;</p>
+<p>Еще лучше использовать node, например, https://www.codetutorial.io/livereload-with-grunt/ и https://webpack.github.io/docs/usage-with-grunt.html</p>
+<p>&nbsp;</p>
 <p>В браузере можно осуществлять отладку приложения, есть специальные плагины, например,&nbsp;<a href="http://h5.cocos.com/static/cocos-devtools/index-en.html">http://h5.cocos.com/static/cocos-devtools/index-en.html</a></p>
 <p>Настройка Webstorm:&nbsp;https://github.com/chukong/cocos-docs/blob/v3-unified-documentation/tutorial/framework/html5/parkour-game-with-javascript-v3.0/chapter1/en.md</p>
+<p>&nbsp;</p>
+<p>Настройка Sublime:&nbsp;
+http://www.sitepoint.com/essential-sublime-text-javascript-plugins/</p>
 <p>&nbsp;</p>
 <p>Можно использовать готовые шаблоны приложений&nbsp;<a href="https://github.com/goodzsq/cocos_template">https://github.com/goodzsq/cocos_template</a></p>
 <p>&nbsp;</p>
@@ -409,6 +414,9 @@
 <p>Запустить код можно командой "<code class="nx">cocos</code> <code class="nx">run</code> <code class="o">-</code><code class="nx">p</code> <code class="nx">web"</code></p>
 <p>&nbsp;</p>
 <p><code class="nx">Базовые&nbsp;простые&nbsp;фигуры позволяет выводить&nbsp;<strong>cc.drawNode</strong>:</code></p>
+<p>&nbsp;</p>
+<p>Cocos2dx how to draw primitives: http://acherkashin.me/2014/11/14/cocos2dx-how-to-draw-primitives/</p>
+<p>&nbsp;</p>
 <pre class="language-javascript"><code>this.draw=new cc.DrawNode();
     this.addChild(this.draw);
 
@@ -1955,6 +1963,8 @@
 <p>&nbsp;</p>
 <p>В cocos2d популярна физическая библиотека&nbsp;<strong>Chipmung</strong>. Спрайты&nbsp;cocos2d-js сопоставляются физическим телам, а&nbsp;Chipmung сам обновит их&nbsp;свойства.</p>
 <p>&nbsp;</p>
+<p>Уроки Chipmung: http://blog.galantegames.com/tag/cocos2d-x/</p>
+<p>&nbsp;</p>
 <p><img src="http://nutcrackify.com/books/rapid_2d_game_development_using_cocos2djs/images/chipmung.png" alt="Chipmung Overview" /></p>
 <p>&nbsp;</p>
 <p>staticBody - не подвержен физике.</p>
@@ -2082,6 +2092,8 @@
 <p>Примеры того что можно сделать с помощью шейдеров: <a href="https://www.shadertoy.com/">https://www.shadertoy.com/</a></p>
 <p>&nbsp;</p>
 <p>Примеры шейдеров в cocos:&nbsp;http://acherkashin.me/2015/07/10/cocos2d-xshaders/</p>
+<p>&nbsp;</p>
+<p>Space glsl cocos2d shader (процедурная генерация космоса): https://gist.github.com/derofim/22c63b41305cd3684d47</p>
 <p>&nbsp;</p>
 <p>Урок:&nbsp;[Cocos3.8 Tutorial] RenderTexture + Blur&nbsp;http://discuss.cocos2d-x.org/t/cocos3-8-tutorial-rendertexture-blur/13622</p>
 <p>&nbsp;</p>
@@ -3763,6 +3775,28 @@
     var animationLayer = this.getParent().getChildByTag(TagOfLayer.Animation);</code></pre>
 <p>Я изменил немного код определения прыжка:&nbsp;https://gist.github.com/derofim/3c7020048c3394837eea</p>
 <p style="text-align: center;">&nbsp;</p>
+<p><strong>magicBall</strong></p>
+<p>&nbsp;</p>
+<p><strong>Игра на физике и шейдерах:&nbsp;</strong></p>
+<p>&nbsp;</p>
+<p>Код:&nbsp;https://github.com/shuidong/magicBall/</p>
+<p>&nbsp;</p>
+<p>Демо:&nbsp;http://shuidong.github.io/magicBall/</p>
+<p>&nbsp;</p>
+<p><strong>Tiled tmx parkour game:&nbsp;</strong></p>
+<p>&nbsp;</p>
+<p>1) Находим или создаем текстуру тайлов. Мой пример: https://cloud.githubusercontent.com/assets/9510143/13634342/fad9ba8e-e605-11e5-8800-a00d7380db83.png взят из http://www.gameart2d.com/free-platformer-game-tileset.html</p>
+<p>&nbsp;</p>
+<p>2) Упаковываем в TexturePacker. Мои найстройки чтоб не ругалась бесплатная версия (ширину и высоту меняем под себя): opt level 0, algorithm basic, В advanced убрать detect identical sprites и все платные пункты</p>
+<p>&nbsp;</p>
+<p>3) Смотрим https://www.youtube.com/watch?v=ZwaomOYGuYo и создаем карту в Tiled Map Editor аналогично https://developer.tizen.org/development/articles/how-use-tiled-map-editor-cocos2d-html5?langredirect=1 и смотрим примеры https://github.com/cocos2d/cocos2d-x/blob/4ab1540ccc27185bb468d361fcfe6bd4d284b4f5/tests/js-tests/src/TileMapTest/TileMapTest.js. Читаем https://developer.blackberry.com/html5/documentation/v1_0/using_sprites_and_tile_maps.html . Смотрим документацию http://www.cocos2d-x.org/docs/api-ref/js/V3.8/symbols/cc.TMXTiledMap.html .</p>
+<p>&nbsp;</p>
+<p>Открываем код .tmx файла и меняем путь к картинке ( например image source="map_01.png" ). Не забываем добавить в код resource.js файлы tmx и png ( map_tmx: "res/map.tmx", map_01_png: "res/map_01.png", ). Добавляем тайлы на сцену ( var map = new cc.TMXTiledMap(res.map_tmx); this.addChild(map, 0); )</p>
+<p>&nbsp;</p>
+<p>Добавляем код карты аналогично моим примерам https://gist.github.com/derofim/9508a6f44d2612fd32a0 - много примеров! </p>
+<p>&nbsp;</p>
+<p>Размер tmx карты в cocos ограничен (~128 тайлов). Для прокрутки может понадобиться разбить большую карту на части и загружать их постепенно.</p>
+<p>&nbsp;</p>
 <h2 id="ai" style="text-align: center;"><a href="#ai">Искусственный интеллект</a></h2>
 <p>http://wizardfu.com/book/cocos2d-x/artificial-intelligence/</p>
 

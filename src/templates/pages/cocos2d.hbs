@@ -3735,7 +3735,25 @@ http://www.sitepoint.com/essential-sublime-text-javascript-plugins/</p>
 <p style="text-align: center;">&nbsp;</p>
 <p><strong>magicBall</strong></p>
 <p>&nbsp;</p>
-<p>Игра на физике и шейдерах:&nbsp;https://github.com/shuidong/magicBall/</p>
+<p><strong>Игра на физике и шейдерах:&nbsp;</strong></p>
+<p>&nbsp;</p>
+<p>Код:&nbsp;https://github.com/shuidong/magicBall/</p>
+<p>&nbsp;</p>
 <p>Демо:&nbsp;http://shuidong.github.io/magicBall/</p>
+<p>&nbsp;</p>
+<p><strong>Tiled tmx parkour game:&nbsp;</strong></p>
+<p>&nbsp;</p>
+<p>1) Находим или создаем текстуру тайлов. Мой пример: https://cloud.githubusercontent.com/assets/9510143/13634342/fad9ba8e-e605-11e5-8800-a00d7380db83.png взят из http://www.gameart2d.com/free-platformer-game-tileset.html</p>
+<p>&nbsp;</p>
+<p>2) Упаковываем в TexturePacker. Мои найстройки чтоб не ругалась бесплатная версия (ширину и высоту меняем под себя): opt level 0, algorithm basic, В advanced убрать detect identical sprites и все платные пункты</p>
+<p>&nbsp;</p>
+<p>3) Смотрим https://www.youtube.com/watch?v=ZwaomOYGuYo и создаем карту в Tiled Map Editor аналогично https://developer.tizen.org/development/articles/how-use-tiled-map-editor-cocos2d-html5?langredirect=1 и смотрим примеры https://github.com/cocos2d/cocos2d-x/blob/4ab1540ccc27185bb468d361fcfe6bd4d284b4f5/tests/js-tests/src/TileMapTest/TileMapTest.js. Читаем https://developer.blackberry.com/html5/documentation/v1_0/using_sprites_and_tile_maps.html . Смотрим документацию http://www.cocos2d-x.org/docs/api-ref/js/V3.8/symbols/cc.TMXTiledMap.html .</p>
+<p>&nbsp;</p>
+<p>Открываем код .tmx файла и меняем путь к картинке ( например image source="map_01.png" ). Не забываем добавить в код resource.js файлы tmx и png ( map_tmx: "res/map.tmx", map_01_png: "res/map_01.png", ). Добавляем тайлы на сцену ( var map = new cc.TMXTiledMap(res.map_tmx); this.addChild(map, 0); )</p>
+<p>&nbsp;</p>
+<p>Добавляем код карты аналогично моим примерам https://gist.github.com/derofim/9508a6f44d2612fd32a0 - много примеров! </p>
+<p>&nbsp;</p>
+<p>Размер tmx карты в cocos ограничен (~128 тайлов). Для прокрутки может понадобиться разбить большую карту на части и загружать их постепенно.</p>
+<p>&nbsp;</p>
 <h2 id="ai" style="text-align: center;"><a href="#ai">Искусственный интеллект</a></h2>
 <p>http://wizardfu.com/book/cocos2d-x/artificial-intelligence/</p>
